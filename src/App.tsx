@@ -137,7 +137,6 @@ export default function App() {
               setActiveTab('store');
               setViewingCart(true);
               setIsMobileMenuOpen(false);
-              window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
             className="relative p-2 text-zinc-700 hover:text-editorial-gold transition"
             title="Open Bookstore Cart"
@@ -191,7 +190,6 @@ export default function App() {
                   setActiveTab('store'); 
                   setViewingCart(true);
                   setIsMobileMenuOpen(false); 
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
                 }} 
                 className={`text-left py-2 hover:text-editorial-gold transition border-b border-black/5 flex justify-between items-center ${activeTab === 'store' ? 'text-editorial-gold' : 'text-zinc-800'}`}
               >
