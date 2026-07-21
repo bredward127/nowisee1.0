@@ -4,6 +4,14 @@ import { Product, CartItem } from '../types';
 import { PRODUCTS } from '../data';
 import PayPalCartButton from './PayPalCartButton';
 
+// Helper function to proxy external images through wsrv.nl to bypass CORS/hotlinking restrictions on CDN domains (like Amazon)
+const getProxiedImageUrl = (url: string): string => {
+  if (url.startsWith('http')) {
+    return `https://wsrv.nl/?url=${encodeURIComponent(url)}`;
+  }
+  return url;
+};
+
 interface StoreViewProps {
   onBackToHome: () => void;
   cart: CartItem[];
@@ -122,7 +130,7 @@ export default function StoreView({
                   {cart.map((item) => (
                     <div key={item.product.id} className="flex gap-4 p-4 border border-black/5 rounded-lg bg-white shadow-sm hover:shadow transition">
                       <img
-                        src={item.product.image}
+                        src={getProxiedImageUrl(item.product.image)}
                         alt={item.product.title}
                         className="w-16 h-20 object-cover rounded shadow-sm border border-zinc-200"
                         referrerPolicy="no-referrer"
@@ -287,7 +295,7 @@ export default function StoreView({
               {/* Image container */}
               <div className="aspect-[4/5] overflow-hidden bg-[#F5F2ED]/30 relative border-b border-black/5">
                 <img
-                  src={product.image}
+                  src={getProxiedImageUrl(product.image)}
                   alt={product.title}
                   className="w-full h-full object-cover group-hover:scale-103 transition duration-500"
                   referrerPolicy="no-referrer"
