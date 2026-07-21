@@ -12,6 +12,8 @@ interface StoreViewProps {
   onRemoveFromCart: (productId: string) => void;
   onClearCart: () => void;
   onPurchaseSuccess: (payerName: string) => void;
+  viewingCart: boolean;
+  setViewingCart: (view: boolean) => void;
 }
 
 export default function StoreView({
@@ -21,13 +23,14 @@ export default function StoreView({
   onUpdateQuantity,
   onRemoveFromCart,
   onClearCart,
-  onPurchaseSuccess
+  onPurchaseSuccess,
+  viewingCart,
+  setViewingCart
 }: StoreViewProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const [viewingCart, setViewingCart] = useState<boolean>(false);
   const [justAddedId, setJustAddedId] = useState<string | null>(null);
 
-  const categories = ['All', 'Books', 'Study', 'Merchandise'];
+  const categories = ['All', ...Array.from(new Set(PRODUCTS.map(p => p.category))).sort()];
 
   const filteredProducts = selectedCategory === 'All'
     ? PRODUCTS
@@ -217,12 +220,12 @@ export default function StoreView({
         </p>
 
         {/* Category filter tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mt-8 font-sans text-xs">
+        <div className="flex overflow-x-auto pb-3 gap-2 mt-8 font-sans text-xs justify-start md:justify-center -mx-4 px-4 md:mx-0 md:px-0 scrollbar-none snap-x">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-5 py-2.5 border rounded-full font-bold uppercase tracking-wider transition ${
+              className={`px-5 py-2.5 border rounded-full font-bold uppercase tracking-wider transition whitespace-nowrap snap-center ${
                 selectedCategory === cat
                   ? 'bg-[#1A1A1A] text-[#F5F2ED] border-transparent shadow'
                   : 'bg-white text-zinc-600 border-editorial-stone hover:border-editorial-gold/40'

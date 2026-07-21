@@ -17,6 +17,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<'home' | 'store'>('home');
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [viewingCart, setViewingCart] = useState(false);
 
   // Accessibility States
   const [largeText, setLargeText] = useState(() => localStorage.getItem('acc-large-text') === 'true');
@@ -132,7 +133,12 @@ export default function App() {
         <div className="flex items-center gap-3 md:gap-4">
           {/* Cart trigger in nav */}
           <button
-            onClick={() => { setActiveTab('store'); setIsMobileMenuOpen(false); }}
+            onClick={() => {
+              setActiveTab('store');
+              setViewingCart(true);
+              setIsMobileMenuOpen(false);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
             className="relative p-2 text-zinc-700 hover:text-editorial-gold transition"
             title="Open Bookstore Cart"
           >
@@ -183,7 +189,9 @@ export default function App() {
               <button 
                 onClick={() => { 
                   setActiveTab('store'); 
+                  setViewingCart(true);
                   setIsMobileMenuOpen(false); 
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
                 }} 
                 className={`text-left py-2 hover:text-editorial-gold transition border-b border-black/5 flex justify-between items-center ${activeTab === 'store' ? 'text-editorial-gold' : 'text-zinc-800'}`}
               >
@@ -495,6 +503,8 @@ export default function App() {
             onRemoveFromCart={handleRemoveFromCart}
             onClearCart={handleClearCart}
             onPurchaseSuccess={handlePurchaseSuccess}
+            viewingCart={viewingCart}
+            setViewingCart={setViewingCart}
           />
         )}
       </main>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronUp, Accessibility, ShoppingCart, Type, Eye, Check, X, BookOpen } from 'lucide-react';
-import coverImage from '../assets/images/cover.jpg';
+import coverImage from '../assets/images/now_i_see_cover_1784594781418.jpg';
 
 interface StickyCTAProps {
   onBuyBook: () => void;
@@ -50,12 +50,12 @@ export default function StickyCTA({
       <AnimatePresence>
         {visible && (
           <>
-            {/* Desktop Side Floating Controls (Compact Deck for screens >= md) */}
+            {/* Desktop Side Floating Controls (Compact Deck for screens >= lg) */}
             <motion.div
-              initial={{ x: 80, opacity: 0 }}
+              initial={{ x: -80, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              exit={{ x: 80, opacity: 0 }}
-              className="hidden md:flex flex-col gap-3 fixed bottom-8 right-8 z-40 font-sans"
+              exit={{ x: -80, opacity: 0 }}
+              className="hidden lg:flex flex-col gap-3 fixed bottom-8 left-8 z-40 font-sans"
             >
               {/* Accessibility Floating Button */}
               <button
@@ -88,12 +88,12 @@ export default function StickyCTA({
               </button>
             </motion.div>
 
-            {/* Mobile Bottom Sticky Bar (For screens < md) */}
+            {/* Mobile & Tablet Bottom Sticky Bar (For screens < lg) */}
             <motion.div
               initial={{ y: 80, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 80, opacity: 0 }}
-              className="fixed bottom-0 inset-x-0 z-40 bg-zinc-950/95 backdrop-blur-md border-t border-editorial-gold/20 py-3 px-4 shadow-[0_-10px_30px_rgba(0,0,0,0.5)] md:hidden flex items-center justify-between gap-2 font-sans"
+              className="fixed bottom-0 inset-x-0 z-40 bg-zinc-950/95 backdrop-blur-md border-t border-editorial-gold/20 py-3 px-4 shadow-[0_-10px_30px_rgba(0,0,0,0.5)] lg:hidden flex items-center justify-between gap-2 font-sans"
             >
               <div className="flex items-center gap-2">
                 {/* Book cover icon */}
