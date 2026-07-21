@@ -1,4 +1,4 @@
-import authorImage from '../assets/images/author_toni_taylor_1784594793249.jpg';
+import authorImage from '../assets/images/author_photo.jpg';
 
 export default function MeetAuthor() {
   return (

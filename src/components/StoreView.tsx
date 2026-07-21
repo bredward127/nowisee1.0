@@ -134,6 +134,11 @@ export default function StoreView({
                         alt={item.product.title}
                         className="w-16 h-20 object-cover rounded shadow-sm border border-zinc-200"
                         referrerPolicy="no-referrer"
+                        onError={(e) => {
+                          if (item.product.fallbackImage && e.currentTarget.src !== item.product.fallbackImage) {
+                            e.currentTarget.src = item.product.fallbackImage;
+                          }
+                        }}
                       />
                       <div className="flex-grow flex flex-col justify-between">
                         <div>
@@ -299,6 +304,11 @@ export default function StoreView({
                   alt={product.title}
                   className="w-full h-full object-cover group-hover:scale-103 transition duration-500"
                   referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    if (product.fallbackImage && e.currentTarget.src !== product.fallbackImage) {
+                      e.currentTarget.src = product.fallbackImage;
+                    }
+                  }}
                 />
                 
                 {/* Visual Category badge */}

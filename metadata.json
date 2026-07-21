@@ -1,6 +1,6 @@
 {
-  "name": "Now I See",
-  "description": "The official book landing page for 'Now I See' by Toni ME Taylor. Order your copy in hardcover or paperback directly or on Amazon.",
+  "name": "Now I See | From God 2 U Ministries",
+  "description": "The official bookstore and memoir hub for 'Now I See' by Toni ME Taylor - From God 2 U Ministries.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

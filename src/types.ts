@@ -28,6 +28,7 @@ export interface Product {
   price: number;
   category: string;
   image: string;
+  fallbackImage?: string;
   description: string;
   features: string[];
   inStock: boolean;

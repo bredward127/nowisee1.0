@@ -1,13 +1,17 @@
-import coverImg from './assets/images/now_i_see_cover_1784594781418.jpg';
+import coverImg from './assets/images/book_cover.jpg';
 import { Product } from './types';
 
 export const PRODUCTS: Product[] = [
+  // -------------------------------------------------------------
+  // CATEGORY 1: Books (Toni ME Taylor Memoirs & Companions)
+  // -------------------------------------------------------------
   {
     id: 'now-i-see-hardcover',
     title: 'Now I See — Hardcover Edition',
     price: 24.99,
     category: 'Books',
     image: coverImg,
+    fallbackImage: coverImg,
     description: 'The premium, durable hardcover edition of Toni ME Taylor’s spiritual memoir. Beautifully printed with high-quality binding, shimmering foil highlights, and vibrant lettering.',
     features: [
       'Gold foil display highlights',
@@ -23,6 +27,7 @@ export const PRODUCTS: Product[] = [
     price: 14.99,
     category: 'Books',
     image: coverImg,
+    fallbackImage: coverImg,
     description: 'The complete, uncompromised paperback edition of the memoir. Perfect for reading on the go, highlighting, and passing on to loved ones.',
     features: [
       'Soft-touch premium matte cover',
@@ -32,753 +37,799 @@ export const PRODUCTS: Product[] = [
     ],
     inStock: true
   },
+
+  // -------------------------------------------------------------
+  // CATEGORY 2: Haitian Creole Bibles
+  // -------------------------------------------------------------
   {
-    id: 'prod-1',
-    title: 'Scripture Verse Soy Candle',
-    price: 17.31,
-    category: 'Candles',
-    image: 'https://m.media-amazon.com/images/I/717-Tpxg-1L._AC_SL1500_.jpg',
-    description: 'Hand-poured soy candle in a clear jar printed with a rotating scripture verse; clean-burn cotton wick, 40+ hour burn time.',
+    id: 'haitian-creole-bible-standard',
+    title: 'Haitian Creole Bible (La Bib La) — Standard Hardcover',
+    price: 14.99,
+    category: 'Haitian Creole Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/h/a/haitian_creole_bible_la_bib_la_hardcover.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
+    description: 'The complete Holy Bible translated into Haitian Creole (La Bib La translation). Designed for church congregations and individual study, featuring a durable binding and clear typography.',
     features: [
-      'Hand-poured 100% natural soy wax',
-      'Soothing clean-burning cotton wick',
-      'Rotating selection of inspiring scripture verses',
-      '40+ hours of tranquil burn time'
+      'Complete Old and New Testaments',
+      'Faithful Haitian Creole translation (La Bib La)',
+      'Highly durable hardcover binding built for church use',
+      'Cross-references, footnoted translations, and maps'
     ],
     inStock: true
   },
   {
-    id: 'prod-2',
-    title: 'Faith Over Fear Wall Cross (12")',
-    price: 25.46,
-    category: 'Wall Decor',
-    image: 'https://m.media-amazon.com/images/I/81R4n239EaL._AC_SL1500_.jpg',
-    description: 'Distressed wood-finish wall cross with raised lettering, ready to hang, a popular entryway or living-room piece.',
+    id: 'haitian-creole-bible-large',
+    title: 'Haitian Creole Bible (La Bib La) — Giant Print Edition',
+    price: 22.99,
+    category: 'Haitian Creole Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/h/a/haitian_creole_giant_print_hardcover.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1513001900722-370f803f498d?auto=format&fit=crop&w=600&q=80',
+    description: 'A special large-print edition of the Haitian Creole Holy Bible (La Bib La). Perfect for elders, public reading, and comfortable study.',
     features: [
-      'Distressed rustic wood finish',
-      'Elegantly raised lettering "Faith Over Fear"',
-      'Ready-to-hang pre-installed hardware',
-      'An inspiring entryway or living room statement'
+      'Giant 14-point clear-print font size',
+      'Complete text of La Bib La translation',
+      'Double-column layout with easy-to-read formatting',
+      'Ribbon marker and elegant gold spine lettering'
     ],
     inStock: true
   },
   {
-    id: 'prod-3',
-    title: '"Bible in a Year" Guided Study Journal',
-    price: 20.37,
-    category: 'Journals',
-    image: 'https://m.media-amazon.com/images/I/71p0WfB6u0L._SL1500_.jpg',
-    description: '52-week guided reading plan with daily reflection prompts and note space, spiral-bound for laying flat.',
+    id: 'haitian-creole-new-testament',
+    title: 'Haitian Creole New Testament with Psalms & Proverbs',
+    price: 4.99,
+    category: 'Haitian Creole Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/h/a/haitian_creole_new_testament_paperback.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80',
+    description: 'A lightweight and cost-effective paperback edition of the New Testament, Psalms, and Proverbs in Haitian Creole, ideal for outreach ministries and pocket carrying.',
     features: [
-      '52-week comprehensive reading plan',
-      'Daily reflection prompts & prayer prompts',
-      'Spiral-bound to lie perfectly flat',
-      'Premium heavy paper to prevent ink bleed'
+      'Includes New Testament, Psalms, and Proverbs',
+      'Compact, travel-friendly softcover paperback',
+      'Affordable bulk pricing for community distribution',
+      'Clear, modern-reading layout with introductory guide'
     ],
     inStock: true
   },
   {
-    id: 'prod-4',
-    title: 'Cross Pendant Necklace, Silver-Plated',
-    price: 19.35,
-    category: 'Jewelry',
-    image: 'https://m.media-amazon.com/images/I/61NlB6Z-GOL._AC_SL1500_.jpg',
-    description: 'Classic cross pendant on an 18-inch chain, lobster clasp, comes in a gift-ready box.',
+    id: 'haitian-creole-english-bilingual',
+    title: 'Haitian Creole / English Bilingual New Testament',
+    price: 12.99,
+    category: 'Haitian Creole Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/h/a/haitian_creole_english_bilingual_new_testament.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=600&q=80',
+    description: 'Side-by-side bilingual edition featuring the Haitian Creole La Bib La text and the English Good News Translation (GNT). Perfect for language learners and multicultural communities.',
     features: [
-      'Classic polished cross design',
-      '18-inch delicate silver-plated chain',
-      'Secure lobster clasp closure',
-      'Arrives in an elegant gift-ready presentation box'
+      'Side-by-side column text presentation',
+      'Haitian Creole (La Bib La) + English (Good News Translation)',
+      'Durable and clean flexible vinyl cover',
+      'Includes helpful cross-lingual dictionary and maps'
     ],
     inStock: true
   },
   {
-    id: 'prod-5',
-    title: '"Blessed" Ceramic Coffee Mug',
-    price: 15.27,
-    category: 'Drinkware',
-    image: 'https://m.media-amazon.com/images/I/71C7z5ZfE9L._AC_SL1500_.jpg',
-    description: '11 oz ceramic mug with a simple faith-forward message, microwave and dishwasher safe.',
+    id: 'haitian-creole-bible-leather',
+    title: 'Haitian Creole Bible (La Bib La) — Premium Leathertone',
+    price: 29.99,
+    category: 'Haitian Creole Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/h/a/haitian_creole_leather_burgundy.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=600&q=80',
+    description: 'An elegant, luxury-bound edition of La Bib La in a soft, burnished burgundy leathertone cover. Ideal for gifts, special landmarks, and lifelong personal study.',
     features: [
-      'Durable 11 oz premium ceramic construction',
-      'Simple, elegant faith-forward message',
-      'Microwave and dishwasher safe',
-      'Ergonomic comfort handle for quiet mornings'
+      'Luxurious, water-resistant leather-feel burgundy cover',
+      'Gilded golden page edges with a matching ribbon marker',
+      'Words of Christ printed in bold red letter alignment',
+      'Comes in a presentation gift box with personal registry'
     ],
     inStock: true
   },
   {
-    id: 'prod-6',
-    title: 'Wooden Cross Keychain, Set of 3',
-    price: 10.18,
-    category: 'Keepsakes',
-    image: 'https://m.media-amazon.com/images/I/71H2e1WbTfL._AC_SL1500_.jpg',
-    description: 'Small carved wood crosses on a keyring, an easy stocking-stuffer or small-group gift.',
+    id: 'haitian-creole-audio-new-testament',
+    title: 'Haitian Creole Audio New Testament (MP3 CD Pack)',
+    price: 19.99,
+    category: 'Haitian Creole Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/h/a/haitian_creole_audio_bible.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=600&q=80',
+    description: 'A beautifully narrated audio edition of the Haitian Creole New Testament, professionally voiced and recorded. Perfect for daily listening, commutes, and visually impaired individuals.',
     features: [
-      'Crafted from genuine natural wood',
-      'Smooth carved tactile worry finish',
-      'Sturdy keyring attachment',
-      'Perfect gift for church groups or stocking stuffers'
+      'High-fidelity digital recordings across multiple CDs',
+      'Clear, natural pronunciation by native Haitian speakers',
+      'Divided cleanly into chapters for easy navigation',
+      'Includes handy travel storage binder and study map'
     ],
     inStock: true
   },
   {
-    id: 'prod-7',
-    title: 'Inspirational Adult Coloring Book: Psalms',
-    price: 10.18,
-    category: 'Books',
-    image: 'https://m.media-amazon.com/images/I/81I-uH1F9-L._SL1500_.jpg',
-    description: '30 hand-illustrated designs paired with Psalm verses, single-sided pages for framing finished art.',
+    id: 'haitian-creole-children-illustrated',
+    title: 'Haitian Creole Children’s Illustrated Bible (La Bib Timoun Yo)',
+    price: 11.99,
+    category: 'Haitian Creole Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/h/a/haitian_creole_kids_bible.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=600&q=80',
+    description: 'An engaging, colorful Bible storytelling collection written specifically for children. Translated into clear, easy-to-read Haitian Creole to foster family reading sessions.',
     features: [
-      '30 custom hand-illustrated devotional designs',
-      'Paired with selected verses from the Psalms',
-      'Single-sided thick pages to prevent bleed-through',
-      'Standard size suitable for framing finished art'
+      'Contains 60 of the most loved Bible narrative accounts',
+      'Vibrant full-page historical illustrations on every page',
+      'Simple, clear language tailored for young minds',
+      'Perfect for Sunday schools and family prayer tables'
     ],
     inStock: true
   },
   {
-    id: 'prod-8',
-    title: 'Faith Comfort Throw Blanket, 50x60"',
-    price: 28.52,
-    category: 'Home Textiles',
-    image: 'https://m.media-amazon.com/images/I/81nZgZisA4L._AC_SL1500_.jpg',
-    description: 'Soft fleece throw woven with a scripture verse border, machine washable.',
+    id: 'haitian-creole-pocket-new-testament',
+    title: 'Haitian Creole Pocket New Testament (Blue Vinyl)',
+    price: 3.99,
+    category: 'Haitian Creole Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/h/a/haitian_creole_pocket_vinyl.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1515263487990-61b07816b324?auto=format&fit=crop&w=600&q=80',
+    description: 'An ultra-compact, travel-friendly edition of the Haitian Creole New Testament, bound in a protective and sturdy navy blue vinyl protective cover.',
     features: [
-      'Ultra-soft plush cozy fleece throw',
-      'Woven border featuring scripture verses',
-      'Machine washable and colorfast',
-      'Generous 50" x 60" size for study times'
+      'Complete New Testament text in a pocket profile',
+      'Durable, waterproof flexible vinyl protective shield',
+      'Weighs less than 4 ounces, ideal for travel carrying',
+      'Includes reading schedule guides and outreach logs'
+    ],
+    inStock: true
+  },
+
+  // -------------------------------------------------------------
+  // CATEGORY 3: English Bibles
+  // -------------------------------------------------------------
+  {
+    id: 'esv-pew-bible-black',
+    title: 'ESV Pew Bible — Classic Black Hardcover',
+    price: 10.99,
+    category: 'English Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/e/s/esv_pew_bible_black.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1438210125605-fa95267e3a41?auto=format&fit=crop&w=600&q=80',
+    description: 'The standard ESV Pew Bible with a durable black hardcover. Highly cost-effective for congregations, displaying clear typography on white archival paper.',
+    features: [
+      'English Standard Version (ESV) translation',
+      'Extremely durable hardcover casing built for daily wear',
+      'Classic double-column layout with section headers',
+      'Readable 8.5-point type font size'
     ],
     inStock: true
   },
   {
-    id: 'prod-9',
-    title: '"Grace" Canvas Tote Bag',
-    price: 17.31,
-    category: 'Bags',
-    image: 'https://m.media-amazon.com/images/I/71d18x2rXDL._AC_SL1500_.jpg',
-    description: 'Heavyweight cotton canvas tote with reinforced handles, roomy enough for a Bible and study journal.',
+    id: 'esv-economy-bible-paperback',
+    title: 'ESV Economy Bible — Outreach Softcover',
+    price: 2.99,
+    category: 'English Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/e/s/esv_economy_bible_paperback.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
+    description: 'A low-cost, light-volume outreach Bible in the English Standard Version. Engineered specifically for distribution, mission trips, and community gifts.',
     features: [
-      'Heavyweight natural cotton canvas',
-      'Reinforced handles for holding books',
-      'Spacious interior for Bibles and notebooks',
-      'Minimalist aesthetic featuring "Grace" typography'
+      'Full Old and New Testaments in ESV text',
+      'Lightweight, highly budget-friendly paperback cover',
+      'Features a helpful plan of salvation guide',
+      'Double-column, clear font layout format'
     ],
     inStock: true
   },
   {
-    id: 'prod-10',
-    title: 'Beaded Cross Charm Bracelet',
-    price: 13.24,
-    category: 'Jewelry',
-    image: 'https://m.media-amazon.com/images/I/71W8yLq7zJL._AC_SL1500_.jpg',
-    description: 'Stretch bead bracelet with a small cross charm, adjustable one-size-fits-most fit.',
+    id: 'kjv-standard-pew-bible',
+    title: 'KJV Standard Pew Bible — Burgundy Hardcover',
+    price: 10.99,
+    category: 'English Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/k/j/kjv_pew_bible_burgundy.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&w=600&q=80',
+    description: 'A classic, long-lasting burgundy hardcover pew Bible in the beloved King James Version (KJV). Features crisp printing, maps, and study resources.',
     features: [
-      'Stretch-to-fit natural beads',
-      'Detailed miniature cross accent charm',
-      'Comfortable one-size-fits-most design',
-      'Ideal daily reminder of faith and devotion'
+      'Authorized King James Version text',
+      'Sturdy fabric hardcover binding with gold lettering',
+      'Includes list of key scriptures and colorful maps',
+      'Clean double-column format with cross-references'
     ],
     inStock: true
   },
   {
-    id: 'prod-11',
-    title: 'Scripture Christmas Ornament Set (6pc)',
-    price: 14.25,
-    category: 'Seasonal',
-    image: 'https://m.media-amazon.com/images/I/81iPZ1gBclL._AC_SL1500_.jpg',
-    description: 'Six glass ornaments each printed with a different verse, boxed for storage and gifting.',
+    id: 'kjv-gift-award-bible',
+    title: 'KJV Gift and Award Bible — Black Imitation Leather',
+    price: 6.99,
+    category: 'English Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/k/j/kjv_gift_award_leather.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80',
+    description: 'The perfect milestone gift, featuring a black imitation leather cover, special presentation pages, and a concise dictionary/concordance resource block.',
     features: [
-      'Set of 6 delicate hand-crafted glass ornaments',
-      'Each printed with a unique encouraging verse',
-      'Includes hanging ribbon loops',
-      'Safely packaged in a divided storage box'
+      'Soft-touch durable black imitation leather cover',
+      'Presentation page for graduation, baptism, or marriage',
+      'Words of Christ printed in bold red lettering',
+      'Includes a helpful topical scripture finder index'
     ],
     inStock: true
   },
   {
-    id: 'prod-12',
-    title: '"Faith It Til You Make It" Phone Case',
-    price: 16.29,
-    category: 'Accessories',
-    image: 'https://m.media-amazon.com/images/I/71W7+B7N5YL._AC_SL1500_.jpg',
-    description: 'Slim-fit protective case available across popular phone models, matte finish.',
+    id: 'niv-pew-bible-blue',
+    title: 'NIV Pew Bible — Royal Blue Hardcover',
+    price: 12.49,
+    category: 'English Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/n/i/niv_pew_bible_blue.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1438210125605-fa95267e3a41?auto=format&fit=crop&w=600&q=80',
+    description: 'The standard pew Bible in the New International Version (NIV), featuring a sturdy royal blue hardcover with gold foiled lettering designed for daily corporate assembly.',
     features: [
-      'Slim-profile impact-resistant defense shell',
-      'Premium elegant matte finish',
-      'Available for popular phone models',
-      'Precise button and camera port cutouts'
+      'Most modern New International Version (NIV) text',
+      'High-quality, durable cloth hardcover binding',
+      'Optimal 9-point Comfort Print font readability',
+      'Comes with full-color visual maps of biblical lands'
     ],
     inStock: true
   },
   {
-    id: 'prod-13',
-    title: 'Boxed Encouragement Greeting Cards (12pk)',
-    price: 11.20,
-    category: 'Stationery',
-    image: 'https://m.media-amazon.com/images/I/81b2tK0C70L._AC_SL1500_.jpg',
-    description: 'Twelve assorted faith-themed cards with envelopes, covering birthdays, sympathy, and general encouragement.',
+    id: 'niv-outreach-bible-softcover',
+    title: 'NIV Outreach Bible — Low-Cost Softcover',
+    price: 3.99,
+    category: 'English Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/n/i/niv_outreach_bible_paperback.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=600&q=80',
+    description: 'A highly budget-friendly, full-text New International Version (NIV) Bible in a durable softcover, specifically optimized for evangelism outreach and high-volume distribution.',
     features: [
-      '12 assorted faith-themed greeting designs',
-      'Covers birthdays, sympathy, and general support',
-      'Includes 12 premium envelope wrappers',
-      'Thick cardstock material with blank interior space'
+      'Full Old and New Testaments in the trusted NIV translation',
+      'Lightweight paperback format perfect for sharing',
+      'Includes introductory articles, maps, and plan of salvation',
+      'Double-column, clear-font text with minimal weight'
     ],
     inStock: true
   },
   {
-    id: 'prod-14',
-    title: 'Praying Hands Resin Figurine',
-    price: 23.42,
-    category: 'Decor',
-    image: 'https://m.media-amazon.com/images/I/71t-Yv685YL._AC_SL1500_.jpg',
-    description: 'Hand-painted resin figurine, a traditional shelf or side-table piece for a faith-centered home.',
+    id: 'gnt-standard-bible-hardcover',
+    title: 'GNT Standard Holy Bible — Green Hardcover',
+    price: 9.99,
+    category: 'English Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/g/n/gnt_standard_bible_hardcover.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
+    description: 'The Good News Translation (GNT) standard hardcover, highly prized for its simple, contemporary language and expressive, unique line drawings throughout.',
     features: [
-      'Exquisite detailed hand-painted resin artistry',
-      'Traditional peaceful pose of praying hands',
-      'Compact size for study desk, mantle, or side-tables',
-      'Brings a calming spiritual atmosphere to any room'
+      'Highly readable Good News Translation (GNT) English',
+      'Over 200 classic Annie Vallotton sketch illustrations',
+      'Chronological history timelines and reading schemes',
+      'Rigid forest green hardcover designed for heavy study'
     ],
     inStock: true
   },
   {
-    id: 'prod-15',
-    title: 'Comfort & Prayer Gift Basket',
-    price: 35.65,
-    category: 'Gift Sets',
-    image: 'https://m.media-amazon.com/images/I/81r1j1N68VL._AC_SL1500_.jpg',
-    description: 'Curated basket with a devotional, candle, and mug, arranged and ready to give for grief or encouragement.',
+    id: 'cev-standard-bible-paperback',
+    title: 'CEV Standard Holy Bible — Flexible Paperback',
+    price: 7.99,
+    category: 'English Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/c/e/cev_standard_bible_paperback.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=600&q=80',
+    description: 'The Contemporary English Version (CEV) is translated to be easily read aloud and understood by all ages. Features a lightweight, flexible softcover.',
     features: [
-      'Curated selection: a daily devotional guide, soy candle, and mug',
-      'Beautifully arranged in a woven handbasket',
-      'Gift-ready wrapping for bereavement or encouragement',
-      'Each basket is packed with prayers from our family'
+      'Optimized translation flow for spoken/oral readings',
+      'Lightweight and perfect for daily study carrying',
+      'Includes a glossary of difficult biblical terms',
+      'Comes with standard historical timelines and maps'
     ],
     inStock: true
   },
   {
-    id: 'prod-16',
-    title: 'Scripture Bookmark Set (10pc, metal tassel)',
-    price: 9.16,
-    category: 'Stationery',
-    image: 'https://m.media-amazon.com/images/I/71Zt97D2vSL._AC_SL1500_.jpg',
-    description: 'Ten metal bookmarks each stamped with a verse, tasseled, fits any standard book or Bible.',
+    id: 'nasb-pew-bible-hardcover',
+    title: 'NASB Pew Bible — Classic Navy Hardcover',
+    price: 13.99,
+    category: 'English Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/n/a/nasb_pew_bible_hardcover.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1438210125605-fa95267e3a41?auto=format&fit=crop&w=600&q=80',
+    description: 'The New American Standard Bible (NASB), famous for its literal, word-for-word accuracy. Standard navy hardcover designed for church pew stands.',
     features: [
-      'Set of 10 durable bookmark cards',
-      'Each individually printed with comforting scripture',
-      'Features elegant silver and gold metal tassels',
-      'Perfect for marking spots in Bibles or hymnals'
+      'Faithful literal NASB 1995 translation text',
+      'Robust cloth binding with gold embossed lettering',
+      'Clear double-column design with section outlines',
+      'Archival-grade paper built to withstand generations'
     ],
     inStock: true
   },
   {
-    id: 'prod-17',
-    title: '"This Home Believes" Wall Plaque',
-    price: 22.41,
-    category: 'Wall Decor',
-    image: 'https://m.media-amazon.com/images/I/81g73M6o1BL._AC_SL1500_.jpg',
-    description: 'Wood-look wall plaque with routed lettering, pre-drilled for hanging.',
+    id: 'nlt-pew-bible-brown',
+    title: 'NLT Pew Bible — Warm Brown Hardcover',
+    price: 11.99,
+    category: 'English Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/n/l/nlt_pew_bible_brown.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=600&q=80',
+    description: 'The New Living Translation (NLT) features dynamic equivalence translation that is incredibly warm and modern. Bound in a beautiful brown hardcover.',
     features: [
-      'Rustic wood-grain look plaque',
-      'Precision routed lettering "This Home Believes"',
-      'Pre-drilled mounting holes for simple setup',
-      'A lovely statement piece for hallways or entryways'
+      'Highly engaging and conversational NLT text flow',
+      'Sturdy textured brown cloth cover binding',
+      'Designed to match traditional and contemporary pews',
+      'Features a quick-access scripture topical index'
+    ],
+    inStock: true
+  },
+
+  // -------------------------------------------------------------
+  // CATEGORY 4: Spanish Bibles
+  // -------------------------------------------------------------
+  {
+    id: 'rvr1960-santa-biblia-hardcover',
+    title: 'Spanish Santa Biblia RVR 1960 — Hardcover',
+    price: 9.99,
+    category: 'Spanish Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/r/v/rvr1960_santa_biblia_hardcover_black.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=600&q=80',
+    description: 'La Santa Biblia en español, traducción Reina Valera 1960. Una edición económica de tapa dura, ideal para estudio personal, obsequios y congregaciones.',
+    features: [
+      'Texto completo de la traducción Reina Valera 1960',
+      'Tapa dura duradera diseñada para uso prolongado',
+      'Secciones de ayuda al lector y mapas a color',
+      'Tipografía clara y de lectura agradable'
     ],
     inStock: true
   },
   {
-    id: 'prod-18',
-    title: '"Pray About Everything" Pocket Prayer Card Set',
-    price: 11.20,
-    category: 'Stationery',
-    image: 'https://m.media-amazon.com/images/I/71u96N6pA1L._AC_SL1500_.jpg',
-    description: 'Wallet-sized cards with short prayers for common situations, held together on a ring.',
+    id: 'rvr1960-santa-biblia-economica',
+    title: 'Spanish RVR 1960 Santa Biblia — Economical Softcover',
+    price: 3.99,
+    category: 'Spanish Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/r/v/rvr1960_santa_biblia_economica.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80',
+    description: 'Una Santa Biblia muy económica en la traducción clásica Reina Valera 1960. Ideal para campañas de evangelización y distribución comunitaria masiva.',
     features: [
-      'Wallet-sized deck of high-quality prayer cards',
-      'Short prayers addressing everyday moments and trials',
-      'Securely held together on a metal binder ring',
-      'Portable encouragement to carry in wallets or purses'
+      'Texto íntegro de la clásica versión Reina Valera 1960',
+      'Portada rústica de papel suave, ligera y fácil de llevar',
+      'Incluye plan de salvación y guía de lectura rápida',
+      'Excelente relación calidad-precio para ministerios'
     ],
     inStock: true
   },
   {
-    id: 'prod-19',
-    title: 'Chamomile & Scripture Tea Gift Set',
-    price: 23.42,
-    category: 'Gift Sets',
-    image: 'https://m.media-amazon.com/images/I/81S79K4b6pL._AC_SL1500_.jpg',
-    description: 'Boxed tea sampler paired with a small verse booklet, a gentle sympathy or thinking-of-you gift.',
+    id: 'rvr1960-large-print-leather',
+    title: 'Spanish Reina Valera 1960 — Large Print Leathertone',
+    price: 19.99,
+    category: 'Spanish Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/r/v/rvr1960_large_print_leathertone_brown.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80',
+    description: 'Una elegante Biblia de estudio Reina Valera 1960 con letra grande (12 puntos), encuadernada en fina piel sintética marrón con cantos dorados.',
     features: [
-      'Organic soothing chamomile loose leaf tea blend',
-      'Includes a miniature scripture pocket devotional',
-      'Includes a sleek mesh tea ball infuser',
-      'Presented in a rustic kraft gift box'
+      'Letra grande de 12 puntos para máxima legibilidad',
+      'Encuadernación de lujo en imitación piel marrón',
+      'Palabras de Cristo resaltadas en color rojo',
+      'Contiene concordancia amplia y mapas detallados'
     ],
     inStock: true
   },
   {
-    id: 'prod-20',
-    title: 'Rustic Wood Cross, 3-Piece Wall Set',
-    price: 30.56,
-    category: 'Wall Decor',
-    image: 'https://m.media-amazon.com/images/I/81Y7y3yZfDL._AC_SL1500_.jpg',
-    description: 'Three graduated wood crosses designed to hang as a cluster, distressed farmhouse finish.',
+    id: 'rvr1960-bilingual-bible',
+    title: 'Spanish / English Bilingual Bible (RVR1960/KJV)',
+    price: 21.99,
+    category: 'Spanish Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/r/v/rvr1960_bilingual_bible.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=600&q=80',
+    description: 'Biblia bilingüe paralela de dos columnas. Presenta la clásica traducción española Reina Valera 1960 al lado de la clásica versión inglesa King James Version.',
     features: [
-      'Three graduated wooden crosses',
-      'Distressed farmhouse finish in warm tones',
-      'Designed to hang as an elegant wall cluster',
-      'Adds a historic spiritual vibe to your home'
+      'Texto en columnas paralelas frente a frente (Español/Inglés)',
+      'Reina Valera 1960 + King James Version (KJV)',
+      'Tapa dura resistente con letras doradas grabadas',
+      'Glosario integrado y referencias cruzadas bilingües'
     ],
     inStock: true
   },
   {
-    id: 'prod-21',
-    title: '"Faith Over Fear" Engraved Cuff Bracelet',
-    price: 17.31,
-    category: 'Jewelry',
-    image: 'https://m.media-amazon.com/images/I/61O-Zf6g00L._AC_SL1500_.jpg',
-    description: 'Adjustable stainless cuff with an engraved verse, hypoallergenic finish.',
+    id: 'nvi-santa-biblia-tapa-blanda',
+    title: 'Spanish Santa Biblia NVI — Tapa Blanda',
+    price: 8.99,
+    category: 'Spanish Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/n/v/nvi_santa_biblia_tapa_blanda.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
+    description: 'La Nueva Versión Internacional (NVI) en español es muy valorada por su excelente equilibrio entre fidelidad y facilidad de lectura moderna.',
     features: [
-      'Adjustable premium stainless steel cuff',
-      'Sleek and polished inside and out',
-      'Engraved with the reminder "Faith Over Fear"',
-      'Hypoallergenic, tarnish-resistant daily wear'
+      'Texto completo en traducción contemporánea NVI',
+      'Tapa blanda de tacto sedoso y durabilidad flexible',
+      'Notas a pie de página aclaratorias sobre términos hebreos',
+      'Ideal para jóvenes y personas que inician su estudio'
     ],
     inStock: true
   },
   {
-    id: 'prod-22',
-    title: 'Personalized Family Prayer Journal',
-    price: 23.42,
-    category: 'Journals',
-    image: 'https://m.media-amazon.com/images/I/81m8R0WfW3L._SL1500_.jpg',
-    description: 'Undated journal with space to record prayer requests and answered prayers, name customization on the cover.',
+    id: 'rvr1960-pocket-bible-zipper',
+    title: 'Spanish RVR 1960 Pocket Bible (Zippered Vinyl)',
+    price: 14.49,
+    category: 'Spanish Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/r/v/rvr1960_pocket_bible_zipper.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1515263487990-61b07816b324?auto=format&fit=crop&w=600&q=80',
+    description: 'Biblia de tamaño bolsillo en estuche protector de vinilo con cremallera de alta calidad para proteger las páginas contra polvo, dobleces y rasgaduras.',
     features: [
-      'Undated custom pages with prompts',
-      'Spacious sections for prayer requests and answers',
-      'Name customization header area on the cover',
-      'Rich textured leather-bound wrap cover'
+      'Tamaño bolsillo ultra-compacto perfecto para viajes',
+      'Cierre con cremallera completa que protege las hojas',
+      'Cantos plateados metálicos elegantes',
+      'Contiene breves introducciones a cada libro bíblico'
+    ],
+    inStock: true
+  },
+
+  // -------------------------------------------------------------
+  // CATEGORY 5: Study & Devotional Bibles
+  // -------------------------------------------------------------
+  {
+    id: 'esv-study-bible-hardcover',
+    title: 'ESV Study Bible — Premium Hardcover Edition',
+    price: 44.99,
+    category: 'Study & Devotional Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/e/s/esv_study_bible_hardcover.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=600&q=80',
+    description: 'The ESV Study Bible features 20,000+ study notes, 80,000+ cross-references, 200+ full-color maps, charts, and comprehensive articles written by leading biblical scholars.',
+    features: [
+      'Comprehensive study notes on every single page',
+      'Full-color theological maps, charts, and illustrations',
+      'Complete English Standard Version (ESV) text',
+      'High-quality Smyth-sewn archival-grade binding'
     ],
     inStock: true
   },
   {
-    id: 'prod-23',
-    title: '"Be Still" Scripture Wall Canvas Print',
-    price: 27.50,
-    category: 'Wall Decor',
-    image: 'https://m.media-amazon.com/images/I/81Pz-39h7HL._AC_SL1500_.jpg',
-    description: 'Gallery-wrapped canvas, ready to hang, a soft focal piece for a bedroom or reading nook.',
+    id: 'esv-scripture-journal-romans',
+    title: 'ESV Scripture Journal: Romans',
+    price: 5.99,
+    category: 'Study & Devotional Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/e/s/esv_scripture_journal_romans.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=600&q=80',
+    description: 'Features the complete biblical text of the Book of Romans on the left-hand side, paired with lightly lined blank grid pages on the right-hand side for your sermon and study notes.',
     features: [
-      'Gallery-wrapped premium artist canvas',
-      'Soft aesthetic typography of Psalm 46:10',
-      'Sturdy wooden frame - ready to hang immediately',
-      'Perfect focal art for bedrooms or reading nooks'
+      'Complete Book of Romans in the ESV translation',
+      'Generous wide margins and full lined page for journaling',
+      'Elegant matte paperback softcover with gold accents',
+      'Premium thick cream paper that prevents ink bleeding'
     ],
     inStock: true
   },
   {
-    id: 'prod-24',
-    title: 'LED Flameless Prayer Candle, Set of 2',
-    price: 19.35,
-    category: 'Candles',
-    image: 'https://m.media-amazon.com/images/I/71k4oBv-vLL._AC_SL1500_.jpg',
-    description: 'Battery-operated pillar candles with a timer function, safe for homes with kids or pets.',
+    id: 'esv-scripture-journal-matthew',
+    title: 'ESV Scripture Journal: Matthew',
+    price: 5.99,
+    category: 'Study & Devotional Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/e/s/esv_scripture_journal_matthew.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=600&q=80',
+    description: 'The complete Gospel of Matthew in single-column layout, opposite lined archival writing pages. Ideal for comprehensive sermon series study and personal reflections.',
     features: [
-      'Battery-operated realistic flickering LED candles',
-      'Built-in automated timer function (6h on / 18h off)',
-      'Safe alternative for homes with children or pets',
-      'Beautifully wrapped with prayer verse decorations'
+      'Full book of Matthew in readable single-column font',
+      'Lined notebook pages opposite every scriptural page',
+      'Textured paperback casing, classic minimalist style',
+      'Sturdy heavy-stock paper suitable for fountain pens'
     ],
     inStock: true
   },
   {
-    id: 'prod-25',
-    title: 'Cross Rosary Beads, Classic White',
-    price: 12.22,
-    category: 'Jewelry',
-    image: 'https://m.media-amazon.com/images/I/71y9I-P881L._AC_SL1500_.jpg',
-    description: 'Traditional five-decade rosary with a crucifix centerpiece, comes in a small pouch.',
+    id: 'esv-scripture-journal-john',
+    title: 'ESV Scripture Journal: John',
+    price: 5.99,
+    category: 'Study & Devotional Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/e/s/esv_scripture_journal_john.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=600&q=80',
+    description: 'The Gospel of John, known for its rich Christological theological deep-dives, displayed side-by-side with lined notebook pages for recording active spiritual studies.',
     features: [
-      'Traditional five-decade rosary design',
-      'Luminous white polished round glass beads',
-      'Detailed metal crucifix centerpiece',
-      'Comes with a soft velvet drawstring pouch'
+      'Full text of John in modern, literal ESV alignment',
+      'Lightly lined cream writing paper opposite each scriptural fold',
+      'Compact notebook weight, easy to tuck into Bibles',
+      'No ink-bleed design with high opacity page layout'
     ],
     inStock: true
   },
   {
-    id: 'prod-26',
-    title: '"Blessed Mama" Enamel Mug',
-    price: 16.29,
-    category: 'Drinkware',
-    image: 'https://m.media-amazon.com/images/I/71U8Gv9IIPL._AC_SL1500_.jpg',
-    description: '12 oz enamel camp-style mug, popular Mother\'s Day and baby-shower gift.',
+    id: 'esv-scripture-journal-genesis',
+    title: 'ESV Scripture Journal: Genesis',
+    price: 5.99,
+    category: 'Study & Devotional Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/e/s/esv_scripture_journal_genesis.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=600&q=80',
+    description: 'Begin study of the scriptures at the very first book. Features the complete text of Genesis paired with lined space for family origins and biblical covenants research notes.',
     features: [
-      'Classic camp-style 12 oz enamel cup',
-      'Extremely lightweight and shatterproof',
-      'Popular Mother\'s Day, baby shower, or birthday gift',
-      'Sleek silver rim accent border'
+      'Complete Book of Genesis in traditional ESV text',
+      'Wide-ruled lined journaling layout on right-hand folds',
+      'Perfect for deep biblical roots and ancestry study',
+      'Foil-stamped matte cover with durable lay-flat binding'
     ],
     inStock: true
   },
   {
-    id: 'prod-27',
-    title: 'Daily Devotional for Women, 365 Days',
-    price: 17.31,
-    category: 'Books',
-    image: 'https://m.media-amazon.com/images/I/81PzH8SjO7L._SL1500_.jpg',
-    description: 'One short reading per day with a closing reflection question, ribbon-marked hardcover.',
+    id: 'niv-life-application-study-bible',
+    title: 'NIV Life Application Study Bible (Hardcover)',
+    price: 39.99,
+    category: 'Study & Devotional Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/n/i/niv_life_application_study_bible.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=600&q=80',
+    description: 'The world’s best-selling application study Bible. Contains over 10,000 real-life application notes, profiles of biblical characters, and detailed topical indexes.',
     features: [
-      'One short inspirational daily reading',
-      'Closing daily reflection questions & bible verses',
-      'Premium embossed hardcover with ribbon marker',
-      'Written to support women in their daily walk of faith'
+      'In-depth application notes that explain contemporary relevance',
+      'Extensive biography lists of key biblical heroes',
+      'Full-color maps, visual timelines, and clear charts',
+      'Excellent for daily application and devotional study'
     ],
     inStock: true
   },
   {
-    id: 'prod-28',
-    title: 'Faith-Based Journaling Bible, Wide Margin',
-    price: 35.65,
-    category: 'Books',
-    image: 'https://m.media-amazon.com/images/I/81R8r-7y7oL._SL1500_.jpg',
-    description: 'Full-text Bible with wide ruled margins for notes and lettering, ribbon marker, hardcover.',
+    id: 'kjv-study-bible-leathertone',
+    title: 'KJV Study Bible — Premium Full-Color Leathertone',
+    price: 34.99,
+    category: 'Study & Devotional Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/k/j/kjv_study_bible_leathertone.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80',
+    description: 'The timeless King James Version text alongside modern full-color illustrations, archeological photos, center-column cross-references, and clear study notes.',
     features: [
-      'Full-text Bible translation',
-      'Wide ruled margins for personal notes and doodles',
-      'Heavy ink-proof cream paper pages',
-      'Satin ribbon bookmark marker'
+      'Classic KJV translation with red-letter words of Christ',
+      'Dozens of high-resolution archeological study photos',
+      'Stunning wood-burned design leathertone cover',
+      'Complete concordance and massive topical index'
     ],
     inStock: true
   },
   {
-    id: 'prod-29',
-    title: 'Scripture Verse Wind Chime',
-    price: 25.46,
-    category: 'Outdoor Decor',
-    image: 'https://m.media-amazon.com/images/I/71N7e6n70NL._AC_SL1500_.jpg',
-    description: 'Metal wind chime with a verse-engraved center disc, weather-resistant for porch or garden.',
+    id: 'gnt-daily-devotional-bible',
+    title: 'GNT Daily Devotional Bible — Walk with God',
+    price: 16.99,
+    category: 'Study & Devotional Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/g/n/gnt_daily_devotional_bible.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
+    description: 'Organized into 365 daily reading portions. Each section contains Old Testament, New Testament, Psalms, and Proverbs snippets paired with a practical spiritual devotional.',
     features: [
-      'Metal wind chime tuned to a peaceful scale',
-      'Windcatcher center disc engraved with scripture',
-      'Weather-resistant components for patio, porch, or garden',
-      'Fills the air with soothing musical faith tones'
+      'Convenient 365 daily structured reading layouts',
+      'Combines diverse scripture chunks with reflective prompts',
+      'Includes beautiful visual drawings to supplement prayer times',
+      'Sturdy cloth binding with ribbon mark spacer'
     ],
     inStock: true
   },
   {
-    id: 'prod-30',
-    title: '"Fear Not" Cross Pendant Keychain',
-    price: 11.20,
-    category: 'Keepsakes',
-    image: 'https://m.media-amazon.com/images/I/61n9WfK6GUL._AC_SL1500_.jpg',
-    description: 'Brushed-metal keychain with a cross and short verse stamp, a simple graduation or travel gift.',
+    id: 'christian-journal-notes-prayer',
+    title: 'Floral Quiet Time Prayer Journal & Notebook',
+    price: 8.99,
+    category: 'Study & Devotional Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/c/h/christian_journal_notes_prayer.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=600&q=80',
+    description: 'A beautiful, lay-flat writing journal with scripture passages printed at the footer of each page. Perfect for prayer lists, sermon recording, and daily gratitude journaling.',
     features: [
-      'Brushed-metal key tag with a mini silver cross',
-      'Engraved with the command "Fear Not"',
-      'Robust metal construction for durability',
-      'A practical and meaningful graduation or travel gift'
+      'Elegant hand-painted watercolor floral cover casing',
+      '160 ruled writing pages with biblical quotes at bottom',
+      'Durable elastic closure band and expandable document pouch',
+      'Acid-free thick cardstock prevents fountain ink bleed'
+    ],
+    inStock: true
+  },
+
+  // -------------------------------------------------------------
+  // CATEGORY 6: Children & Youth Bibles
+  // -------------------------------------------------------------
+  {
+    id: 'gnt-childrens-illustrated',
+    title: 'GNT Children’s Illustrated Bible — Hardcover',
+    price: 15.99,
+    category: 'Children & Youth Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/g/n/gnt_childrens_illustrated_bible.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=600&q=80',
+    description: 'The Good News Translation (GNT) Children’s Bible features beautiful, colorful full-page illustrations and children-friendly guides that make the scriptures accessible for young readers.',
+    features: [
+      'Dozens of vibrant full-color biblical illustrations',
+      'Written in the highly accessible Good News Translation (GNT)',
+      'Includes kid-friendly dictionary, timelines, and study tools',
+      'Robust hardcover binding perfect for Sunday school'
     ],
     inStock: true
   },
   {
-    id: 'prod-31',
-    title: 'Faith Family Photo Frame, Scripture Border',
-    price: 19.35,
-    category: 'Home Decor',
-    image: 'https://m.media-amazon.com/images/I/81P-v4-U7kL._AC_SL1500_.jpg',
-    description: '4x6 tabletop frame with a printed verse border, wood-look finish.',
+    id: 'cev-youth-devotional-bible',
+    title: 'CEV Youth Devotional Bible — Softcover',
+    price: 13.99,
+    category: 'Children & Youth Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/c/e/cev_youth_devotional_bible.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=600&q=80',
+    description: 'Contemporary English Version (CEV) Youth Bible features hundreds of devotions, reading plans, and reflective journal prompts specifically tailored to high school and college students.',
     features: [
-      'Holds a standard 4x6 tabletop photograph',
-      'Printed border with encouraging family scripture',
-      'Warm wood-look finish with easel stand back',
-      'Preserves precious family memories in faith'
+      'Over 365 daily youth-focused devotional readings',
+      'Clear, modern Contemporary English Version translation',
+      'Discussion questions, prayers, and real-life topic indexes',
+      'Durable, flexible softcover perfect for student bags'
     ],
     inStock: true
   },
   {
-    id: 'prod-32',
-    title: 'Inspirational Coffee & Cocoa Mug Gift Set',
-    price: 28.52,
-    category: 'Gift Sets',
-    image: 'https://m.media-amazon.com/images/I/81-Tqg9e-YL._AC_SL1500_.jpg',
-    description: 'Mug paired with two packets of cocoa and a verse card, boxed and ready to give.',
+    id: 'esv-childrens-bible-hardcover',
+    title: 'ESV Children’s Holy Bible (Hardcover with Guides)',
+    price: 14.99,
+    category: 'Children & Youth Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/e/s/esv_childrens_bible_hardcover.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=600&q=80',
+    description: 'The full text of the English Standard Version (ESV) paired with 24 pages of beautiful color illustrations, dictionary articles, and basic guides to scriptural history.',
     features: [
-      'Elegantly printed ceramic faith mug',
-      'Two premium packets of hot cocoa mix',
-      'Printed scripture verse cards',
-      'Arrives fully wrapped and ribboned for gifting'
+      'Complete, unmodified ESV biblical text translation',
+      '24 colorful plates depicting critical Old/New covenant scenes',
+      'Designed for children ages 6 to 11 for transition reading',
+      'Durable, child-resistant rigid hardcover binding'
     ],
     inStock: true
   },
   {
-    id: 'prod-33',
-    title: 'Praying Angel Figurine, Hand-Painted',
-    price: 25.46,
-    category: 'Decor',
-    image: 'https://m.media-amazon.com/images/I/71S8yBv-96L._AC_SL1500_.jpg',
-    description: 'Hand-painted resin angel in a kneeling pose, a common sympathy or baptism gift.',
+    id: 'bible-stories-little-hands',
+    title: 'Bible Stories for Little Hands — Durable Board Book',
+    price: 7.99,
+    category: 'Children & Youth Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/b/i/bible_stories_little_hands.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=600&q=80',
+    description: 'An extremely durable, heavy board book containing simplified Bible stories with interactive questions and touchable details for toddlers.',
     features: [
-      'Detailed hand-painted resin sculpture',
-      'Angel in a peaceful kneeling posture of prayer',
-      'A beautiful sympathy, baptism, or comfort gift',
-      'Smooth ivory stone-look finish'
+      'Simple, active-voice vocabulary tailored for toddlers',
+      'Sturdy extra-thick board pages that clean easily',
+      'Vibrant colors and highly expressive artwork layout',
+      'Features short prayers at the end of each narrative portion'
     ],
     inStock: true
   },
   {
-    id: 'prod-34',
-    title: 'Scripture Verse Sticky Notes & Planner Set',
-    price: 13.24,
-    category: 'Stationery',
-    image: 'https://m.media-amazon.com/images/I/71n9Xv6gDUL._AC_SL1500_.jpg',
-    description: 'Undated weekly planner pad bundled with matching verse sticky notes.',
+    id: 'action-bible-comic-book',
+    title: 'The Action Bible — Comic Book Illustrated Edition',
+    price: 22.99,
+    category: 'Children & Youth Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/a/c/action_bible_comic_book.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=600&q=80',
+    description: 'An award-winning comic book Bible illustrated by Marvel artist Sergio Cariello. Over 215 chronological narratives designed to captivate visual learners and preteens.',
     features: [
-      'Undated weekly horizontal planner block pad',
-      'Matching set of colorful scripture sticky note pads',
-      'Keeps your weekly schedule centered on God\'s word',
-      'Convenient desktop size for home or office'
+      'Stunning graphic novel illustrations on heavy clay pages',
+      'Highly dramatic, faith-faithful action story pacing',
+      'Over 750 pages of chronological, cinematic scriptural history',
+      'Vibrant colors that leap off the page to hold attention'
+    ],
+    inStock: true
+  },
+
+  // -------------------------------------------------------------
+  // CATEGORY 7: Compact & Pocket Bibles
+  // -------------------------------------------------------------
+  {
+    id: 'military-camoflage-new-testament',
+    title: 'KJV Military Pocket New Testament (Camouflage Cover)',
+    price: 4.50,
+    category: 'Compact & Pocket Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/m/i/military_new_testament_camo_kjv.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1522441815192-d9f04eb0615c?auto=format&fit=crop&w=600&q=80',
+    description: 'A rugged, pocket-sized King James Version New Testament with Psalms and Proverbs, featuring a water-resistant digital camouflage cover designed for military deployment and outdoor usage.',
+    features: [
+      'KJV New Testament, Psalms, and Proverbs',
+      'Rugged water-resistant digital camouflage design cover',
+      'Compact military-grade sizing to fit pocket or rucksack',
+      'Includes special military prayers and active service registry'
     ],
     inStock: true
   },
   {
-    id: 'prod-35',
-    title: '"Trust in the Lord" Garden Stone',
-    price: 20.37,
-    category: 'Outdoor Decor',
-    image: 'https://m.media-amazon.com/images/I/81vP7-U76yL._AC_SL1500_.jpg',
-    description: 'Cast resin stepping stone with a raised verse, weatherproof for garden or entry path.',
+    id: 'gnt-pocket-new-testament-blue',
+    title: 'GNT Pocket New Testament — Compact Blue Vinyl',
+    price: 2.99,
+    category: 'Compact & Pocket Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/g/n/gnt_pocket_new_testament_blue_vinyl.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1515263487990-61b07816b324?auto=format&fit=crop&w=600&q=80',
+    description: 'Good News Translation (GNT) Pocket New Testament. Extremely compact and lightweight, featuring a protective navy blue vinyl slip cover, ideal for active travelers.',
     features: [
-      'Cast resin stepping stone with a raised verse design',
-      'Weatherproof construction for outdoor durability',
-      'Raised "Trust in the Lord" centerpiece text',
-      'Enhances garden pathways, flower beds, or entryways'
+      'Full New Testament text in the modern GNT translation',
+      'Waterproof navy blue textured vinyl slip jacket',
+      'Ultra-slim profile that easily slips into pockets or bags',
+      'Includes a quick-reference alphabetical guide to key passages'
     ],
     inStock: true
   },
   {
-    id: 'prod-36',
-    title: 'Cross Charm Anklet',
-    price: 11.20,
-    category: 'Jewelry',
-    image: 'https://m.media-amazon.com/images/I/61NlB6Z-GOL._AC_SL1500_.jpg',
-    description: 'Delicate chain anklet with a small cross charm, adjustable clasp.',
+    id: 'esv-pocket-new-testament-psalms',
+    title: 'ESV Pocket New Testament with Psalms (Black Leather)',
+    price: 8.99,
+    category: 'Compact & Pocket Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/e/s/esv_pocket_new_testament_psalms.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1515263487990-61b07816b324?auto=format&fit=crop&w=600&q=80',
+    description: 'An elegant, high-grade genuine leather-feeling pocket New Testament. Beautiful gold gilt lines with complete Book of Psalms and Proverbs.',
     features: [
-      'Delicate polished chain anklet design',
-      'Miniature silver cross charm dangle',
-      'Adjustable clasp chain (fits most sizes)',
-      'A lovely faith statement for warm weather'
+      'Contains full New Testament text, Psalms, and Proverbs in ESV',
+      'Smooth, high-end black bonded leather wrapper feel',
+      'Gilded silver edges and a satin silver bookmark ribbon',
+      'Super-slim thickness (less than 0.35 inches total)'
     ],
     inStock: true
   },
   {
-    id: 'prod-37',
-    title: 'Devotional Coloring Journal for Teens',
-    price: 12.22,
-    category: 'Books',
-    image: 'https://m.media-amazon.com/images/I/818Z4vL9S7L._SL1500_.jpg',
-    description: 'Combines short devotionals with coloring pages and guided prompts aimed at teen readers.',
+    id: 'kjv-pocket-new-testament-red-letter',
+    title: 'KJV Pocket New Testament — Deluxe Red Letter Edition',
+    price: 5.49,
+    category: 'Compact & Pocket Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/k/j/kjv_pocket_new_testament_red_letter.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1515263487990-61b07816b324?auto=format&fit=crop&w=600&q=80',
+    description: 'The King James Version New Testament in pocket profile. Features traditional red-letter highlighting of the direct spoken words of Christ.',
     features: [
-      'Short devotionals speaking directly to teen challenges',
-      'Intricate coloring scenes that encourage quiet reflection',
-      'Guided journaling pages to capture private prayers',
-      'Beautiful cover art with layout for coloring'
+      'Authorized King James Version (KJV) New Testament text',
+      'Red-letter text highlighting of Jesus’ spoken words',
+      'Deep brown leatherette protective cover',
+      'Includes helpful thematic index for quick comfort searches'
     ],
     inStock: true
   },
   {
-    id: 'prod-38',
-    title: '"God\'s Got This" Throw Pillow Cover',
-    price: 17.31,
-    category: 'Home Textiles',
-    image: 'https://m.media-amazon.com/images/I/71LqO6GBLhL._AC_SL1500_.jpg',
-    description: '18x18 linen-look pillow cover, zippered, insert sold separately.',
+    id: 'cev-compact-bible-zipper',
+    title: 'CEV Compact Bible (Black Zippered Cover)',
+    price: 12.99,
+    category: 'Compact & Pocket Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/c/e/cev_compact_bible_zipper.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1515263487990-61b07816b324?auto=format&fit=crop&w=600&q=80',
+    description: 'The complete Old and New Testaments in Contemporary English. Features a compact size and a protective metal-tooth zipper wrapper.',
     features: [
-      'Crafted from high-grade 18x18 linen-look fabric',
-      'Featuring "God\'s Got This" premium printing',
-      'Concealed matching zipper for easy pillow insertion',
-      'Machine-washable cover (hang dry recommended)'
+      'Complete Holy Bible in modern, active-word CEV English',
+      'Enclosed zippered binder protects margins and spine',
+      'Includes special reading charts and daily guidance pages',
+      'Small, versatile footprint ideal for camping or travel bags'
+    ],
+    inStock: true
+  },
+
+  // -------------------------------------------------------------
+  // CATEGORY 8: Specialty & Foreign Bibles
+  // -------------------------------------------------------------
+  {
+    id: 'french-la-sainte-bible-hardcover',
+    title: 'French La Sainte Bible — Louis Segond Classic',
+    price: 14.99,
+    category: 'Specialty & Foreign Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/f/r/french_la_sainte_bible_hardcover.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
+    description: 'La Sainte Bible en français, version de référence Louis Segond. Una excelente edición de tapa dura para estudio pastoral y congregaciones francófonas.',
+    features: [
+      'Texte intégral de la version classique de Louis Segond (1910)',
+      'Reliure cartonnée très solide et élégante avec détails dorés',
+      'Contient des cartes bibliques colorées et des plans d’étude',
+      'Idéal pour les francophones et l’apprentissage de la langue'
     ],
     inStock: true
   },
   {
-    id: 'prod-39',
-    title: 'Communion Gift Set with Cross Bookmark',
-    price: 20.37,
-    category: 'Gift Sets',
-    image: 'https://m.media-amazon.com/images/I/81S79K4b6pL._AC_SL1500_.jpg',
-    description: 'Small boxed set with a devotional booklet and a metal cross bookmark, sized for a first-communion gift.',
+    id: 'portuguese-biblia-sagrada-hardcover',
+    title: 'Portuguese Bíblia Sagrada — Almeida Revista',
+    price: 14.99,
+    category: 'Specialty & Foreign Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/p/o/portuguese_biblia_sagrada_hardcover.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
+    description: 'A Bíblia Sagrada em português, tradução clássica João Ferreira de Almeida (Revista e Atualizada). Edição capa dura com folha branca especial.',
     features: [
-      'Curated devotional booklet designed for beginners',
-      'Shining metal polished cross page bookmark',
-      'Elegantly wrapped inside a satin gift-box lining',
-      'Perfect celebratory keepsake for baptisms and communions'
+      'Texto completo da tradução Almeida Revista e Atualizada (ARA)',
+      'Capa dura preta robusta projetada para longa durabilidade',
+      'Inclui seção de concordância bíblica e mapas temáticos',
+      'Excelente legibilidade e tipografia clara'
     ],
     inStock: true
   },
   {
-    id: 'prod-40',
-    title: 'Scripture Verse Car Air Freshener, 3-Pack',
-    price: 9.16,
-    category: 'Accessories',
-    image: 'https://m.media-amazon.com/images/I/71g0u4-Lq1L._AC_SL1500_.jpg',
-    description: 'Hanging car air fresheners printed with verses, three scents per pack.',
+    id: 'chinese-english-bilingual-bible',
+    title: 'Chinese / English Bilingual Bible (Union / ESV)',
+    price: 24.99,
+    category: 'Specialty & Foreign Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/c/h/chinese_english_bilingual_bible_union_esv.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=600&q=80',
+    description: 'Features the complete Chinese Union Version (CUV) in simplified characters side-by-side with the English Standard Version (ESV). Complete double-column layout.',
     features: [
-      'Hanging vertical cards featuring scripture designs',
-      'Contains 3 premium comforting fragrances',
-      'Equipped with pre-tied elastic hanging bands',
-      'Durable scent technology that lasts for weeks'
+      'Parallel text layout with Chinese CUV and English ESV text',
+      'Simplified Chinese characters with Pinyin helps',
+      'Hardcover cloth binding with elegant protective slip cover',
+      'Includes cross-cultural theological dictionary index'
     ],
     inStock: true
   },
   {
-    id: 'prod-41',
-    title: '"Faith Walks" Engraved Wood Sign',
-    price: 24.44,
-    category: 'Wall Decor',
-    image: 'https://m.media-amazon.com/images/I/81c-n9S6h6L._AC_SL1500_.jpg',
-    description: 'Laser-engraved pine sign with sawtooth hanger on the back, ready to display.',
+    id: 'arabic-standard-bible-hardcover',
+    title: 'Arabic Standard Holy Bible — Van Dyck Hardcover',
+    price: 16.99,
+    category: 'Specialty & Foreign Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/a/r/arabic_standard_bible_hardcover.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
+    description: 'The standard classical translation of the Holy Bible in Arabic (Smith & Van Dyck translation). Elegantly bound in a dark green vinyl-wrapped hardcover.',
     features: [
-      'Crafted from real natural-grain solid pine wood',
-      'Precisely laser-etched "Walk By Faith, Not By Sight"',
-      'Sawtooth hanging bracket mounted on the reverse',
-      'Adds clean farmhouse warmth to halls or galleries'
+      'Complete Arabic Smith & Van Dyck translation text',
+      'Classical Arabic script alignment with clear voweling guides',
+      'Durable vinyl-coated hardcover for lifelong preservation',
+      'Includes detailed maps of the Middle Eastern lands'
     ],
     inStock: true
   },
   {
-    id: 'prod-42',
-    title: 'Beaded Prayer Bracelet with Cross Charm',
-    price: 14.25,
-    category: 'Jewelry',
-    image: 'https://m.media-amazon.com/images/I/71OQ09g4k-L._AC_SL1500_.jpg',
-    description: 'Natural-stone bead bracelet with a small cross charm, stretch fit.',
+    id: 'tagalog-standard-bible-paperback',
+    title: 'Tagalog Holy Bible (Magandang Balita Biblia)',
+    price: 9.49,
+    category: 'Specialty & Foreign Bibles',
+    image: 'https://www.bibles.com/media/catalog/product/t/a/tagalog_standard_bible_paperback.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
+    description: 'Ang Banal na Biblia sa wikang Tagalog (Magandang Balita Biblia translation), widely popular for its clear contemporary prose throughout the Philippines.',
     features: [
-      'Made of polished premium solid stone beads',
-      'Detailed hanging antique-silver cross charm',
-      'Snug comfortable stretch wire base',
-      'Serves as an elegant daily companion for prayer'
-    ],
-    inStock: true
-  },
-  {
-    id: 'prod-43',
-    title: '"New Believer" Starter Bible & Journal Set',
-    price: 30.56,
-    category: 'Gift Sets',
-    image: 'https://m.media-amazon.com/images/I/818Z4vL9S7L._SL1500_.jpg',
-    description: 'Paperback Bible bundled with a beginner\'s reading plan and a companion journal, boxed.',
-    features: [
-      'Easy-to-follow paperback introductory translation Bible',
-      'Coordinating lined journal with scripture footnotes',
-      'Beginner-friendly 30-day starting roadmap leaflet',
-      'Arrives complete in a professional presentation carton'
-    ],
-    inStock: true
-  },
-  {
-    id: 'prod-44',
-    title: 'Scripture Verse Ceramic Trinket Dish',
-    price: 13.24,
-    category: 'Home Decor',
-    image: 'https://m.media-amazon.com/images/I/61gHhF-gH3L._AC_SL1500_.jpg',
-    description: 'Small ceramic dish for rings or keys, verse printed along the rim.',
-    features: [
-      'Fired glazed high-quality glossy white porcelain',
-      'Fine gold trim highlight border band',
-      'Printed with Psalm 23:3 scripture lettering',
-      'Sized for nightstands, sinks, or vanity counters'
-    ],
-    inStock: true
-  },
-  {
-    id: 'prod-45',
-    title: '"Blessed Beyond Measure" Wall Sticker Decal',
-    price: 15.27,
-    category: 'Wall Decor',
-    image: 'https://m.media-amazon.com/images/I/81GZ6Y-G-zL._AC_SL1500_.jpg',
-    description: 'Removable vinyl wall decal, matte finish, application tool included.',
-    features: [
-      'Industrial grade removable self-adhesive vinyl film',
-      'Flat matte charcoal finish looks professionally painted',
-      'Squeegee tool included for bubble-free application',
-      'Safe for household drywall surfaces'
-    ],
-    inStock: true
-  },
-  {
-    id: 'prod-46',
-    title: 'Cross Stress Relief Fidget Set',
-    price: 10.18,
-    category: 'Keepsakes',
-    image: 'https://m.media-amazon.com/images/I/71Xw+9U+I2L._AC_SL1500_.jpg',
-    description: 'Pocket-sized wood cross fidget pieces on a cord, a quiet comfort item for anxious moments.',
-    features: [
-      'Tactile olive wood holding worry crosses',
-      'Strung securely on a durable black woven string',
-      'Contoured to fit snugly between fingers',
-      'A silent and personal sensory item'
-    ],
-    inStock: true
-  },
-  {
-    id: 'prod-47',
-    title: 'Scripture Verse Notepad & Pen Gift Set',
-    price: 12.22,
-    category: 'Stationery',
-    image: 'https://m.media-amazon.com/images/I/71n9Xv6gDUL._AC_SL1500_.jpg',
-    description: 'Magnetic notepad paired with a matching verse-printed pen, kitchen or office use.',
-    features: [
-      '50 sheet tear-off pad with magnetic backing panel',
-      'Premium metal clip-on pen printed with scripture',
-      'Thick clean lined paper sheets',
-      'Great for shopping lists, quick verses, or notes'
-    ],
-    inStock: true
-  },
-  {
-    id: 'prod-48',
-    title: '"Faith Family Home" Doormat',
-    price: 28.52,
-    category: 'Home Decor',
-    image: 'https://m.media-amazon.com/images/I/81Hqg-7-GzL._AC_SL1500_.jpg',
-    description: 'Coir entry mat with a routed verse design, non-slip backing.',
-    features: [
-      'Coarse heavy-duty premium coconut coir fibers',
-      'Anti-slip protective rubber bottom grid',
-      'Clean carved "Faith Family Home" lettering',
-      'Resistant to outdoor weather and mud'
-    ],
-    inStock: true
-  },
-  {
-    id: 'prod-49',
-    title: 'Praise & Worship Devotional Journal Bundle',
-    price: 19.35,
-    category: 'Gift Sets',
-    image: 'https://m.media-amazon.com/images/I/818Z4vL9S7L._SL1500_.jpg',
-    description: 'Guided worship journal paired with a printed lyric booklet for reflection.',
-    features: [
-      'Elegant daily worship journaling sections',
-      'Included booklet featuring words to beloved hymns',
-      'Designed to companion quiet daily devotions',
-      'Lay-flat spine makes writing easy'
-    ],
-    inStock: true
-  },
-  {
-    id: 'prod-50',
-    title: '"I Can Do All Things" Athletic Water Bottle',
-    price: 18.33,
-    category: 'Drinkware',
-    image: 'https://m.media-amazon.com/images/I/71lD88wG3EL._AC_SL1500_.jpg',
-    description: '24 oz insulated stainless bottle with a verse print, leak-proof lid.',
-    features: [
-      'Double-wall vacuum-insulated stainless steel construction',
-      'Keeps hot tea warm for 12h or cold water chilled for 24h',
-      'Spill-proof flip lid with safety lock',
-      'Features Philippians 4:13 decorative lettering'
+      'Complete Old and New Testaments in Tagalog',
+      'Highly accessible, clear language modern translation',
+      'Lightweight paperback cover, excellent for daily use',
+      'Includes helpful historical word index list'
     ],
     inStock: true
   }

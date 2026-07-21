@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import coverImage from '../assets/images/now_i_see_cover_1784594781418.jpg';
+import coverImage from '../assets/images/book_cover.jpg';
 
 export default function BookMockup() {
   const [rotate, setRotate] = useState({ x: 0, y: -15 });
