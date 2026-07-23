@@ -32,6 +32,8 @@ export interface Product {
   description: string;
   features: string[];
   inStock: boolean;
+  isDigital?: boolean;
+  downloadUrl?: string;
 }
 
 export interface CartItem {

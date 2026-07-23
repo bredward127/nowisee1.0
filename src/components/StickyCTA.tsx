@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronUp, Accessibility, ShoppingCart, Type, Eye, Check, X, BookOpen } from 'lucide-react';
-import coverImage from '../assets/images/now_i_see_cover_1784594781418.jpg';
+import coverImage from '../assets/images/book_cover.jpg';
 
 interface StickyCTAProps {
   onBuyBook: () => void;

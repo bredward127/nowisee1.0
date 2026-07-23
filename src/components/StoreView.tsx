@@ -19,7 +19,7 @@ interface StoreViewProps {
   onUpdateQuantity: (productId: string, delta: number) => void;
   onRemoveFromCart: (productId: string) => void;
   onClearCart: () => void;
-  onPurchaseSuccess: (payerName: string) => void;
+  onPurchaseSuccess: (payerName: string, items?: CartItem[]) => void;
   viewingCart: boolean;
   setViewingCart: (view: boolean) => void;
 }
@@ -231,7 +231,7 @@ export default function StoreView({
                     onSuccess={(name) => {
                       onClearCart();
                       setViewingCart(false);
-                      onPurchaseSuccess(name);
+                      onPurchaseSuccess(name, cart);
                     }}
                   />
                   
