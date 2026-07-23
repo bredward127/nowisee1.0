@@ -1111,11 +1111,13 @@ export const PRODUCTS: Product[] = [
     title: 'Atomic Habit: An Easy & Proven Way to Build Good Habits',
     price: 20.99,
     category: 'Books & Journals',
-    image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80',
-    description: 'AliExpress ID: 3256812248016698',
+    image: 'https://ae-pic-a1.aliexpress-media.com/kf/S5a24b122ad7a4197a80906978f536c35b.jpg_960x960.jpg',
+    fallbackImage: 'https://ae-pic-a1.aliexpress-media.com/kf/S00ab963226a84fccb95a33a7e3684d39o.jpg_960x960.jpg',
+    description: 'James Clear\'s bestselling guide to building better habits through small, consistent changes — a great pick for readers pursuing practical personal growth alongside their walk with God.',
     features: [
-      'AliExpress ID: 3256812248016698'
+      'Bestselling personal growth guide',
+      'Practical, easy-to-apply habit strategies',
+      'Great gift for goal-setters'
     ],
     inStock: true
   },
@@ -1124,11 +1126,13 @@ export const PRODUCTS: Product[] = [
     title: 'Don\'t Believe Everything You Think: Essential Guide',
     price: 16.99,
     category: 'Books & Journals',
-    image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80',
-    description: 'AliExpress ID: 3256811843347220',
+    image: 'https://ae-pic-a1.aliexpress-media.com/kf/Saaf522ccf97549cead12be467e6cd526L.png_960x960.png',
+    fallbackImage: 'https://ae-pic-a1.aliexpress-media.com/kf/Sff876f394f99478a8d0f5879d1610265P.jpg_960x960.jpg',
+    description: 'A guided companion for examining anxious or self-critical thoughts and replacing them with truth — pairs naturally with scripture-based reflection.',
     features: [
-      'AliExpress ID: 3256811843347220'
+      'Helps identify unhelpful thought patterns',
+      'Companion guide for renewing the mind',
+      'Popular pick for personal growth shelves'
     ],
     inStock: true
   },
@@ -1137,11 +1141,13 @@ export const PRODUCTS: Product[] = [
     title: 'Bible Book Summary Guide with Scripture Note & Prayer Reflections',
     price: 34.99,
     category: 'Books & Journals',
-    image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80',
-    description: 'AliExpress ID: 3256811373953361',
+    image: 'https://ae-pic-a1.aliexpress-media.com/kf/S0711969cec9a4d37a726ec491202f3e50.jpg_960x960.jpg',
+    fallbackImage: 'https://ae-pic-a1.aliexpress-media.com/kf/S2a90208986114cc9b89bac729253b818a.jpg_960x960.jpg',
+    description: 'A book-by-book companion for working through Scripture, with space for notes and prayer reflections after each study — ideal for personal devotion or small group use.',
     features: [
-      'AliExpress ID: 3256811373953361'
+      'Book-by-book Bible summaries',
+      'Dedicated space for notes & prayer reflections',
+      'Great for personal or group Bible study'
     ],
     inStock: true
   },
@@ -1150,11 +1156,13 @@ export const PRODUCTS: Product[] = [
     title: '365 Days of Daily Prayer Brown Book, Bible Prayer Tracking Diary',
     price: 48.99,
     category: 'Books & Journals',
-    image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80',
-    description: 'AliExpress ID: 3256811374183451',
+    image: 'https://ae-pic-a1.aliexpress-media.com/kf/Sa6ca11ff4723450a8718c9b29f4dda19l.jpg_960x960.jpg',
+    fallbackImage: 'https://ae-pic-a1.aliexpress-media.com/kf/Sc2fc686c247748dd858f6fffc17d211cx.jpg_960x960.jpg',
+    description: 'A full-year prayer tracking journal bound in rich brown, designed to build a daily habit of prayer and reflection one day at a time.',
     features: [
-      'AliExpress ID: 3256811374183451'
+      '365-day daily prayer tracker',
+      'Durable hardcover binding',
+      'Ideal gift for spiritual growth'
     ],
     inStock: true
   },
@@ -1163,11 +1171,13 @@ export const PRODUCTS: Product[] = [
     title: 'Vintage Thick Leather Bible Notebook Blank Diary Book',
     price: 24.99,
     category: 'Books & Journals',
-    image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80',
-    description: 'AliExpress ID: 2251832612973992',
+    image: 'https://ae-pic-a1.aliexpress-media.com/kf/S2e47fa8d39754c40879ef79a13f3bf26R.jpg_960x960.jpg',
+    fallbackImage: 'https://ae-pic-a1.aliexpress-media.com/kf/S9ed4c520e1ab45909e45b652442c9c5an.jpg_960x960.jpg',
+    description: 'A vintage-style leather-bound blank diary with thick, retro-finished pages — perfect for journaling prayers, sermon notes, or personal reflections.',
     features: [
-      'AliExpress ID: 2251832612973992'
+      'Vintage leather-style cover',
+      'Thick blank pages for journaling',
+      'Compact size for carrying to church'
     ],
     inStock: true
   },
@@ -1176,11 +1186,13 @@ export const PRODUCTS: Product[] = [
     title: 'Biblical Reference Book - Pocket Bible Dictionary',
     price: 28.99,
     category: 'Books & Journals',
-    image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80',
-    description: 'AliExpress ID: 3256812598366349',
+    image: 'https://ae-pic-a1.aliexpress-media.com/kf/S28c0f0ba0b4449d581821b034fa9ec58v.jpeg_960x960.jpeg',
+    fallbackImage: 'https://ae-pic-a1.aliexpress-media.com/kf/S28c0f0ba0b4449d581821b034fa9ec58v.jpeg_960x960.jpeg',
+    description: 'A compact 352-page paperback dictionary of biblical terms, names, and places — a handy reference to keep alongside your Bible for deeper study.',
     features: [
-      'AliExpress ID: 3256812598366349'
+      '352-page pocket-sized reference',
+      'Covers key biblical terms & names',
+      'Great companion for Bible study'
     ],
     inStock: true
   },
@@ -1189,11 +1201,13 @@ export const PRODUCTS: Product[] = [
     title: 'Ladies Prayer Journal 365 Days Daily Devotional Notebook',
     price: 21.99,
     category: 'Books & Journals',
-    image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80',
-    description: 'AliExpress ID: 3256812150714370',
+    image: 'https://ae-pic-a1.aliexpress-media.com/kf/Sb8f06ca0e8374d4190f696ca589b8274E.jpg_960x960.jpg',
+    fallbackImage: 'https://ae-pic-a1.aliexpress-media.com/kf/Sc9001d51bed74535b0184e895f928139a.jpg_960x960.jpg',
+    description: 'A hardcover, year-long devotional journal designed for women, with a built-in Bible index to help track daily prayer and reflection.',
     features: [
-      'AliExpress ID: 3256812150714370'
+      '365-day devotional journal',
+      'Hardcover with built-in Bible index',
+      'Designed especially for women\'s daily devotion'
     ],
     inStock: true
   },
@@ -1202,11 +1216,13 @@ export const PRODUCTS: Product[] = [
     title: '52-Week Spanish Bible Study Journal for Women, Floral Cover',
     price: 10.99,
     category: 'Books & Journals',
-    image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80',
-    description: 'AliExpress ID: 3256812292085650',
+    image: 'https://ae-pic-a1.aliexpress-media.com/kf/Sf068e0bfe42049268ff5cb3b16d43d24d.jpg_960x960.jpg',
+    fallbackImage: 'https://ae-pic-a1.aliexpress-media.com/kf/Sd423b37762414bf9b1c095809c9a211a2.jpg_960x960.jpg',
+    description: 'A 52-week guided devotional planner in Spanish, featuring a floral cover — a portable companion for weekly faith reflection and Bible study.',
     features: [
-      'AliExpress ID: 3256812292085650'
+      '52-week guided Bible study planner',
+      'Written in Spanish',
+      'Portable floral-cover design'
     ],
     inStock: true
   },
@@ -1215,11 +1231,13 @@ export const PRODUCTS: Product[] = [
     title: 'Rose Publishing Rose Book of Bible Charts, Maps & Time Lines',
     price: 16.99,
     category: 'Books & Journals',
-    image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80',
-    description: 'AliExpress ID: 3256812415905221',
+    image: 'https://ae-pic-a1.aliexpress-media.com/kf/Abbf5124cb11a4e14885a12d42f50ba34p.jpg_960x960.jpg',
+    fallbackImage: 'https://ae-pic-a1.aliexpress-media.com/kf/Ac06d801aee8b4fdd9eeb0a7e4d1f2e59R.jpg_960x960.jpg',
+    description: 'A spiral-bound 10th-anniversary edition packed with reproducible Bible charts, maps, and time lines — a trusted visual reference for teachers, students, and small groups.',
     features: [
-      'AliExpress ID: 3256812415905221'
+      'Reproducible Bible charts, maps & time lines',
+      'Spiral-bound for easy use',
+      'Popular resource for teachers & study groups'
     ],
     inStock: true
   },
@@ -1228,11 +1246,13 @@ export const PRODUCTS: Product[] = [
     title: 'Rechargeable Bible Talking King for James Version Bible Audios Player',
     price: 34.99,
     category: 'Books & Journals',
-    image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80',
-    description: 'AliExpress ID: 3256808234975313',
+    image: 'https://ae-pic-a1.aliexpress-media.com/kf/S7d21910c3d214d4d8c37f64c990d9d00N.jpg_960x960.jpg',
+    fallbackImage: 'https://ae-pic-a1.aliexpress-media.com/kf/S0d470d6c30ce4e4c8b138a2c206e4d35D.jpg_960x960.jpg',
+    description: 'A rechargeable audio Bible player preloaded with the King James Version, Old and New Testament — a wonderful way to listen to Scripture hands-free, anytime, anywhere.',
     features: [
-      'AliExpress ID: 3256808234975313'
+      'King James Version, Old & New Testament',
+      'Rechargeable, portable audio player',
+      'Great gift for those who love listening to Scripture'
     ],
     inStock: true
   },
