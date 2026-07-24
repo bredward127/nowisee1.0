@@ -1,4 +1,5 @@
 import { Product } from './types';
+import nowISeeCover from './assets/images/now_i_see_cover_1784594781418.jpg';
 
 export const PRODUCTS: Product[] = [
   {
@@ -36,8 +37,8 @@ export const PRODUCTS: Product[] = [
     title: '"Bible in a Year" Guided Study Journal',
     price: 49.99,
     category: 'Books & Journals',
-    image: 'https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
+    image: 'https://ae-pic-a1.aliexpress-media.com/kf/Sc86d7dfe753245e38b2662a80bb03378P.jpg_960x960.jpg',
+    fallbackImage: 'https://ae-pic-a1.aliexpress-media.com/kf/S182699b4c9df4e9f882a2aa7d82c70dcv.jpg_960x960.jpg',
     description: '52-week guided reading plan with daily reflection prompts and note space, spiral-bound for laying flat.',
     features: [
       'Inspirational design',
@@ -96,8 +97,8 @@ export const PRODUCTS: Product[] = [
     title: 'Inspirational Adult Coloring Book: Psalms',
     price: 24.99,
     category: 'Books & Journals',
-    image: 'https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
+    image: 'https://ae-pic-a1.aliexpress-media.com/kf/S1a6ab9bb45724d3eaad631b8b5f5afe2k.jpg_960x960.jpg',
+    fallbackImage: 'https://ae-pic-a1.aliexpress-media.com/kf/S9b1004543e0145e5ab98a8b715673e14f.jpg_960x960.jpg',
     description: '30 hand-illustrated designs paired with Psalm verses, single-sided pages for framing finished art.',
     features: [
       'Inspirational design',
@@ -321,8 +322,8 @@ export const PRODUCTS: Product[] = [
     title: 'Personalized Family Prayer Journal',
     price: 57.99,
     category: 'Books & Journals',
-    image: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
+    image: 'https://ae-pic-a1.aliexpress-media.com/kf/Sb8cba52c013d4474bdda17ca4882a5157.jpg_960x960.jpg',
+    fallbackImage: 'https://ae-pic-a1.aliexpress-media.com/kf/S27aa671e6165449f9c815e4cdbeab928n.jpg_960x960.jpg',
     description: 'Undated journal with space to record prayer requests and answered prayers, name customization on the cover.',
     features: [
       'Inspirational design',
@@ -396,8 +397,8 @@ export const PRODUCTS: Product[] = [
     title: 'Daily Devotional for Women, 365 Days',
     price: 42.99,
     category: 'Books & Journals',
-    image: 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
+    image: 'https://ae-pic-a1.aliexpress-media.com/kf/S4b7856a119e04a8aa3078a53ba7497f9O.jpg_960x960.jpg',
+    fallbackImage: 'https://ae-pic-a1.aliexpress-media.com/kf/S3cf46c982dc343d49573725356c828dfa.jpg_960x960.jpg',
     description: 'One short reading per day with a closing reflection question, ribbon-marked hardcover.',
     features: [
       'Inspirational design',
@@ -411,8 +412,8 @@ export const PRODUCTS: Product[] = [
     title: 'Faith-Based Journaling Bible, Wide Margin',
     price: 87.99,
     category: 'Books & Journals',
-    image: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
+    image: 'https://ae-pic-a1.aliexpress-media.com/kf/S04bcad51091b4e46826bd707e90fef81c.jpg_960x960.jpg',
+    fallbackImage: 'https://ae-pic-a1.aliexpress-media.com/kf/S9fb3944ac5f245268d40419c295e9b7b5.jpg_960x960.jpg',
     description: 'Full-text Bible with wide ruled margins for notes and lettering, ribbon marker, hardcover.',
     features: [
       'Inspirational design',
@@ -546,8 +547,8 @@ export const PRODUCTS: Product[] = [
     title: 'Devotional Coloring Journal for Teens',
     price: 29.99,
     category: 'Books & Journals',
-    image: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
+    image: 'https://ae-pic-a1.aliexpress-media.com/kf/S3b9d714b3a234829abf41f5f31d30ab14.jpg_960x960.jpg',
+    fallbackImage: 'https://ae-pic-a1.aliexpress-media.com/kf/Sde83c9f9f37f41589ab09c53e908a866F.jpg_960x960.jpg',
     description: 'Combines short devotionals with coloring pages and guided prompts aimed at teen readers.',
     features: [
       'Inspirational design',
@@ -636,8 +637,8 @@ export const PRODUCTS: Product[] = [
     title: '"New Believer" Starter Bible & Journal Set',
     price: 74.99,
     category: 'Books & Journals',
-    image: 'https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
+    image: 'https://ae-pic-a1.aliexpress-media.com/kf/S1bdd65dc363d45978dccb02b492bb12fN.jpg_960x960.jpg',
+    fallbackImage: 'https://ae-pic-a1.aliexpress-media.com/kf/S797c6f85288d4a66ac5d76bf56a47ff6P.jpg_960x960.jpg',
     description: 'Paperback Bible bundled with a beginner\'s reading plan and a companion journal, boxed.',
     features: [
       'Inspirational design',
@@ -714,21 +715,6 @@ export const PRODUCTS: Product[] = [
     image: 'https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=600&q=80',
     fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
     description: 'Coir entry mat with a routed verse design, non-slip backing.',
-    features: [
-      'Inspirational design',
-      'High-quality materials',
-      'Perfect for gifting'
-    ],
-    inStock: true
-  },
-  {
-    id: 'praise-worship-devotional-journal-bundle',
-    title: 'Praise & Worship Devotional Journal Bundle',
-    price: 47.99,
-    category: 'Books & Journals',
-    image: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
-    description: 'Guided worship journal paired with a printed lyric booklet for reflection.',
     features: [
       'Inspirational design',
       'High-quality materials',
@@ -1261,8 +1247,8 @@ export const PRODUCTS: Product[] = [
     title: 'Now I See: America, My Testimony, God and Me (Hardcover)',
     price: 24.99,
     category: 'Books & Journals',
-    image: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=600&q=80',
+    image: nowISeeCover,
+    fallbackImage: nowISeeCover,
     description: 'The flagship hardcover edition of Toni ME Taylor\'s prophetic memoir.',
     features: [
       'Hardcover Edition',
@@ -1276,8 +1262,8 @@ export const PRODUCTS: Product[] = [
     title: 'Now I See: America, My Testimony, God and Me (Paperback)',
     price: 14.99,
     category: 'Books & Journals',
-    image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=600&q=80',
+    image: nowISeeCover,
+    fallbackImage: nowISeeCover,
     description: 'The paperback edition of Toni ME Taylor\'s prophetic memoir.',
     features: [
       'Paperback Edition',
