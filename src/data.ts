@@ -7,8 +7,8 @@ export const PRODUCTS: Product[] = [
     title: 'Scripture Verse Soy Candle',
     price: 42.99,
     category: 'Home & Decor',
-    image: 'https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
+    image: 'https://ae-pic-a1.aliexpress-media.com/kf/H2f3520cbfe804323926e03d6141cd938K.jpg_960x960.jpg',
+    fallbackImage: 'https://ae-pic-a1.aliexpress-media.com/kf/H40b133b397bb43f9b4328426de925587h.jpg_960x960.jpg',
     description: 'Hand-poured soy candle in a clear jar printed with a rotating scripture verse; clean-burn cotton wick, 40+ hour burn time.',
     features: [
       'Inspirational design',
@@ -22,8 +22,8 @@ export const PRODUCTS: Product[] = [
     title: 'Faith Over Fear Wall Cross (12")',
     price: 62.99,
     category: 'Home & Decor',
-    image: 'https://images.unsplash.com/photo-1544427920-c49ccfb85579?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
+    image: 'https://ae-pic-a1.aliexpress-media.com/kf/Se0500d720be24b04bca159dbca046105W.jpg_960x960.jpg',
+    fallbackImage: 'https://ae-pic-a1.aliexpress-media.com/kf/S9b7e6bb3890e48dc9ac2bf081d61e9198.jpg_960x960.jpg',
     description: 'Distressed wood-finish wall cross with raised lettering, ready to hang, a popular entryway or living-room piece.',
     features: [
       'Inspirational design',
@@ -112,8 +112,8 @@ export const PRODUCTS: Product[] = [
     title: 'Faith Comfort Throw Blanket, 50x60"',
     price: 69.99,
     category: 'Home & Decor',
-    image: 'https://images.unsplash.com/photo-1580301762395-21ce84d00bc6?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
+    image: 'https://ae-pic-a1.aliexpress-media.com/kf/S791d2dce87fa495a8bf7d13be793f4c8b.jpg_960x960.jpg',
+    fallbackImage: 'https://ae-pic-a1.aliexpress-media.com/kf/S014c31eb1fab413691a05f88f049ca0cT.jpg_960x960.jpg',
     description: 'Soft fleece throw woven with a scripture verse border, machine washable.',
     features: [
       'Inspirational design',
@@ -157,8 +157,8 @@ export const PRODUCTS: Product[] = [
     title: 'Scripture Christmas Ornament Set (6pc)',
     price: 34.99,
     category: 'Home & Decor',
-    image: 'https://images.unsplash.com/photo-1512389142860-9c449e58a543?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
+    image: 'https://ae-pic-a1.aliexpress-media.com/kf/S8b38af6f8bb444d290f533455ec9048cN.jpg_960x960.jpg?has_lang=1&ver=3',
+    fallbackImage: 'https://ae-pic-a1.aliexpress-media.com/kf/S59b0b8e300f1488692b476a0778a7d228.jpg_960x960.jpg?has_lang=1&ver=3',
     description: 'Six glass ornaments each printed with a different verse, boxed for storage and gifting.',
     features: [
       'Inspirational design',
@@ -202,8 +202,8 @@ export const PRODUCTS: Product[] = [
     title: 'Praying Hands Resin Figurine',
     price: 57.99,
     category: 'Home & Decor',
-    image: 'https://images.unsplash.com/photo-1567225557594-88d73e55f2cb?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
+    image: 'https://ae-pic-a1.aliexpress-media.com/kf/Sef60bfe61b5f489c9d8f5902764dca9bJ.jpg_960x960.jpg',
+    fallbackImage: 'https://ae-pic-a1.aliexpress-media.com/kf/S9dba148a5bae47679c97885c908f07dcN.jpg_960x960.jpg',
     description: 'Hand-painted resin figurine, a traditional shelf or side-table piece for a faith-centered home.',
     features: [
       'Inspirational design',
@@ -242,22 +242,7 @@ export const PRODUCTS: Product[] = [
     ],
     inStock: true
   },
-  {
-    id: 'this-home-believes-wall-plaque',
-    title: '"This Home Believes" Wall Plaque',
-    price: 54.99,
-    category: 'Home & Decor',
-    image: 'https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
-    description: 'Wood-look wall plaque with routed lettering, pre-drilled for hanging.',
-    features: [
-      'Inspirational design',
-      'High-quality materials',
-      'Perfect for gifting'
-    ],
-    inStock: true
-  },
-  {
+    {
     id: 'pray-about-everything-pocket-prayer-card-set',
     title: '"Pray About Everything" Pocket Prayer Card Set',
     price: 27.99,
@@ -292,8 +277,8 @@ export const PRODUCTS: Product[] = [
     title: 'Rustic Wood Cross, 3-Piece Wall Set',
     price: 74.99,
     category: 'Home & Decor',
-    image: 'https://images.unsplash.com/photo-1544427920-c49ccfb85579?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
+    image: 'https://ae-pic-a1.aliexpress-media.com/kf/Sb7d97b4ffe3f4b36a389aa5463a8e019c.jpg_960x960.jpg?has_lang=1&ver=1',
+    fallbackImage: 'https://ae-pic-a1.aliexpress-media.com/kf/S2209768f1616459cb927001a176c8345U.jpg_960x960.jpg?has_lang=1&ver=1',
     description: 'Three graduated wood crosses designed to hang as a cluster, distressed farmhouse finish.',
     features: [
       'Inspirational design',
@@ -337,8 +322,8 @@ export const PRODUCTS: Product[] = [
     title: '"Be Still" Scripture Wall Canvas Print',
     price: 67.99,
     category: 'Home & Decor',
-    image: 'https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
+    image: 'https://ae-pic-a1.aliexpress-media.com/kf/S43662a87d5164314a6c4cde6340c9009h.jpg_960x960.jpg',
+    fallbackImage: 'https://ae-pic-a1.aliexpress-media.com/kf/Sb8aab6179cf742b295d79a3b09fee84cG.jpg_960x960.jpg',
     description: 'Gallery-wrapped canvas, ready to hang, a soft focal piece for a bedroom or reading nook.',
     features: [
       'Inspirational design',
@@ -352,8 +337,8 @@ export const PRODUCTS: Product[] = [
     title: 'LED Flameless Prayer Candle, Set of 2',
     price: 47.99,
     category: 'Home & Decor',
-    image: 'https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
+    image: 'https://ae-pic-a1.aliexpress-media.com/kf/Sa669ba4e3d8e422a8b6ee14122883f28B.png_960x960.png',
+    fallbackImage: 'https://ae-pic-a1.aliexpress-media.com/kf/S12216f9a636044ad9456809f6127a62fn.jpg_960x960.jpg',
     description: 'Battery-operated pillar candles with a timer function, safe for homes with kids or pets.',
     features: [
       'Inspirational design',
@@ -422,22 +407,7 @@ export const PRODUCTS: Product[] = [
     ],
     inStock: true
   },
-  {
-    id: 'scripture-verse-wind-chime',
-    title: 'Scripture Verse Wind Chime',
-    price: 62.99,
-    category: 'Home & Decor',
-    image: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
-    description: 'Metal wind chime with a verse-engraved center disc, weather-resistant for porch or garden.',
-    features: [
-      'Inspirational design',
-      'High-quality materials',
-      'Perfect for gifting'
-    ],
-    inStock: true
-  },
-  {
+    {
     id: 'fear-not-cross-pendant-keychain',
     title: '"Fear Not" Cross Pendant Keychain',
     price: 27.99,
@@ -452,22 +422,7 @@ export const PRODUCTS: Product[] = [
     ],
     inStock: true
   },
-  {
-    id: 'faith-family-photo-frame-scripture-border',
-    title: 'Faith Family Photo Frame, Scripture Border',
-    price: 47.99,
-    category: 'Home & Decor',
-    image: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
-    description: '4x6 tabletop frame with a printed verse border, wood-look finish.',
-    features: [
-      'Inspirational design',
-      'High-quality materials',
-      'Perfect for gifting'
-    ],
-    inStock: true
-  },
-  {
+    {
     id: 'inspirational-coffee-cocoa-mug-gift-set',
     title: 'Inspirational Coffee & Cocoa Mug Gift Set',
     price: 69.99,
@@ -487,8 +442,8 @@ export const PRODUCTS: Product[] = [
     title: 'Praying Angel Figurine, Hand-Painted',
     price: 62.99,
     category: 'Home & Decor',
-    image: 'https://images.unsplash.com/photo-1567225557594-88d73e55f2cb?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
+    image: 'https://ae-pic-a1.aliexpress-media.com/kf/Sbee4e871819c4873b0fa7a0768c7bc97C.jpg_960x960.jpg',
+    fallbackImage: 'https://ae-pic-a1.aliexpress-media.com/kf/S8ae639afa2f0426e9e67e964764098c0h.jpg_960x960.jpg',
     description: 'Hand-painted resin angel in a kneeling pose, a common sympathy or baptism gift.',
     features: [
       'Inspirational design',
@@ -512,22 +467,7 @@ export const PRODUCTS: Product[] = [
     ],
     inStock: true
   },
-  {
-    id: 'trust-in-the-lord-garden-stone',
-    title: '"Trust in the Lord" Garden Stone',
-    price: 49.99,
-    category: 'Home & Decor',
-    image: 'https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
-    description: 'Cast resin stepping stone with a raised verse, weatherproof for garden or entry path.',
-    features: [
-      'Inspirational design',
-      'High-quality materials',
-      'Perfect for gifting'
-    ],
-    inStock: true
-  },
-  {
+    {
     id: 'cross-charm-anklet',
     title: 'Cross Charm Anklet',
     price: 27.99,
@@ -557,22 +497,7 @@ export const PRODUCTS: Product[] = [
     ],
     inStock: true
   },
-  {
-    id: 'god-s-got-this-throw-pillow-cover',
-    title: '"God\'s Got This" Throw Pillow Cover',
-    price: 42.99,
-    category: 'Home & Decor',
-    image: 'https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
-    description: '18x18 linen-look pillow cover, zippered, insert sold separately.',
-    features: [
-      'Inspirational design',
-      'High-quality materials',
-      'Perfect for gifting'
-    ],
-    inStock: true
-  },
-  {
+    {
     id: 'communion-gift-set-with-cross-bookmark',
     title: 'Communion Gift Set with Cross Bookmark',
     price: 49.99,
@@ -602,22 +527,7 @@ export const PRODUCTS: Product[] = [
     ],
     inStock: true
   },
-  {
-    id: 'faith-walks-engraved-wood-sign',
-    title: '"Faith Walks" Engraved Wood Sign',
-    price: 59.99,
-    category: 'Home & Decor',
-    image: 'https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
-    description: 'Laser-engraved pine sign with sawtooth hanger on the back, ready to display.',
-    features: [
-      'Inspirational design',
-      'High-quality materials',
-      'Perfect for gifting'
-    ],
-    inStock: true
-  },
-  {
+    {
     id: 'beaded-prayer-bracelet-with-cross-charm',
     title: 'Beaded Prayer Bracelet with Cross Charm',
     price: 34.99,
@@ -647,28 +557,13 @@ export const PRODUCTS: Product[] = [
     ],
     inStock: true
   },
-  {
-    id: 'scripture-verse-ceramic-trinket-dish',
-    title: 'Scripture Verse Ceramic Trinket Dish',
-    price: 32.99,
-    category: 'Home & Decor',
-    image: 'https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
-    description: 'Small ceramic dish for rings or keys, verse printed along the rim.',
-    features: [
-      'Inspirational design',
-      'High-quality materials',
-      'Perfect for gifting'
-    ],
-    inStock: true
-  },
-  {
+    {
     id: 'blessed-beyond-measure-wall-sticker-decal',
     title: '"Blessed Beyond Measure" Wall Sticker Decal',
     price: 37.99,
     category: 'Home & Decor',
-    image: 'https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
+    image: 'https://ae-pic-a1.aliexpress-media.com/kf/S912a0c30d2c0499fa5585112433f6db5Y.jpg_960x960.jpg',
+    fallbackImage: 'https://ae-pic-a1.aliexpress-media.com/kf/Sbb0e77540a3844e699af27ea722a3857Q.jpg_960x960.jpg',
     description: 'Removable vinyl wall decal, matte finish, application tool included.',
     features: [
       'Inspirational design',
@@ -707,22 +602,7 @@ export const PRODUCTS: Product[] = [
     ],
     inStock: true
   },
-  {
-    id: 'faith-family-home-doormat',
-    title: '"Faith Family Home" Doormat',
-    price: 69.99,
-    category: 'Home & Decor',
-    image: 'https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=600&q=80',
-    fallbackImage: 'https://images.unsplash.com/photo-1544965838-54ef841b24f6?auto=format&fit=crop&w=600&q=80',
-    description: 'Coir entry mat with a routed verse design, non-slip backing.',
-    features: [
-      'Inspirational design',
-      'High-quality materials',
-      'Perfect for gifting'
-    ],
-    inStock: true
-  },
-  {
+    {
     id: 'i-can-do-all-things-athletic-water-bottle',
     title: '"I Can Do All Things" Athletic Water Bottle',
     price: 44.99,
