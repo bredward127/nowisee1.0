@@ -1,8 +1,12 @@
-import { useState } from 'react';
-import PayPalButton from './components/PayPalButton';
+import { useMemo, useState } from 'react';
+import CartPayPalButton, { type CartCheckoutItem, type CartEdition } from './components/CartPayPalButton';
 import authenticCover from './assets/images/now_i_see_authentic_cover.png';
 
 const amazonUrl = 'https://amzn.to/4cYuQUX';
+const products: Record<CartEdition, { name: string; price: number }> = {
+  paperback: { name: 'Paperback', price: 18.99 },
+  hardcover: { name: 'Hardcover', price: 29.99 }
+};
 
 function Arrow() {
   return <span aria-hidden="true" className="arrow">→</span>;
@@ -10,8 +14,31 @@ function Arrow() {
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
+  const [cart, setCart] = useState<Record<CartEdition, number>>({ paperback: 0, hardcover: 0 });
   const [purchaseSuccess, setPurchaseSuccess] = useState<string | null>(null);
   const closeMenu = () => setMenuOpen(false);
+
+  const cartItems = useMemo<CartCheckoutItem[]>(() => (Object.keys(products) as CartEdition[])
+    .filter((edition) => cart[edition] > 0)
+    .map((edition) => ({ edition, ...products[edition], quantity: cart[edition] })), [cart]);
+  const cartQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  const cartTotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+  const addToCart = (edition: CartEdition) => {
+    setCart((current) => ({ ...current, [edition]: current[edition] + 1 }));
+    setCartOpen(true);
+  };
+
+  const setQuantity = (edition: CartEdition, quantity: number) => {
+    setCart((current) => ({ ...current, [edition]: Math.max(0, quantity) }));
+  };
+
+  const handleCheckoutSuccess = (payerName: string) => {
+    setPurchaseSuccess(payerName);
+    setCart({ paperback: 0, hardcover: 0 });
+    setCartOpen(false);
+  };
 
   return (
     <div className="site-shell">
@@ -19,9 +46,14 @@ export default function App() {
 
       <header className="site-header">
         <a className="wordmark" href="#top" aria-label="Now I See home" onClick={closeMenu}><span>NOW</span><i>I SEE</i></a>
-        <button type="button" className="menu-toggle" aria-expanded={menuOpen} aria-controls="primary-navigation" onClick={() => setMenuOpen((open) => !open)}>
-          <span>{menuOpen ? 'Close' : 'Menu'}</span><span className="menu-mark" aria-hidden="true">{menuOpen ? '×' : '+'}</span>
-        </button>
+        <div className="header-actions">
+          <button type="button" className="cart-trigger" onClick={() => setCartOpen(true)} aria-label={`Open cart with ${cartQuantity} ${cartQuantity === 1 ? 'item' : 'items'}`}>
+            Cart <span className="cart-count">{cartQuantity}</span>
+          </button>
+          <button type="button" className="menu-toggle" aria-expanded={menuOpen} aria-controls="primary-navigation" onClick={() => setMenuOpen((open) => !open)}>
+            <span>{menuOpen ? 'Close' : 'Menu'}</span><span className="menu-mark" aria-hidden="true">{menuOpen ? '×' : '+'}</span>
+          </button>
+        </div>
         <nav id="primary-navigation" className={menuOpen ? 'nav-links is-open' : 'nav-links'} aria-label="Primary navigation">
           <a href="#the-book" onClick={closeMenu}>The book</a><a href="#preorder" onClick={closeMenu}>Preorder</a><a href="#inside" onClick={closeMenu}>Inside</a><a href="#faq" onClick={closeMenu}>FAQ</a>
           <a className="nav-amazon" href={amazonUrl} target="_blank" rel="noopener noreferrer" onClick={closeMenu}>Amazon <Arrow /></a>
@@ -51,17 +83,17 @@ export default function App() {
         <section className="statement section-pad" aria-label="Book statement"><p>“Amid blindness<br /><span>I become sight.”</span></p><div className="statement-rule" /><p className="statement-caption">A testimony of restoration, a reflection on America, and a call to see one another with greater clarity.</p></section>
 
         <section id="preorder" className="preorder-wrap section-pad" aria-labelledby="preorder-title">
-          <div className="preorder-heading"><p className="eyebrow">Direct preorder · free U.S. shipping</p><h2 id="preorder-title">Choose your edition.</h2><p>Order directly for an author-supporting, delivered price. Your preorder reserves a copy from the next publisher case order; the price includes the book, secure payment processing, packaging, and standard U.S. shipping.</p></div>
+          <div className="preorder-heading"><p className="eyebrow">Direct preorder · free U.S. shipping</p><h2 id="preorder-title">Choose your edition.</h2><p>Add paperbacks, hardcovers, or both to your cart. Checkout happens once, with one combined total and one PayPal payment.</p></div>
           <div className="edition-grid">
             <article className="edition-card paperback-card">
               <p className="card-kicker">Paperback</p><h3>The message<br /><em>within reach.</em></h3><p className="card-description">A flexible, easy-to-share edition for readers, study groups, and meaningful gifts.</p>
               <div className="price-line"><strong>$18.99</strong><span>delivered in the U.S.</span></div><p className="savings-note">Free U.S. shipping included · Direct orders help fund the next case of 12</p>
-              <div className="paypal-slot"><PayPalButton editionId="paperback" price={18.99} onSuccess={setPurchaseSuccess} /></div><p className="checkout-caption">This is a preorder. Publisher orders are placed in cases of 12; please allow approximately four weeks for fulfillment.</p>
+              <button type="button" className="add-cart-button" onClick={() => addToCart('paperback')}>Add paperback <span>$18.99</span></button><p className="checkout-caption">Add more than one copy, or mix editions, then pay once from the cart.</p>
             </article>
             <article className="edition-card hardcover-card">
               <div className="collector-badge">Collector’s edition</div><p className="card-kicker">Hardcover</p><h3>A lasting<br /><em>testimony.</em></h3><p className="card-description">A durable keepsake edition for the home library, a loved one, or a meaningful occasion.</p>
               <div className="price-line"><strong>$29.99</strong><span>delivered in the U.S.</span></div><p className="savings-note">Free U.S. shipping included · $1.00 below the stated Amazon hardcover price</p>
-              <div className="paypal-slot"><PayPalButton editionId="hardcover" price={29.99} onSuccess={setPurchaseSuccess} /></div><p className="checkout-caption">This is a preorder. Publisher orders are placed in cases of 12; please allow approximately four weeks for fulfillment.</p>
+              <button type="button" className="add-cart-button add-cart-button-light" onClick={() => addToCart('hardcover')}>Add hardcover <span>$29.99</span></button><p className="checkout-caption">Add more than one copy, or mix editions, then pay once from the cart.</p>
             </article>
           </div>
           <aside className="amazon-route"><div><p className="eyebrow">Prefer Amazon checkout?</p><h3>Shop the listing at any time.</h3><p>Amazon availability and price are shown on its listing. The link below is an Amazon Associate link at no extra cost to you.</p></div><a className="button button-stone" href={amazonUrl} target="_blank" rel="noopener noreferrer">Shop Now I See on Amazon <Arrow /></a></aside>
@@ -82,13 +114,25 @@ export default function App() {
 
         <section id="faq" className="faq section-pad" aria-labelledby="faq-title"><p className="eyebrow">Before you order</p><h2 id="faq-title">Common questions.</h2><div className="faq-list">
           <details open><summary>When will a direct preorder ship?<span aria-hidden="true">+</span></summary><p>Direct copies are purchased from the publisher in cases of 12. Please allow approximately four weeks for the next case to arrive and for your copy to be sent with free U.S. shipping.</p></details>
+          <details><summary>Can I buy more than one copy?<span aria-hidden="true">+</span></summary><p>Yes. Add any number of paperback and hardcover copies to your cart, adjust quantities there, and complete one combined checkout.</p></details>
           <details><summary>Is shipping included in the direct preorder price?<span aria-hidden="true">+</span></summary><p>Yes. The direct paperback and hardcover prices include standard shipping within the United States. International shipping is not offered through this direct preorder checkout.</p></details>
           <details><summary>Can I buy the book through Amazon instead?<span aria-hidden="true">+</span></summary><p>Yes. The Amazon option is available throughout this page for readers who prefer Amazon checkout, pricing, or fulfillment.</p></details>
-          <details><summary>Does using the Amazon button cost me more?<span aria-hidden="true">+</span></summary><p>No. The Amazon button is an Amazon Associate link. This site may earn a small commission from qualifying purchases, at no additional cost to you.</p></details>
         </div></section>
       </main>
 
       <footer className="site-footer"><div className="footer-top section-pad"><a className="footer-wordmark" href="#top">NOW <i>I SEE</i></a><p>America. My Testimony. God and Me.</p><div className="footer-actions"><a href="#preorder">Preorder direct <Arrow /></a><a href={amazonUrl} target="_blank" rel="noopener noreferrer">Shop Amazon <Arrow /></a></div></div><div className="footer-bottom section-pad"><p>© {new Date().getFullYear()} Toni ME Taylor. All rights reserved.</p><p>As an Amazon Associate, this site may earn from qualifying purchases.</p></div></footer>
+
+      {cartOpen && <div className="cart-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setCartOpen(false); }}>
+        <aside className="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+          <div className="cart-header"><div><p className="eyebrow">Your direct preorder</p><h2 id="cart-title">Your cart.</h2></div><button type="button" className="cart-close" onClick={() => setCartOpen(false)} aria-label="Close cart">×</button></div>
+          {cartItems.length === 0 ? <div className="cart-empty"><p>Your cart is empty.</p><button type="button" className="button button-wine" onClick={() => { setCartOpen(false); document.getElementById('preorder')?.scrollIntoView({ behavior: 'smooth' }); }}>Choose an edition <Arrow /></button></div> : <>
+            <div className="cart-lines">{cartItems.map((item) => <div className="cart-line" key={item.edition}><div><p className="cart-line-name">Now I See — {item.name}</p><p className="cart-line-price">${item.price.toFixed(2)} each · Free U.S. shipping</p><button type="button" className="remove-line" onClick={() => setQuantity(item.edition, 0)}>Remove</button></div><div className="quantity-control" aria-label={`${item.name} quantity`}><button type="button" onClick={() => setQuantity(item.edition, item.quantity - 1)} aria-label={`Decrease ${item.name} quantity`}>−</button><span>{item.quantity}</span><button type="button" onClick={() => setQuantity(item.edition, item.quantity + 1)} aria-label={`Increase ${item.name} quantity`}>+</button></div></div>)}</div>
+            <div className="cart-summary"><div><span>Items ({cartQuantity})</span><strong>${cartTotal.toFixed(2)}</strong></div><div><span>Standard U.S. shipping</span><strong>Included</strong></div><div className="cart-total"><span>Total</span><strong>${cartTotal.toFixed(2)}</strong></div></div>
+            <p className="cart-disclosure">Your PayPal checkout will show the complete order, request a shipping address, and charge one combined total. Direct preorders ship in approximately four weeks.</p>
+            <CartPayPalButton items={cartItems} total={cartTotal} onSuccess={handleCheckoutSuccess} />
+          </>}
+        </aside>
+      </div>}
     </div>
   );
 }
