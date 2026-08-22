@@ -56,7 +56,7 @@ export default function PayPalButton({ editionId, price, onSuccess }: PayPalButt
         createOrder: (_data: any, actions: any) => {
           return actions.order.create({
             purchase_units: [{
-              description: `Now I See — ${editionId === 'hardcover' ? 'Hardcover Edition' : 'Paperback Edition'}`,
+              description: `Now I See — ${editionId === 'hardcover' ? 'Hardcover' : 'Paperback'} Preorder (ships in approximately 4 weeks)`,
               amount: {
                 value: price.toFixed(2)
               }

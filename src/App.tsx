@@ -1,569 +1,207 @@
 import { useState } from 'react';
-import { BookOpen, Star, ShieldCheck, Heart, Award, ArrowRight, Book, Flame, Compass, MessageSquare, ShoppingCart, Menu, X } from 'lucide-react';
-import BookMockup from './components/BookMockup';
-import ChapterPreview from './components/ChapterPreview';
-import ReviewSection from './components/ReviewSection';
-import MeetAuthor from './components/MeetAuthor';
-import FaqSection from './components/FaqSection';
 import PayPalButton from './components/PayPalButton';
-import StickyCTA from './components/StickyCTA';
-import StoreView from './components/StoreView';
-import NewsletterPopup from './components/NewsletterPopup';
-import { Product, CartItem } from './types';
+import coverImage from './assets/images/now_i_see_cover_1784594781418.jpg';
+
+const amazonUrl = 'https://amzn.to/4cYuQUX';
+
+function Arrow() {
+  return <span aria-hidden="true" className="arrow">↗</span>;
+}
 
 export default function App() {
-  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [purchaseSuccess, setPurchaseSuccess] = useState<string | null>(null);
-  const [purchasedItems, setPurchasedItems] = useState<CartItem[]>([]);
-  const [activeTab, setActiveTab] = useState<'home' | 'store'>('home');
-  const [cart, setCart] = useState<CartItem[]>([]);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [viewingCart, setViewingCart] = useState(false);
 
-  // Accessibility States
-  const [largeText, setLargeText] = useState(() => localStorage.getItem('acc-large-text') === 'true');
-  const [highContrast, setHighContrast] = useState(() => localStorage.getItem('acc-high-contrast') === 'true');
-  const [sansSerif, setSansSerif] = useState(() => localStorage.getItem('acc-sans-serif') === 'true');
-
-  const handleSetLargeText = (val: boolean) => {
-    setLargeText(val);
-    localStorage.setItem('acc-large-text', String(val));
-  };
-  const handleSetHighContrast = (val: boolean) => {
-    setHighContrast(val);
-    localStorage.setItem('acc-high-contrast', String(val));
-  };
-  const handleSetSansSerif = (val: boolean) => {
-    setSansSerif(val);
-    localStorage.setItem('acc-sans-serif', String(val));
-  };
-
-  const handlePurchaseSuccess = (payerName: string, items?: CartItem[]) => {
-    setPurchaseSuccess(payerName);
-    if (items) setPurchasedItems(items); else setPurchasedItems([]);
-    // Smooth scroll to top to show confirmation
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const scrollToSection = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const navigateToHomeAndScroll = (id: string) => {
-    setActiveTab('home');
-    setTimeout(() => {
-      scrollToSection(id);
-    }, 100);
-  };
-
-  const handleAddToCart = (product: Product) => {
-    setCart((prevCart) => {
-      const existing = prevCart.find((item) => item.product.id === product.id);
-      if (existing) {
-        return prevCart.map((item) =>
-          item.product.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      }
-      return [...prevCart, { product, quantity: 1 }];
-    });
-  };
-
-  const handleUpdateQuantity = (productId: string, delta: number) => {
-    setCart((prevCart) => {
-      return prevCart
-        .map((item) => {
-          if (item.product.id === productId) {
-            const newQuantity = item.quantity + delta;
-            return { ...item, quantity: newQuantity };
-          }
-          return item;
-        })
-        .filter((item) => item.quantity > 0);
-    });
-  };
-
-  const handleRemoveFromCart = (productId: string) => {
-    setCart((prevCart) => prevCart.filter((item) => item.product.id !== productId));
-  };
-
-  const handleClearCart = () => {
-    setCart([]);
-  };
-
-  const totalCartItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const closeMenu = () => setMenuOpen(false);
 
   return (
-    <div className={`min-h-screen flex flex-col relative transition-all duration-300 selection:bg-editorial-gold selection:text-white
-      ${highContrast ? 'bg-white text-black contrast-125' : 'bg-[#F5F2ED] text-[#1A1A1A]'}
-      ${sansSerif ? '!font-sans' : 'font-serif'}
-      ${largeText ? 'text-lg md:text-xl [&_p]:text-lg [&_p]:leading-relaxed [&_h1]:text-6xl sm:[&_h1]:text-7xl lg:[&_h1]:text-8xl [&_h2]:text-3xl [&_h3]:text-2xl [&_button]:text-sm' : 'text-base'}
-    `}>
-      {/* Background Ornamental Element */}
-      <div className="absolute top-[-100px] right-[-150px] text-[400px] font-black leading-none text-black/[0.015] select-none pointer-events-none z-0">
-        2026
-      </div>
+    <div className="site-shell">
+      <div className="top-note">Direct paperback preorders ship in approximately 4 weeks</div>
 
-      {/* Top Banner for Faith Announcement */}
-      <div className="bg-[#8B0000] text-[#F5F2ED] font-sans py-2.5 px-4 text-center text-xs font-semibold tracking-[0.15em] uppercase z-10 shadow-sm">
-        <span>A STORY OF FAITH, FAMILY, & SPIRITUAL AWAKENING — NEWLY REPUBLISHED</span>
-      </div>
+      <header className="site-header">
+        <a className="wordmark" href="#top" aria-label="Now I See home" onClick={closeMenu}>
+          <span>NOW</span><i>I SEE</i>
+        </a>
 
-      {/* Navigation */}
-      <nav className="h-20 px-6 md:px-12 flex justify-between items-center border-b border-black/5 bg-[#F5F2ED] z-30 sticky top-0 backdrop-blur-sm bg-opacity-95">
-        <button 
-          onClick={() => { setActiveTab('home'); setIsMobileMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-          className="text-xl md:text-2xl font-bold tracking-tighter uppercase font-serif text-left cursor-pointer hover:opacity-80 transition"
+        <button
+          type="button"
+          className="menu-toggle"
+          aria-expanded={menuOpen}
+          aria-controls="primary-navigation"
+          onClick={() => setMenuOpen((open) => !open)}
         >
-          Toni <span className="italic font-light text-editorial-gold">Taylor</span>
+          <span>{menuOpen ? 'Close' : 'Menu'}</span>
+          <span className="menu-mark" aria-hidden="true">{menuOpen ? '×' : '+'}</span>
         </button>
 
-        {/* Desktop Navigation Links */}
-        <div className="hidden md:flex gap-8 text-[11px] uppercase tracking-[0.2em] font-sans font-semibold">
-          <button onClick={() => { setActiveTab('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className={`hover:text-editorial-gold transition ${activeTab === 'home' ? 'text-editorial-gold border-b-2 border-editorial-gold pb-1' : ''}`}>Home</button>
-          <button onClick={() => setActiveTab('store')} className={`hover:text-editorial-gold transition ${activeTab === 'store' ? 'text-editorial-gold border-b-2 border-editorial-gold pb-1' : ''}`}>Store</button>
-          <button onClick={() => navigateToHomeAndScroll('the-story')} className="hover:text-editorial-gold transition">The Testimony</button>
-          <button onClick={() => navigateToHomeAndScroll('meet-toni')} className="hover:text-editorial-gold transition">Meet Toni</button>
-          <button onClick={() => navigateToHomeAndScroll('reviews')} className="hover:text-editorial-gold transition">Reviews</button>
-        </div>
+        <nav id="primary-navigation" className={menuOpen ? 'nav-links is-open' : 'nav-links'} aria-label="Primary navigation">
+          <a href="#the-book" onClick={closeMenu}>The book</a>
+          <a href="#preorder" onClick={closeMenu}>Preorder</a>
+          <a href="#inside" onClick={closeMenu}>Inside</a>
+          <a href="#faq" onClick={closeMenu}>FAQ</a>
+          <a className="nav-amazon" href={amazonUrl} target="_blank" rel="noopener noreferrer" onClick={closeMenu}>Amazon <Arrow /></a>
+        </nav>
+      </header>
 
-        {/* Navigation Action Area */}
-        <div className="flex items-center gap-3 md:gap-4">
-          {/* Cart trigger in nav */}
-          <button
-            onClick={() => {
-              setActiveTab('store');
-              setViewingCart(true);
-              setIsMobileMenuOpen(false);
-            }}
-            className="relative p-2 text-zinc-700 hover:text-editorial-gold transition"
-            title="Open Bookstore Cart"
-          >
-            <ShoppingCart className="w-5 h-5" />
-            {totalCartItems > 0 && (
-              <span className="absolute top-0 right-0 bg-[#8B0000] text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-mono font-bold">
-                {totalCartItems}
-              </span>
-            )}
-          </button>
-
-          {/* Desktop Free Preview Button */}
-          <button
-            onClick={() => setIsPreviewOpen(true)}
-            className="hidden md:block border border-black px-5 py-2 text-[10px] font-sans uppercase tracking-[0.15em] font-bold hover:bg-black hover:text-white transition"
-          >
-            Free Preview
-          </button>
-
-          {/* Mobile Hamburger Menu Toggle Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-zinc-700 hover:text-editorial-gold transition focus:outline-none"
-            aria-label="Toggle Mobile Menu"
-          >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
-      </nav>
-
-      {/* Mobile Sliding Menu Dropdown */}
-      <div className="relative">
-        {isMobileMenuOpen && (
-          <div
-            className="md:hidden w-full bg-[#F5F2ED] border-b border-black/10 shadow-lg z-20 fixed top-20 left-0 right-0 font-sans animate-slide-down"
-          >
-            <div className="px-6 py-8 flex flex-col gap-6 text-sm uppercase tracking-[0.15em] font-bold">
-              <button 
-                onClick={() => { 
-                  setActiveTab('home'); 
-                  setIsMobileMenuOpen(false);
-                  window.scrollTo({ top: 0, behavior: 'smooth' }); 
-                }} 
-                className={`text-left py-2 hover:text-editorial-gold transition border-b border-black/5 ${activeTab === 'home' ? 'text-editorial-gold' : 'text-zinc-800'}`}
-              >
-                Home
-              </button>
-              <button 
-                onClick={() => { 
-                  setActiveTab('store'); 
-                  setViewingCart(true);
-                  setIsMobileMenuOpen(false); 
-                }} 
-                className={`text-left py-2 hover:text-editorial-gold transition border-b border-black/5 flex justify-between items-center ${activeTab === 'store' ? 'text-editorial-gold' : 'text-zinc-800'}`}
-              >
-                <span>Store</span>
-                {totalCartItems > 0 && (
-                  <span className="bg-[#8B0000] text-white text-[10px] px-2.5 py-0.5 rounded-full font-mono">
-                    {totalCartItems} {totalCartItems === 1 ? 'item' : 'items'}
-                  </span>
-                )}
-              </button>
-              <button 
-                onClick={() => { 
-                  navigateToHomeAndScroll('the-story'); 
-                  setIsMobileMenuOpen(false); 
-                }} 
-                className="text-left py-2 text-zinc-800 hover:text-editorial-gold transition border-b border-black/5"
-              >
-                The Testimony
-              </button>
-              <button 
-                onClick={() => { 
-                  navigateToHomeAndScroll('meet-toni'); 
-                  setIsMobileMenuOpen(false); 
-                }} 
-                className="text-left py-2 text-zinc-800 hover:text-editorial-gold transition border-b border-black/5"
-              >
-                Meet Toni
-              </button>
-              <button 
-                onClick={() => { 
-                  navigateToHomeAndScroll('reviews'); 
-                  setIsMobileMenuOpen(false); 
-                }} 
-                className="text-left py-2 text-zinc-800 hover:text-editorial-gold transition border-b border-black/5"
-              >
-                Reviews
-              </button>
-              
-              <div className="pt-2 flex flex-col gap-4">
-                <button
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    setIsPreviewOpen(true);
-                  }}
-                  className="w-full text-center py-3.5 border border-black text-[10px] font-sans uppercase tracking-[0.15em] font-bold hover:bg-black hover:text-white transition"
-                >
-                  Free Preview
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* Main Content */}
-      <main className="flex-grow">
-        {/* Success Alert */}
+      <main id="top">
         {purchaseSuccess && (
-          <div className="max-w-4xl mx-auto mt-6 mx-4 p-6 bg-emerald-50 border border-emerald-800/10 rounded-md text-emerald-950 flex flex-col items-center text-center gap-2 shadow-sm animate-fade-in relative z-20">
-            <ShieldCheck className="w-10 h-10 text-emerald-600" />
-            <h3 className="font-serif text-xl font-bold">Thank You, {purchaseSuccess}!</h3>
-            <p className="font-sans text-sm text-emerald-800 max-w-lg">
-              Your order has been safely processed. A confirmation email has been sent. Physical items will be packaged with personal care from our family.
-            </p>
-            {purchasedItems.filter(item => item.product.category === 'PDF Study Guides').length > 0 && (
-              <div className="w-full mt-4 p-4 bg-emerald-100 rounded text-left">
-                <h4 className="font-bold text-emerald-900 mb-2">📥 Digital Downloads</h4>
-                <p className="text-xs text-emerald-800 mb-3">Your PDF study guides are ready for immediate download:</p>
-                <div className="space-y-2">
-                  {purchasedItems.filter(item => item.product.category === 'PDF Study Guides').map((item, idx) => (
-                    <div key={idx} className="flex items-center justify-between bg-white p-2 rounded shadow-sm">
-                      <span className="font-sans text-xs font-semibold text-zinc-800 truncate pr-4">{item.product.title}</span>
-                      <a href="#" onClick={(e) => { e.preventDefault(); alert('In a live environment, this will trigger the PDF download.'); }} className="text-xs px-3 py-1 bg-emerald-600 text-white rounded font-bold hover:bg-emerald-700 transition">Download</a>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-            <button
-              onClick={() => setPurchaseSuccess(null)}
-              className="mt-2 text-xs font-sans font-semibold underline hover:text-emerald-700"
-            >
-              Dismiss
-            </button>
+          <section className="success-banner" aria-live="polite">
+            <p><strong>Thank you, {purchaseSuccess}.</strong> Your preorder has been received. Please allow approximately four weeks for your paperback to ship.</p>
+            <button type="button" onClick={() => setPurchaseSuccess(null)} aria-label="Dismiss confirmation">×</button>
+          </section>
+        )}
+
+        <section className="hero section-pad" aria-labelledby="hero-title">
+          <div className="hero-copy">
+            <p className="eyebrow">A memoir by Toni ME Taylor</p>
+            <h1 id="hero-title">Now<br /><em>I See.</em></h1>
+            <p className="hero-intro">A faith-centered reflection on America, conscience, and the work of seeing one another clearly.</p>
+            <p className="hero-detail">A newly rebranded edition of a message that asks us to look beyond division and toward truth, justice, liberty, and freedom for all.</p>
+            <div className="hero-actions">
+              <a className="button button-pink" href="#preorder">Preorder direct <Arrow /></a>
+              <a className="text-link" href={amazonUrl} target="_blank" rel="noopener noreferrer">Or shop on Amazon <Arrow /></a>
+            </div>
+            <p className="shipping-line"><span className="shipping-dot" aria-hidden="true" /> Direct paperback preorders ship in about 4 weeks</p>
           </div>
-        )}
 
-        {activeTab === 'home' ? (
-          <>
-            {/* Hero Section */}
-            <section className="py-12 md:py-20 px-6 md:px-12 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 max-w-7xl mx-auto items-center relative z-10">
-              {/* Left Hero Text */}
-              <div className="md:col-span-7 flex flex-col justify-center">
-                <span className="font-sans text-xs uppercase tracking-[0.3em] text-[#8B0000] font-bold block mb-3">
-                  A True Story of Faith
-                </span>
-                <h1 className="text-[52px] sm:text-[76px] lg:text-[84px] leading-none tracking-tight font-serif text-[#1A1A1A] mb-3">
-                  Now I <span className="italic font-light text-[#8B0000]">See</span>
-                </h1>
-                <h2 className="text-lg sm:text-xl lg:text-2xl font-sans tracking-widest text-editorial-gold font-semibold uppercase mb-6 leading-relaxed">
-                  America. My Testimony. God and Me.
-                </h2>
-                <div className="font-sans text-[11px] text-zinc-500 font-bold tracking-[0.2em] uppercase mb-4">
-                  By <span className="text-[#1A1A1A]">Toni ME Taylor</span>
-                </div>
-                <p className="text-base sm:text-lg leading-relaxed text-zinc-700 mb-8 max-w-2xl font-serif">
-                  A powerful, raw, and deeply inspiring testimony of overcoming trials, healing from brokenness, and discovering an unshakeable connection to God.
-                </p>
-                
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-                  <button
-                    onClick={() => scrollToSection('order-now')}
-                    className="bg-[#1A1A1A] text-white px-8 py-4.5 text-[11px] font-sans uppercase tracking-[0.25em] font-bold hover:bg-[#8B0000] transition duration-300 text-center shadow-lg hover:shadow-xl"
-                  >
-                    Order Your Copy
-                  </button>
-                  <button
-                    onClick={() => setIsPreviewOpen(true)}
-                    className="flex items-center justify-center gap-2 border border-black/20 bg-white/50 backdrop-blur-sm px-8 py-4.5 text-[11px] font-sans uppercase tracking-[0.25em] font-bold hover:bg-black/5 transition duration-300 text-center"
-                  >
-                    <BookOpen className="w-4 h-4 text-editorial-gold" /> Read Free Excerpt
-                  </button>
-                </div>
+          <div className="hero-art" aria-label="Now I See book cover">
+            <div className="ray ray-one" />
+            <div className="ray ray-two" />
+            <div className="hero-orbit orbit-one" />
+            <div className="hero-orbit orbit-two" />
+            <div className="cover-shadow" />
+            <img src={coverImage} alt="Now I See, a memoir by Toni ME Taylor" className="book-cover hero-cover" />
+            <div className="hero-label">Light for<br />the way forward</div>
+          </div>
+        </section>
 
-                {/* Quick trust strip */}
-                <div className="mt-8 pt-6 border-t border-black/5 flex flex-wrap items-center gap-6 text-xs text-zinc-500 font-sans font-medium">
-                  <span className="flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-[#8B0000]" /> Secure PayPal Express Checkout</span>
-                  <span className="flex items-center gap-1.5"><Award className="w-4 h-4 text-editorial-gold" /> Signed Copies Available</span>
-                </div>
+        <section className="statement section-pad" aria-label="Book statement">
+          <p>“Ask not for whom the bell tolls.<br /><span>It tolls for us.”</span></p>
+          <div className="statement-rule" />
+          <p className="statement-caption">A call to see America—and each other—with conscience, faith, and courage.</p>
+        </section>
+
+        <section id="preorder" className="preorder-wrap section-pad" aria-labelledby="preorder-title">
+          <div className="preorder-heading">
+            <p className="eyebrow">Choose your path</p>
+            <h2 id="preorder-title">Get your copy.</h2>
+            <p>Preorder directly to support the family’s upcoming bulk order, or choose Amazon checkout. Either way, your order helps this message find its readers.</p>
+          </div>
+
+          <div className="buy-grid">
+            <article className="buy-card direct-card">
+              <div className="card-sticker">Family preorder</div>
+              <p className="card-kicker">Direct paperback</p>
+              <h3>Reserve a copy<br /><em>from the next order.</em></h3>
+              <p className="card-description">Your copy will be included in the next family bulk order. That means a little more patience—and a direct way to support the book.</p>
+              <div className="price-line"><strong>$14.99</strong><span>plus shipping</span></div>
+              <div className="fulfillment-note"><span aria-hidden="true">✓</span> Estimated to ship in approximately 4 weeks</div>
+              <div className="paypal-slot">
+                <PayPalButton editionId="paperback" price={14.99} onSuccess={setPurchaseSuccess} />
               </div>
+              <p className="checkout-caption">Secure checkout through PayPal. Your order is a preorder and will ship when the bulk order arrives.</p>
+            </article>
 
-              {/* Right Hero Image / Mockup */}
-              <div className="md:col-span-5 flex flex-col items-center justify-center relative">
-                <BookMockup />
-                <p className="text-xs text-zinc-400 font-sans tracking-widest mt-2 uppercase">
-                  ▲ Drag book to rotate and explore cover
-                </p>
-              </div>
-            </section>
+            <article className="buy-card amazon-card">
+              <div className="amazon-sun" aria-hidden="true">A</div>
+              <p className="card-kicker">Amazon option</p>
+              <h3>Prefer Amazon<br /><em>checkout?</em></h3>
+              <p className="card-description">Use the Amazon listing if you would rather shop through Amazon. This page uses an Amazon Associate link at no extra cost to you.</p>
+              <a className="button button-ink amazon-button" href={amazonUrl} target="_blank" rel="noopener noreferrer">Shop Now I See on Amazon <Arrow /></a>
+              <p className="checkout-caption">Amazon availability, fulfillment, and pricing are shown on its listing.</p>
+            </article>
+          </div>
+        </section>
 
-            {/* Divider line */}
-            <div className="w-full h-px bg-black/5" />
+        <section id="the-book" className="book-story" aria-labelledby="story-title">
+          <div className="story-heading section-pad">
+            <p className="eyebrow">What you will find inside</p>
+            <h2 id="story-title">A deeply personal call to look again.</h2>
+            <p><em>Now I See</em> looks at a fractured nation through faith, personal conviction, and a great-grandmother’s eyes. It asks hard questions about how we see one another—and what it means to choose a more truthful, compassionate path.</p>
+          </div>
 
-            {/* Book Quotes Bar (Toni's voice) */}
-            <section className="bg-[#EAE7E0] py-10 px-6 text-center border-b border-black/5 relative z-10">
-              <div className="max-w-4xl mx-auto">
-                <span className="font-sans text-[10px] uppercase tracking-[0.3em] opacity-40 block mb-2">Toni's Testimony</span>
-                <p className="font-serif italic text-2xl sm:text-3xl text-[#8B0000] leading-snug">
-                  &ldquo;The adversarial bell clanging throughout this great nation cannot be &ldquo;unrung&rdquo;! But, a United America can reclaim, reestablish, reignite, and reaffirm America&rsquo;s Core Values.&rdquo;
-                </p>
-              </div>
-            </section>
+          <div className="theme-grid section-pad">
+            <article className="theme-card theme-gold">
+              <span className="theme-number">01</span>
+              <h3>Spiritual sight</h3>
+              <p>Reflections on faith, grace, mercy, and the possibility of being made whole.</p>
+            </article>
+            <article className="theme-card theme-purple">
+              <span className="theme-number">02</span>
+              <h3>One people</h3>
+              <p>A plea to recognize shared humanity beyond race, gender, origin, or political division.</p>
+            </article>
+            <article className="theme-card theme-ink">
+              <span className="theme-number">03</span>
+              <h3>America’s promise</h3>
+              <p>A meditation on truth, justice, liberty, freedom, and the responsibility we carry forward.</p>
+            </article>
+          </div>
+        </section>
 
-            {/* Core Themes (Bento grid style) */}
-            <section id="the-story" className="py-20 px-6 md:px-12 max-w-7xl mx-auto relative z-10">
-              <div className="text-center mb-16">
-                <span className="font-sans text-xs font-bold tracking-[0.4em] text-editorial-gold uppercase">THE HEART OF THE memoir</span>
-                <h2 className="text-3xl sm:text-5xl font-serif text-[#1A1A1A] mt-3">Spiritual Sight & Unveiling</h2>
-                <div className="h-[2px] w-24 bg-[#8B0000] mx-auto mt-4" />
-              </div>
+        <section id="inside" className="excerpt section-pad" aria-labelledby="excerpt-title">
+          <div className="excerpt-mark" aria-hidden="true">“</div>
+          <div className="excerpt-copy">
+            <p className="eyebrow">From the pages</p>
+            <h2 id="excerpt-title">“Amid blindness I become sight.”</h2>
+            <p>In language that is poetic, direct, and deeply spiritual, Toni ME Taylor turns toward the possibility of revelation, restoration, and a more united future.</p>
+            <a className="text-link" href="#preorder">Begin with a preorder <Arrow /></a>
+          </div>
+          <div className="excerpt-cover-wrap">
+            <img src={coverImage} alt="Now I See book cover" className="book-cover excerpt-cover" />
+          </div>
+        </section>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {/* Card 1 */}
-                <div className="bg-white p-8 md:p-10 border border-black/5 shadow-sm hover:shadow-md transition duration-300 flex flex-col justify-between">
-                  <div>
-                    <Heart className="w-8 h-8 text-[#8B0000] mb-6" />
-                    <h3 className="font-serif text-xl font-bold mb-4">Gracefully Broken</h3>
-                    <p className="font-serif text-zinc-600 leading-relaxed text-[15px]">
-                      &ldquo;The world broke me from the inside out. Having no further need of me, it gathered up my broken pieces, took me to an abandoned landfill, and threw me atop a garbage heap.&rdquo; Discover how God found Toni, wrapped her in mercy, and made her whole again.
-                    </p>
-                  </div>
-                  <div className="pt-6 border-t border-black/5 mt-6 font-sans text-xs tracking-wider uppercase text-editorial-gold font-bold">
-                    Spiritual Sight Overcoming
-                  </div>
-                </div>
+        <section className="why-direct section-pad" aria-labelledby="why-direct-title">
+          <div>
+            <p className="eyebrow">Why preorder direct?</p>
+            <h2 id="why-direct-title">A small wait for a more personal route.</h2>
+          </div>
+          <div className="why-direct-copy">
+            <p>Physical direct orders are being collected for a family bulk order. Your preorder is reserved now and will be sent after the shipment arrives—estimated at approximately four weeks.</p>
+            <p>If that timing does not work for you, the Amazon option remains available at every purchase point on this page.</p>
+            <a className="button button-pink" href="#preorder">Reserve my copy <Arrow /></a>
+          </div>
+        </section>
 
-                {/* Card 2 */}
-                <div className="bg-white p-8 md:p-10 border border-black/5 shadow-sm hover:shadow-md transition duration-300 flex flex-col justify-between">
-                  <div>
-                    <Flame className="w-8 h-8 text-editorial-gold mb-6" />
-                    <h3 className="font-serif text-xl font-bold mb-4">We are God's Lighthouses</h3>
-                    <p className="font-serif text-zinc-600 leading-relaxed text-[15px]">
-                      &ldquo;We are God’s lighthouses standing amid the world’s raging storms! We pave, light, and secure the way! We are sword! We are shield!&rdquo; An inspiring, patriotic call to return to America's core values of Truth, Justice, Liberty, and Freedom.
-                    </p>
-                  </div>
-                  <div className="pt-6 border-t border-black/5 mt-6 font-sans text-xs tracking-wider uppercase text-editorial-gold font-bold">
-                    Faith and Sanctuary
-                  </div>
-                </div>
-
-                {/* Card 3 */}
-                <div className="bg-white p-8 md:p-10 border border-black/5 shadow-sm hover:shadow-md transition duration-300 flex flex-col justify-between">
-                  <div>
-                    <Compass className="w-8 h-8 text-indigo-900 mb-6" />
-                    <h3 className="font-serif text-xl font-bold mb-4">Different Yet The Same</h3>
-                    <p className="font-serif text-zinc-600 leading-relaxed text-[15px]">
-                      Through deep scriptural revelations and personal dreams, Toni reflects on her shared spiritual purpose. She looks past skin color and outer differences, showing how we are all identical beneath the skin—conjointly authored and beautifully designed by our Father.
-                    </p>
-                  </div>
-                  <div className="pt-6 border-t border-black/5 mt-6 font-sans text-xs tracking-wider uppercase text-editorial-gold font-bold">
-                    A Shared Divine Purpose
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* Meet the Author Section */}
-            <section id="meet-toni" className="bg-[#EAE7E0] py-20 px-6 md:px-12 border-t border-b border-black/5">
-              <div className="max-w-7xl mx-auto">
-                <MeetAuthor />
-              </div>
-            </section>
-
-            {/* Reader Testimonials Section */}
-            <section id="reviews" className="py-20 px-6 md:px-12 max-w-7xl mx-auto relative z-10">
-              <ReviewSection />
-            </section>
-
-            {/* Order Editions Section */}
-            <section id="order-now" className="bg-white py-20 px-6 md:px-12 border-t border-b border-black/5 relative z-10">
-              <div className="max-w-5xl mx-auto">
-                <div className="text-center mb-12">
-                  <span className="font-sans text-xs font-bold tracking-[0.4em] text-editorial-gold uppercase">ORDER YOUR COPY</span>
-                  <h2 className="text-3xl sm:text-5xl font-serif text-[#1A1A1A] mt-3">Select Your Edition</h2>
-                  <p className="text-sm text-zinc-500 font-sans mt-2">
-                    Order directly from our personal family stock or instantly on Amazon.
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch mb-12">
-                  {/* Hardcover Edition Card */}
-                  <div className="p-8 border-2 border-editorial-gold rounded bg-[#F5F2ED]/30 relative flex flex-col justify-between">
-                    <div className="absolute top-4 right-4 bg-[#8B0000] text-white text-[9px] font-sans font-bold tracking-widest px-2.5 py-1 uppercase rounded-sm">
-                      MOST CHERISHED
-                    </div>
-                    <div>
-                      <h3 className="font-serif text-2xl font-bold text-[#1A1A1A] mb-1">Hardcover</h3>
-                      <p className="text-xs text-zinc-500 font-sans uppercase tracking-wider mb-4">Signed by Toni ME Taylor</p>
-                      <p className="font-serif text-zinc-600 text-sm leading-relaxed mb-6">
-                        A beautiful, durable, premium addition to your home library. Features shimmering foil lettering and robust binding. Perfect for a lasting gift of faith.
-                      </p>
-                    </div>
-                    <div>
-                      <div className="text-3xl font-serif font-black text-[#1A1A1A] mb-2">
-                        $24.99 <span className="text-xs font-sans text-zinc-500 font-normal tracking-wide">+ shipping</span>
-                      </div>
-                      <div className="h-px bg-black/5 my-4" />
-                      <PayPalButton
-                        editionId="hardcover"
-                        price={24.99}
-                        onSuccess={handlePurchaseSuccess}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Paperback Edition Card */}
-                  <div className="p-8 border border-black/10 rounded relative flex flex-col justify-between">
-                    <div>
-                      <h3 className="font-serif text-2xl font-bold text-[#1A1A1A] mb-1">Paperback</h3>
-                      <p className="text-xs text-zinc-500 font-sans uppercase tracking-wider mb-4">Direct Family Stock</p>
-                      <p className="font-serif text-zinc-600 text-sm leading-relaxed mb-6">
-                        The classic lightweight edition. Easy to carry, annotate, and pass along to friends or study groups as a beautiful reminder of hope.
-                      </p>
-                    </div>
-                    <div>
-                      <div className="text-3xl font-serif font-black text-[#1A1A1A] mb-2">
-                        $14.99 <span className="text-xs font-sans text-zinc-500 font-normal tracking-wide">+ shipping</span>
-                      </div>
-                      <div className="h-px bg-black/5 my-4" />
-                      <PayPalButton
-                        editionId="paperback"
-                        price={14.99}
-                        onSuccess={handlePurchaseSuccess}
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Direct Shipping note vs Amazon Prime options */}
-                <div className="bg-[#EAE7E0]/60 border border-black/5 rounded p-6 md:p-8 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-                  <div className="md:col-span-8">
-                    <h4 className="font-serif text-lg font-bold mb-2 text-[#8B0000]">Why 10-day Direct Shipping?</h4>
-                    <p className="font-serif text-zinc-600 text-[14.5px] leading-relaxed">
-                      We maintain a small personal supply of <em>Now I See</em> directly in our home rather than a warehouse. Every order placed directly here is hand-packed and shipped with love from our family.
-                    </p>
-                    <p className="font-serif text-zinc-600 text-[14.5px] leading-relaxed mt-2">
-                      If you prefer <strong>instant delivery or fast Prime 2-day shipping</strong>, you are welcome to order through Amazon as well!
-                    </p>
-                  </div>
-                  <div className="md:col-span-4 flex flex-col gap-3">
-                    <a
-                      href="https://www.amazon.com/dp/B0FCQ1B86T?tag=drainguru-20"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-[#FF9900] text-zinc-950 font-sans text-xs font-bold text-center uppercase tracking-wider py-3.5 px-4 rounded shadow-md hover:brightness-105 active:scale-98 transition flex items-center justify-center gap-1.5"
-                    >
-                      Buy Paperback on Amazon
-                    </a>
-                    <a
-                      href="https://www.amazon.com/dp/B0FCQ1B86T?tag=drainguru-20"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-zinc-800 text-white font-sans text-xs font-bold text-center uppercase tracking-wider py-3 px-4 rounded hover:bg-zinc-950 transition flex items-center justify-center gap-1.5"
-                    >
-                      Buy Kindle E-Book Edition
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* FAQ Section */}
-            <section className="py-20 px-6 md:px-12 max-w-7xl mx-auto">
-              <FaqSection />
-            </section>
-          </>
-        ) : (
-          <StoreView
-            onBackToHome={() => setActiveTab('home')}
-            cart={cart}
-            onAddToCart={handleAddToCart}
-            onUpdateQuantity={handleUpdateQuantity}
-            onRemoveFromCart={handleRemoveFromCart}
-            onClearCart={handleClearCart}
-            onPurchaseSuccess={handlePurchaseSuccess}
-            viewingCart={viewingCart}
-            setViewingCart={setViewingCart}
-          />
-        )}
+        <section id="faq" className="faq section-pad" aria-labelledby="faq-title">
+          <p className="eyebrow">Before you order</p>
+          <h2 id="faq-title">Common questions.</h2>
+          <div className="faq-list">
+            <details open>
+              <summary>When will a direct preorder ship?<span aria-hidden="true">+</span></summary>
+              <p>Direct paperback preorders are included in the next family bulk order. Please allow approximately four weeks for the books to arrive and ship out to you.</p>
+            </details>
+            <details>
+              <summary>Can I buy the book through Amazon instead?<span aria-hidden="true">+</span></summary>
+              <p>Yes. The Amazon option is available throughout this page for readers who prefer Amazon checkout, availability, or fulfillment.</p>
+            </details>
+            <details>
+              <summary>Does using the Amazon button cost me more?<span aria-hidden="true">+</span></summary>
+              <p>No. The Amazon button is an Amazon Associate link. The site may earn a small commission from qualifying purchases, at no additional cost to you.</p>
+            </details>
+            <details>
+              <summary>What is this book about?<span aria-hidden="true">+</span></summary>
+              <p>Now I See is Toni ME Taylor’s faith-centered memoir and reflection on America, conscience, unity, liberty, and seeing one another with greater clarity.</p>
+            </details>
+          </div>
+        </section>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-[#1A1A1A] text-zinc-400 py-12 px-6 md:px-12 border-t border-black/10 text-center font-sans text-xs tracking-wider uppercase">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="font-serif normal-case text-base text-white font-bold tracking-normal">
-            NOW I SEE <span className="text-zinc-500 font-light font-sans text-xs tracking-widest ml-1 uppercase">BY TONI ME TAYLOR</span>
-          </div>
-          <div>
-            &copy; {new Date().getFullYear()} Toni ME Taylor. All rights reserved.
+      <footer className="site-footer">
+        <div className="footer-top section-pad">
+          <a className="footer-wordmark" href="#top">NOW <i>I SEE</i></a>
+          <p>A memoir by Toni ME Taylor.</p>
+          <div className="footer-actions">
+            <a href="#preorder">Preorder direct <Arrow /></a>
+            <a href={amazonUrl} target="_blank" rel="noopener noreferrer">Shop Amazon <Arrow /></a>
           </div>
         </div>
-        <div className="max-w-3xl mx-auto mt-6 pt-6 border-t border-zinc-800 text-[10px] text-zinc-500 normal-case leading-relaxed font-sans">
-          Disclosure: This website contains affiliate links to Amazon. As an Amazon Associate, the webhost may earn a small commission from qualifying purchases made through these links at no additional cost to you.
+        <div className="footer-bottom section-pad">
+          <p>© {new Date().getFullYear()} Toni ME Taylor. All rights reserved.</p>
+          <p>As an Amazon Associate, this site may earn from qualifying purchases.</p>
         </div>
       </footer>
-
-      {/* Excerpt Overlay Modal */}
-      <ChapterPreview
-        isOpen={isPreviewOpen}
-        onClose={() => setIsPreviewOpen(false)}
-      />
-
-      {/* Mobile & Desktop Sticky CTA / Accessibility Deck / Scroll-to-Top */}
-      <StickyCTA
-        onBuyBook={() => {
-          if (activeTab !== 'home') {
-            setActiveTab('home');
-          }
-          setTimeout(() => {
-            scrollToSection('order-now');
-          }, 100);
-        }}
-        largeText={largeText}
-        setLargeText={handleSetLargeText}
-        highContrast={highContrast}
-        setHighContrast={handleSetHighContrast}
-        sansSerif={sansSerif}
-        setSansSerif={handleSetSansSerif}
-      />
-
-      {/* 5-Second Scroll Triggered Newsletter Popup */}
-      <NewsletterPopup />
     </div>
   );
 }
