@@ -1,7 +1,6 @@
 import { useMemo, useRef, useState } from 'react';
 import CartPayPalButton, { type CartCheckoutItem, type CartEdition } from './components/CartPayPalButton';
-import authenticCover from './assets/images/now_i_see_authentic_cover.png';
-import heroVisual from './assets/images/now_i_see_hero_visual.png';
+import cleanBookCover from './assets/images/now_i_see_book_only_clean.png';
 
 const amazonUrl = 'https://amzn.to/4cYuQUX';
 const products: Record<CartEdition, { name: string; price: number }> = {
@@ -105,8 +104,8 @@ export default function App() {
             <p className="shipping-line"><span className="shipping-dot" aria-hidden="true" /> Free U.S. shipping is included with every direct preorder</p>
           </div>
           <div className={`hero-art hero-video-shell ${trailerPaused ? 'is-paused' : ''}`} aria-label="Now I See book trailer">
-            <img src={heroVisual} alt="Now I See book displayed in a burgundy and midnight navy editorial studio setting" className="hero-video-fallback" />
-            <video ref={trailerRef} className="hero-trailer" autoPlay muted playsInline controls preload="metadata" poster={heroVisual} onPlay={() => setTrailerPaused(false)} onPause={() => setTrailerPaused(true)} onEnded={() => setTrailerPaused(true)}>
+            <img src={cleanBookCover} alt="Now I See: America, My Testimony, God and Me by Toni ME Taylor" className="hero-video-fallback" />
+            <video ref={trailerRef} className="hero-trailer" autoPlay muted playsInline controls preload="metadata" poster={cleanBookCover} onPlay={() => setTrailerPaused(false)} onPause={() => setTrailerPaused(true)} onEnded={() => setTrailerPaused(true)}>
               <source src="/media/now-i-see-trailer.mp4" type="video/mp4" />
               Your browser does not support embedded video.
             </video>
@@ -143,7 +142,7 @@ export default function App() {
           </div>
         </section>
 
-        <section id="inside" className="excerpt section-pad" aria-labelledby="excerpt-title"><div className="excerpt-mark" aria-hidden="true">“</div><div className="excerpt-copy"><p className="eyebrow">From the pages</p><h2 id="excerpt-title">“It takes courage to love.”</h2><p>In direct, spiritual language, Toni ME Taylor writes about revelation, restoration, and the resolve to move through a divided world with faith and purpose.</p><a className="text-link" href="#preorder">Reserve your copy <Arrow /></a></div><div className="excerpt-cover-wrap"><img src={authenticCover} alt="Now I See authentic book cover" className="book-cover excerpt-cover" /></div></section>
+        <section id="inside" className="excerpt section-pad" aria-labelledby="excerpt-title"><div className="excerpt-mark" aria-hidden="true">“</div><div className="excerpt-copy"><p className="eyebrow">From the pages</p><h2 id="excerpt-title">“It takes courage to love.”</h2><p>In direct, spiritual language, Toni ME Taylor writes about revelation, restoration, and the resolve to move through a divided world with faith and purpose.</p><a className="text-link" href="#preorder">Reserve your copy <Arrow /></a></div><div className="excerpt-cover-wrap"><img src={cleanBookCover} alt="Now I See: America, My Testimony, God and Me by Toni ME Taylor" className="book-cover excerpt-cover" /></div></section>
 
         <section className="why-direct section-pad" aria-labelledby="why-direct-title"><div><p className="eyebrow">A direct preorder</p><h2 id="why-direct-title">A little patience. A personal route.</h2></div><div className="why-direct-copy"><p>The publisher supplies direct copies in cases of 12. Your preorder helps fill the next case, and its delivered price includes standard shipping to your U.S. address.</p><p>After the case is received, each copy is prepared and shipped directly to you. Please allow approximately four weeks from your preorder.</p><a className="button button-wine" href="#preorder">Reserve my copy <Arrow /></a></div></section>
 

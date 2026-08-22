@@ -312,3 +312,7 @@ h1 em { color: #e9d5bd; font-weight: 400; }
   .sound-enable-prompt { right: .65rem; bottom: 3.35rem; padding: .63rem .75rem; font-size: .59rem; }
   .trailer-resume-prompt { font-size: .64rem; }
 }
+
+/* Clean book-only trailer fallback */
+.hero-video-fallback { object-fit: contain; padding: .55rem; background: #10131e; }
+.hero-video-shell.is-paused .hero-video-fallback { object-fit: contain; }
