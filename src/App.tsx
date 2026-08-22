@@ -51,17 +51,17 @@ export default function App() {
         <section className="statement section-pad" aria-label="Book statement"><p>“Amid blindness<br /><span>I become sight.”</span></p><div className="statement-rule" /><p className="statement-caption">A testimony of restoration, a reflection on America, and a call to see one another with greater clarity.</p></section>
 
         <section id="preorder" className="preorder-wrap section-pad" aria-labelledby="preorder-title">
-          <div className="preorder-heading"><p className="eyebrow">Direct preorder · free U.S. shipping</p><h2 id="preorder-title">Choose your edition.</h2><p>Order directly for less than the stated Amazon prices. Your preorder reserves a copy from the next publisher case order, and the delivered price already includes U.S. shipping.</p></div>
+          <div className="preorder-heading"><p className="eyebrow">Direct preorder · free U.S. shipping</p><h2 id="preorder-title">Choose your edition.</h2><p>Order directly for an author-supporting, delivered price. Your preorder reserves a copy from the next publisher case order; the price includes the book, secure payment processing, packaging, and standard U.S. shipping.</p></div>
           <div className="edition-grid">
             <article className="edition-card paperback-card">
               <p className="card-kicker">Paperback</p><h3>The message<br /><em>within reach.</em></h3><p className="card-description">A flexible, easy-to-share edition for readers, study groups, and meaningful gifts.</p>
-              <div className="price-line"><strong>$17.99</strong><span>delivered in the U.S.</span></div><p className="savings-note">Free U.S. shipping included · $0.40 below the stated Amazon paperback price</p>
-              <div className="paypal-slot"><PayPalButton editionId="paperback" price={17.99} onSuccess={setPurchaseSuccess} /></div><p className="checkout-caption">This is a preorder. Publisher orders are placed in cases of 12; please allow approximately four weeks for fulfillment.</p>
+              <div className="price-line"><strong>$18.99</strong><span>delivered in the U.S.</span></div><p className="savings-note">Free U.S. shipping included · Direct orders help fund the next case of 12</p>
+              <div className="paypal-slot"><PayPalButton editionId="paperback" price={18.99} onSuccess={setPurchaseSuccess} /></div><p className="checkout-caption">This is a preorder. Publisher orders are placed in cases of 12; please allow approximately four weeks for fulfillment.</p>
             </article>
             <article className="edition-card hardcover-card">
               <div className="collector-badge">Collector’s edition</div><p className="card-kicker">Hardcover</p><h3>A lasting<br /><em>testimony.</em></h3><p className="card-description">A durable keepsake edition for the home library, a loved one, or a meaningful occasion.</p>
-              <div className="price-line"><strong>$28.99</strong><span>delivered in the U.S.</span></div><p className="savings-note">Free U.S. shipping included · $2.00 below the stated Amazon hardcover price</p>
-              <div className="paypal-slot"><PayPalButton editionId="hardcover" price={28.99} onSuccess={setPurchaseSuccess} /></div><p className="checkout-caption">This is a preorder. Publisher orders are placed in cases of 12; please allow approximately four weeks for fulfillment.</p>
+              <div className="price-line"><strong>$29.99</strong><span>delivered in the U.S.</span></div><p className="savings-note">Free U.S. shipping included · $1.00 below the stated Amazon hardcover price</p>
+              <div className="paypal-slot"><PayPalButton editionId="hardcover" price={29.99} onSuccess={setPurchaseSuccess} /></div><p className="checkout-caption">This is a preorder. Publisher orders are placed in cases of 12; please allow approximately four weeks for fulfillment.</p>
             </article>
           </div>
           <aside className="amazon-route"><div><p className="eyebrow">Prefer Amazon checkout?</p><h3>Shop the listing at any time.</h3><p>Amazon availability and price are shown on its listing. The link below is an Amazon Associate link at no extra cost to you.</p></div><a className="button button-stone" href={amazonUrl} target="_blank" rel="noopener noreferrer">Shop Now I See on Amazon <Arrow /></a></aside>

@@ -12,6 +12,8 @@ declare global {
   }
 }
 
+const paypalClientId = import.meta.env.VITE_PAYPAL_CLIENT_ID || 'BAAqvvMK6Qbu1RmFBF2-iiKTyfphwRTcUwqQSKKEXgJ2yunZx7cWzxOBZxMQj3IcDYfkY_ZfeXu5urGLVY';
+
 export default function PayPalButton({ editionId, price, onSuccess }: PayPalButtonProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [sdkReady, setSdkReady] = useState(false);
@@ -26,7 +28,7 @@ export default function PayPalButton({ editionId, price, onSuccess }: PayPalButt
 
     // Create script element
     const script = document.createElement('script');
-    script.src = 'https://www.paypal.com/sdk/js?client-id=BAAqvvMK6Qbu1RmFBF2-iiKTyfphwRTcUwqQSKKEXgJ2yunZx7cWzxOBZxMQj3IcDYfkY_ZfeXu5urGLVY&currency=USD';
+    script.src = `https://www.paypal.com/sdk/js?client-id=${paypalClientId}&currency=USD&intent=capture&commit=true`;
     script.async = true;
     script.onload = () => setSdkReady(true);
     script.onerror = () => setError('Failed to load payment system. Please refresh or buy on Amazon.');
@@ -55,6 +57,10 @@ export default function PayPalButton({ editionId, price, onSuccess }: PayPalButt
         },
         createOrder: (_data: any, actions: any) => {
           return actions.order.create({
+            application_context: {
+              shipping_preference: 'GET_FROM_FILE',
+              user_action: 'PAY_NOW'
+            },
             purchase_units: [{
               description: `Now I See — ${editionId === 'hardcover' ? 'Hardcover' : 'Paperback'} Preorder (free U.S. shipping; ships in approximately 4 weeks)`,
               amount: {
