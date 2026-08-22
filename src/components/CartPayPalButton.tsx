@@ -82,7 +82,7 @@ export default function CartPayPalButton({ items, subtotal, shipping, total, onS
       createOrder: (_data: any, actions: any) => actions.order.create({
         application_context: { shipping_preference: 'GET_FROM_FILE', user_action: 'PAY_NOW' },
         purchase_units: [{
-          description: `Now I See preorder — ${description} (ships in approximately 4 weeks)`,
+          description: `Now I See preorder — ${description} (standard U.S. shipping included; ships in approximately 4 weeks)`,
           items: orderItems,
           amount: {
             currency_code: 'USD',
