@@ -11,6 +11,8 @@ export interface CartCheckoutItem {
 
 interface CartPayPalButtonProps {
   items: CartCheckoutItem[];
+  subtotal: number;
+  shipping: number;
   total: number;
   onSuccess: (payerName: string) => void;
 }
@@ -48,7 +50,7 @@ function loadPayPalSdk() {
   return paypalSdkPromise;
 }
 
-export default function CartPayPalButton({ items, total, onSuccess }: CartPayPalButtonProps) {
+export default function CartPayPalButton({ items, subtotal, shipping, total, onSuccess }: CartPayPalButtonProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [sdkReady, setSdkReady] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -80,15 +82,22 @@ export default function CartPayPalButton({ items, total, onSuccess }: CartPayPal
       createOrder: (_data: any, actions: any) => actions.order.create({
         application_context: { shipping_preference: 'GET_FROM_FILE', user_action: 'PAY_NOW' },
         purchase_units: [{
-          description: `Now I See preorder — ${description} (free U.S. shipping; ships in approximately 4 weeks)`,
+          description: `Now I See preorder — ${description} (ships in approximately 4 weeks)`,
           items: orderItems,
           amount: {
             currency_code: 'USD',
             value: total.toFixed(2),
-            breakdown: { item_total: { currency_code: 'USD', value: total.toFixed(2) } }
+            breakdown: {
+              item_total: { currency_code: 'USD', value: subtotal.toFixed(2) },
+              shipping: { currency_code: 'USD', value: shipping.toFixed(2) }
+            }
           }
         }]
       }),
+      onShippingAddressChange: (data: any, actions: any) => {
+        if (data.shipping_address?.country_code !== 'US') return actions.reject();
+        return actions.resolve();
+      },
       onApprove: async (_data: any, actions: any) => {
         const details = await actions.order.capture();
         onSuccess(details.payer?.name?.given_name || 'Reader');
@@ -98,7 +107,7 @@ export default function CartPayPalButton({ items, total, onSuccess }: CartPayPal
         setError('An error occurred during payment processing. Please refresh and try again.');
       }
     }).render(containerRef.current);
-  }, [sdkReady, itemSignature, total, onSuccess, items]);
+  }, [sdkReady, itemSignature, subtotal, shipping, total, onSuccess, items]);
 
   if (error) return <p className="checkout-error" role="alert">{error}</p>;
 
