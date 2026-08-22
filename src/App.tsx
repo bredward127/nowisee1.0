@@ -1,12 +1,12 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import CartPayPalButton, { type CartCheckoutItem, type CartEdition } from './components/CartPayPalButton';
 import authenticCover from './assets/images/now_i_see_authentic_cover.png';
 import heroVisual from './assets/images/now_i_see_hero_visual.png';
 
 const amazonUrl = 'https://amzn.to/4cYuQUX';
 const products: Record<CartEdition, { name: string; price: number }> = {
-  paperback: { name: 'Paperback', price: 22.49 },
-  hardcover: { name: 'Hardcover', price: 31.09 }
+  paperback: { name: 'Paperback', price: 22.99 },
+  hardcover: { name: 'Hardcover', price: 31.99 }
 };
 
 type CartPanel = 'closed' | 'mini' | 'checkout';
@@ -24,7 +24,26 @@ export default function App() {
   const [cartPanel, setCartPanel] = useState<CartPanel>('closed');
   const [cart, setCart] = useState<Record<CartEdition, number>>({ paperback: 0, hardcover: 0 });
   const [purchaseSuccess, setPurchaseSuccess] = useState<string | null>(null);
+  const [trailerMuted, setTrailerMuted] = useState(true);
+  const [trailerPaused, setTrailerPaused] = useState(false);
+  const trailerRef = useRef<HTMLVideoElement>(null);
   const closeMenu = () => setMenuOpen(false);
+
+  const enableTrailerSound = () => {
+    const trailer = trailerRef.current;
+    if (!trailer) return;
+    trailer.muted = false;
+    trailer.volume = 0.85;
+    setTrailerMuted(false);
+    trailer.play().catch(() => setTrailerPaused(true));
+  };
+
+  const resumeTrailer = () => {
+    const trailer = trailerRef.current;
+    if (!trailer) return;
+    if (trailer.ended) trailer.currentTime = 0;
+    trailer.play().then(() => setTrailerPaused(false)).catch(() => setTrailerPaused(true));
+  };
 
   const cartItems = useMemo<CartCheckoutItem[]>(() => (Object.keys(products) as CartEdition[])
     .filter((edition) => cart[edition] > 0)
@@ -85,8 +104,14 @@ export default function App() {
             <div className="hero-actions"><a className="button button-wine" href="#preorder">Preorder direct <Arrow /></a><a className="text-link" href={amazonUrl} target="_blank" rel="noopener noreferrer">Shop on Amazon <Arrow /></a></div>
             <p className="shipping-line"><span className="shipping-dot" aria-hidden="true" /> Free U.S. shipping is included with every direct preorder</p>
           </div>
-          <div className="hero-art hero-art-image" aria-label="Now I See book on an editorial studio plinth">
-            <img src={heroVisual} alt="Now I See book displayed in a burgundy and midnight navy editorial studio setting" className="hero-visual" />
+          <div className={`hero-art hero-video-shell ${trailerPaused ? 'is-paused' : ''}`} aria-label="Now I See book trailer">
+            <img src={heroVisual} alt="Now I See book displayed in a burgundy and midnight navy editorial studio setting" className="hero-video-fallback" />
+            <video ref={trailerRef} className="hero-trailer" autoPlay muted playsInline controls preload="metadata" poster={heroVisual} onPlay={() => setTrailerPaused(false)} onPause={() => setTrailerPaused(true)} onEnded={() => setTrailerPaused(true)}>
+              <source src="/media/now-i-see-trailer.mp4" type="video/mp4" />
+              Your browser does not support embedded video.
+            </video>
+            {!trailerPaused && trailerMuted && <button type="button" className="sound-enable-prompt" onClick={enableTrailerSound}>Click to enable sound <span aria-hidden="true">↗</span></button>}
+            {trailerPaused && <button type="button" className="trailer-resume-prompt" onClick={resumeTrailer}><span className="play-mark" aria-hidden="true">▶</span><span>Press play to resume trailer</span></button>}
           </div>
         </section>
 
@@ -97,12 +122,12 @@ export default function App() {
           <div className="edition-grid">
             <article className="edition-card paperback-card">
               <p className="card-kicker">Paperback</p><h3>The message<br /><em>within reach.</em></h3><p className="card-description">A flexible, easy-to-share edition for readers, study groups, and meaningful gifts.</p>
-              <div className="price-line"><strong>$22.49</strong><span>delivered in the U.S.</span></div><p className="savings-note">Free standard U.S. shipping included</p>
+              <div className="price-line"><strong>$22.99</strong><span>delivered in the U.S.</span></div><p className="savings-note">Free standard U.S. shipping included</p>
               <button type="button" className="add-cart-button" onClick={() => addToCart('paperback')}>Add to cart <CartIcon /></button><p className="checkout-caption">Add more than one copy, mix editions, or continue shopping before checkout.</p>
             </article>
             <article className="edition-card hardcover-card">
               <div className="collector-badge">Collector’s edition</div><p className="card-kicker">Hardcover</p><h3>A lasting<br /><em>testimony.</em></h3><p className="card-description">A durable keepsake edition for the home library, a loved one, or a meaningful occasion.</p>
-              <div className="price-line"><strong>$31.09</strong><span>delivered in the U.S.</span></div><p className="savings-note">Free standard U.S. shipping included</p>
+              <div className="price-line"><strong>$31.99</strong><span>delivered in the U.S.</span></div><p className="savings-note">Free standard U.S. shipping included</p>
               <button type="button" className="add-cart-button add-cart-button-light" onClick={() => addToCart('hardcover')}>Add to cart <CartIcon /></button><p className="checkout-caption">Add more than one copy, mix editions, or continue shopping before checkout.</p>
             </article>
           </div>
