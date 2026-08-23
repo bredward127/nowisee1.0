@@ -82,8 +82,19 @@ export default function CartPayPalButton({ items, subtotal, shipping, total, onS
       createOrder: (_data: any, actions: any) => actions.order.create({
         application_context: { shipping_preference: 'GET_FROM_FILE', user_action: 'PAY_NOW' },
         purchase_units: [{
-          description: `Now I See preorder — ${description} (standard U.S. shipping included; ships in approximately 4 weeks)`,
+          description: `Now I See preorder — ${description} (ships in approximately 4 weeks)`,
           items: orderItems,
+          // A named shipping option makes the cost appear as its own line in the
+          // PayPal window. Its amount MUST equal breakdown.shipping exactly.
+          shipping: {
+            options: [{
+              id: 'STANDARD_US',
+              label: shipping > 0 ? 'Standard U.S. Shipping' : 'Free Standard U.S. Shipping',
+              type: 'SHIPPING',
+              selected: true,
+              amount: { currency_code: 'USD', value: shipping.toFixed(2) }
+            }]
+          },
           amount: {
             currency_code: 'USD',
             value: total.toFixed(2),
@@ -94,9 +105,19 @@ export default function CartPayPalButton({ items, subtotal, shipping, total, onS
           }
         }]
       }),
+      // NOTE: this callback is `onShippingAddressChange`, which supplies
+      // `data.shippingAddress` with camelCase fields (countryCode, state,
+      // city, postalCode). The older `onShippingChange` used
+      // `data.shipping_address.country_code`. Mixing them makes the country
+      // check fail for EVERY address and PayPal shows the buyer
+      // "Your order can't be shipped to this address".
       onShippingAddressChange: (data: any, actions: any) => {
-        if (data.shipping_address?.country_code !== 'US') return actions.reject();
-        return actions.resolve();
+        const countryCode = data?.shippingAddress?.countryCode;
+        if (countryCode !== 'US') {
+          return actions.reject(data.errors.COUNTRY_ERROR);
+        }
+        // No actions.resolve() here — this callback's actions object only
+        // exposes reject(). Returning nothing accepts the address.
       },
       onApprove: async (_data: any, actions: any) => {
         const details = await actions.order.capture();
