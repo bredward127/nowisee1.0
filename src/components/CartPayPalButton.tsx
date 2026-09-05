@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { getPayPalConfigError, loadPayPalSdk } from '../paypal';
 
 export type CartEdition = 'hardcover' | 'paperback';
 
@@ -23,31 +24,13 @@ declare global {
   }
 }
 
-const paypalClientId = import.meta.env.VITE_PAYPAL_CLIENT_ID || 'BAAqvvMK6Qbu1RmFBF2-iiKTyfphwRTcUwqQSKKEXgJ2yunZx7cWzxOBZxMQj3IcDYfkY_ZfeXu5urGLVY';
-let paypalSdkPromise: Promise<void> | null = null;
-
-function loadPayPalSdk() {
-  if (window.paypal) return Promise.resolve();
-  if (paypalSdkPromise) return paypalSdkPromise;
-
-  paypalSdkPromise = new Promise((resolve, reject) => {
-    const existingScript = document.querySelector('script[data-now-i-see-paypal-sdk]') as HTMLScriptElement | null;
-    if (existingScript) {
-      existingScript.addEventListener('load', () => resolve(), { once: true });
-      existingScript.addEventListener('error', () => reject(new Error('PayPal SDK failed to load.')), { once: true });
-      return;
-    }
-
-    const script = document.createElement('script');
-    script.src = `https://www.paypal.com/sdk/js?client-id=${paypalClientId}&currency=USD&intent=capture&commit=true`;
-    script.async = true;
-    script.dataset.nowISeePaypalSdk = 'true';
-    script.onload = () => resolve();
-    script.onerror = () => reject(new Error('PayPal SDK failed to load.'));
-    document.head.appendChild(script);
-  });
-
-  return paypalSdkPromise;
+function checkoutErrorMessage(configError: ReturnType<typeof getPayPalConfigError>) {
+  if (configError) {
+    // A build-time misconfiguration: no client id, or a hosted-button id that
+    // paypal.Buttons() cannot use. Nothing the buyer can do by retrying.
+    return 'PayPal checkout is not configured on this site yet. Please use the Amazon option, or contact us to order directly.';
+  }
+  return 'PayPal could not load. Please refresh, or use the Amazon option.';
 }
 
 export default function CartPayPalButton({ items, subtotal, shipping, total, onSuccess }: CartPayPalButtonProps) {
@@ -60,7 +43,10 @@ export default function CartPayPalButton({ items, subtotal, shipping, total, onS
     let active = true;
     loadPayPalSdk()
       .then(() => { if (active) setSdkReady(true); })
-      .catch(() => { if (active) setError('PayPal could not load. Please refresh, or use the Amazon option.'); });
+      .catch((sdkError) => {
+        console.error('PayPal SDK load failed:', sdkError);
+        if (active) setError(checkoutErrorMessage(getPayPalConfigError()));
+      });
     return () => { active = false; };
   }, []);
 

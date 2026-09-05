@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { CartItem } from '../types';
+import { getPayPalConfigError, loadPayPalSdk } from '../paypal';
 
 interface PayPalCartButtonProps {
   totalPrice: number;
@@ -13,20 +14,18 @@ export default function PayPalCartButton({ totalPrice, cartItems, onSuccess }: P
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Check if PayPal SDK is already loaded
-    if (window.paypal) {
-      setSdkReady(true);
-      return;
-    }
-
-    // Create script element with sandbox client-id
-    const script = document.createElement('script');
-    script.src = 'https://www.paypal.com/sdk/js?client-id=BAAqvvMK6Qbu1RmFBF2-iiKTyfphwRTcUwqQSKKEXgJ2yunZx7cWzxOBZxMQj3IcDYfkY_ZfeXu5urGLVY&currency=USD';
-    script.async = true;
-    script.onload = () => setSdkReady(true);
-    script.onerror = () => setError('Failed to load secure payment gateway. Please retry.');
-    
-    document.head.appendChild(script);
+    let active = true;
+    loadPayPalSdk()
+      .then(() => { if (active) setSdkReady(true); })
+      .catch((sdkError) => {
+        console.error('PayPal SDK load failed:', sdkError);
+        if (active) {
+          setError(getPayPalConfigError()
+            ? 'PayPal checkout is not configured on this site yet. Please contact us to order directly.'
+            : 'Failed to load secure payment gateway. Please retry.');
+        }
+      });
+    return () => { active = false; };
   }, []);
 
   useEffect(() => {
