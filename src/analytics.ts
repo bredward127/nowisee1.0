@@ -5,6 +5,7 @@ type RedditEventPayload = {
   value?: number;
   itemCount?: number;
   customEventName?: string;
+  conversionId?: string;
   products?: { id: string; name: string; category?: string }[];
 };
 
@@ -23,6 +24,18 @@ export function identifyReddit(matchKeys: { email?: string; phoneNumber?: string
   } catch (err) {
     console.warn('Reddit pixel identify failed:', err);
   }
+}
+
+/**
+ * Reddit de-duplicates events that share a conversionId, so every event needs
+ * a unique one. Purchases pass the PayPal order id; browser-side events that
+ * have no natural id get a random one.
+ */
+export function newConversionId(prefix: string) {
+  const uuid = typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function'
+    ? crypto.randomUUID()
+    : `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+  return `${prefix}-${uuid}`;
 }
 
 export function trackReddit(event: RedditEventName, payload?: RedditEventPayload) {
