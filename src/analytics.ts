@@ -63,6 +63,8 @@ type ServerConversion = {
   value?: number;
   itemCount?: number;
   email?: string;
+  phoneNumber?: string;
+  externalId?: string;
   products?: { id: string; name: string; category?: string }[];
 };
 
@@ -81,6 +83,8 @@ export function sendRedditConversion(event: ServerConversion) {
     // Ties the server event to the same browser the pixel saw.
     rdtUuid: readCookie('_rdt_uuid'),
     clickId,
+    screenWidth: window.screen?.width,
+    screenHeight: window.screen?.height,
   });
 
   // keepalive so the request survives the page navigating away after checkout.

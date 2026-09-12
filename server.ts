@@ -47,9 +47,13 @@ async function startServer() {
         itemCount,
         currency = "USD",
         email,
+        phoneNumber,
+        externalId,
         products,
         rdtUuid,
         clickId,
+        screenWidth,
+        screenHeight,
         eventAt
       } = req.body || {};
 
@@ -67,16 +71,23 @@ async function startServer() {
         type: customEventName
           ? { tracking_type: "CUSTOM", custom_event_name: customEventName }
           : { tracking_type: trackingType },
+        // Reddit expects identifiers SHA-256 hashed; user_agent stays plain.
         user: {
           email: sha256(email),
+          phone_number: sha256(phoneNumber),
+          external_id: sha256(externalId),
           ip_address: sha256(ipAddress),
           user_agent: req.headers["user-agent"],
-          uuid: rdtUuid
+          uuid: rdtUuid,
+          screen_dimensions: typeof screenWidth === "number" && typeof screenHeight === "number"
+            ? { width: screenWidth, height: screenHeight }
+            : undefined
         },
-        event_metadata: {
+        metadata: {
+          // conversion_id is what Reddit de-duplicates the pixel event against.
           conversion_id: conversionId,
           currency,
-          value_decimal: typeof value === "number" ? value : undefined,
+          value: typeof value === "number" ? value : undefined,
           item_count: typeof itemCount === "number" ? itemCount : undefined,
           products
         }
