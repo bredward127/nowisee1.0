@@ -1,7 +1,7 @@
 import { useMemo, useRef, useState } from 'react';
 import CartPayPalButton, { type CartCheckoutItem, type CartEdition } from './components/CartPayPalButton';
 import cleanBookCover from './assets/images/now_i_see_book_only_clean.png';
-import { trackReddit } from './analytics';
+import { identifyReddit, trackReddit } from './analytics';
 
 const amazonUrl = 'https://amzn.to/4cYuQUX';
 const products: Record<CartEdition, { name: string; price: number }> = {
@@ -68,7 +68,8 @@ export default function App() {
     setCart((current) => ({ ...current, [edition]: Math.max(0, quantity) }));
   };
 
-  const handleCheckoutSuccess = (payerName: string) => {
+  const handleCheckoutSuccess = (payerName: string, payerEmail?: string) => {
+    identifyReddit({ email: payerEmail });
     trackReddit('Purchase', {
       currency: 'USD',
       value: cartTotal,

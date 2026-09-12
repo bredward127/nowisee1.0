@@ -14,7 +14,7 @@ interface CartPayPalButtonProps {
   subtotal: number;
   shipping: number;
   total: number;
-  onSuccess: (payerName: string) => void;
+  onSuccess: (payerName: string, payerEmail?: string) => void;
 }
 
 declare global {
@@ -121,7 +121,7 @@ export default function CartPayPalButton({ items, subtotal, shipping, total, onS
       },
       onApprove: async (_data: any, actions: any) => {
         const details = await actions.order.capture();
-        onSuccess(details.payer?.name?.given_name || 'Reader');
+        onSuccess(details.payer?.name?.given_name || 'Reader', details.payer?.email_address);
       },
       onError: (err: any) => {
         console.error('PayPal cart checkout error:', err);
