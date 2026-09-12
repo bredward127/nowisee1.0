@@ -49,3 +49,45 @@ export function trackReddit(event: RedditEventName, payload?: RedditEventPayload
     console.warn('Reddit pixel event failed:', err);
   }
 }
+
+function readCookie(name: string) {
+  if (typeof document === 'undefined') return undefined;
+  const match = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
+  return match ? decodeURIComponent(match[1]) : undefined;
+}
+
+type ServerConversion = {
+  trackingType: 'AddToCart' | 'Purchase' | 'Lead' | 'SignUp' | 'ViewContent' | 'CUSTOM';
+  customEventName?: string;
+  conversionId: string;
+  value?: number;
+  itemCount?: number;
+  email?: string;
+  products?: { id: string; name: string; category?: string }[];
+};
+
+/**
+ * Mirrors a pixel event through the Conversions API so it still lands when the
+ * browser pixel is blocked. Reddit merges the two using conversion_id, so the
+ * caller must pass the same id it gave the pixel.
+ */
+export function sendRedditConversion(event: ServerConversion) {
+  if (typeof window === 'undefined') return;
+  const clickId = new URLSearchParams(window.location.search).get('rdt_cid') || undefined;
+  const body = JSON.stringify({
+    ...event,
+    currency: 'USD',
+    eventAt: Date.now(),
+    // Ties the server event to the same browser the pixel saw.
+    rdtUuid: readCookie('_rdt_uuid'),
+    clickId,
+  });
+
+  // keepalive so the request survives the page navigating away after checkout.
+  fetch('/api/reddit/conversion', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body,
+    keepalive: true,
+  }).catch((err) => console.warn('Reddit conversion event failed:', err));
+}

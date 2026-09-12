@@ -1,7 +1,7 @@
 import { useMemo, useRef, useState } from 'react';
 import CartPayPalButton, { type CartCheckoutItem, type CartEdition } from './components/CartPayPalButton';
 import cleanBookCover from './assets/images/now_i_see_book_only_clean.png';
-import { identifyReddit, newConversionId, trackReddit } from './analytics';
+import { identifyReddit, newConversionId, sendRedditConversion, trackReddit } from './analytics';
 
 const amazonUrl = 'https://amzn.to/4cYuQUX';
 const products: Record<CartEdition, { name: string; price: number }> = {
@@ -56,12 +56,21 @@ export default function App() {
   const addToCart = (edition: CartEdition) => {
     setCart((current) => ({ ...current, [edition]: current[edition] + 1 }));
     setCartPanel('mini');
+    const conversionId = newConversionId('add-to-cart');
+    const cartProducts = [{ id: edition, name: products[edition].name, category: 'Book' }];
     trackReddit('AddToCart', {
-      conversionId: newConversionId('add-to-cart'),
+      conversionId,
       currency: 'USD',
       value: products[edition].price,
       itemCount: 1,
-      products: [{ id: edition, name: products[edition].name, category: 'Book' }]
+      products: cartProducts
+    });
+    sendRedditConversion({
+      trackingType: 'AddToCart',
+      conversionId,
+      value: products[edition].price,
+      itemCount: 1,
+      products: cartProducts
     });
   };
 
@@ -71,14 +80,25 @@ export default function App() {
 
   const handleCheckoutSuccess = (payerName: string, payerEmail?: string, orderId?: string) => {
     identifyReddit({ email: payerEmail });
+    // The PayPal order id keeps this stable if the buyer reloads the
+    // confirmation, so one order is never counted twice — and it lets Reddit
+    // merge the pixel event with the server-side one below.
+    const conversionId = orderId || newConversionId('purchase');
+    const purchasedProducts = cartItems.map((item) => ({ id: item.edition, name: item.name, category: 'Book' }));
     trackReddit('Purchase', {
-      // The PayPal order id keeps this stable if the buyer reloads the
-      // confirmation, so one order is never counted twice.
-      conversionId: orderId || newConversionId('purchase'),
+      conversionId,
       currency: 'USD',
       value: cartTotal,
       itemCount: cartQuantity,
-      products: cartItems.map((item) => ({ id: item.edition, name: item.name, category: 'Book' }))
+      products: purchasedProducts
+    });
+    sendRedditConversion({
+      trackingType: 'Purchase',
+      conversionId,
+      value: cartTotal,
+      itemCount: cartQuantity,
+      email: payerEmail,
+      products: purchasedProducts
     });
     setPurchaseSuccess(payerName);
     setCart({ paperback: 0, hardcover: 0 });
@@ -88,10 +108,18 @@ export default function App() {
   const openCart = () => setCartPanel('mini');
   const openCheckout = () => {
     setCartPanel('checkout');
+    const conversionId = newConversionId('initiate-checkout');
     trackReddit('Custom', {
       customEventName: 'InitiateCheckout',
-      conversionId: newConversionId('initiate-checkout'),
+      conversionId,
       currency: 'USD',
+      value: cartTotal,
+      itemCount: cartQuantity
+    });
+    sendRedditConversion({
+      trackingType: 'CUSTOM',
+      customEventName: 'InitiateCheckout',
+      conversionId,
       value: cartTotal,
       itemCount: cartQuantity
     });

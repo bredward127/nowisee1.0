@@ -18,6 +18,96 @@ async function startServer() {
     res.json({ status: "ok" });
   });
 
+  // Reddit Conversions API (server-side events)
+  //
+  // The browser pixel is blocked for a meaningful share of visitors, so the
+  // same events are also sent from here. Reddit de-duplicates a server event
+  // against the pixel event when both carry the same conversion_id, so the
+  // client sends the id it already used (the PayPal order id for purchases).
+  app.post("/api/reddit/conversion", async (req, res) => {
+    const accessToken = process.env.REDDIT_CONVERSIONS_ACCESS_TOKEN;
+    const pixelId = process.env.REDDIT_PIXEL_ID || "a2_jfpt0cc0tbxd";
+
+    if (!accessToken) {
+      // Not configured yet: report success so checkout is never affected.
+      return res.json({ sent: false, reason: "REDDIT_CONVERSIONS_ACCESS_TOKEN not set" });
+    }
+
+    try {
+      const crypto = await import("crypto");
+      const sha256 = (value?: string) => value
+        ? crypto.createHash("sha256").update(value.trim().toLowerCase()).digest("hex")
+        : undefined;
+
+      const {
+        trackingType,
+        customEventName,
+        conversionId,
+        value,
+        itemCount,
+        currency = "USD",
+        email,
+        products,
+        rdtUuid,
+        clickId,
+        eventAt
+      } = req.body || {};
+
+      if (!trackingType) {
+        return res.status(400).json({ error: "trackingType is required" });
+      }
+
+      const forwardedFor = (req.headers["x-forwarded-for"] as string | undefined)?.split(",")[0]?.trim();
+      const ipAddress = forwardedFor || req.socket.remoteAddress || undefined;
+
+      const event: Record<string, any> = {
+        // Reddit rejects events older than seven days.
+        event_at: typeof eventAt === "number" ? eventAt : Date.now(),
+        action_source: "WEBSITE",
+        type: customEventName
+          ? { tracking_type: "CUSTOM", custom_event_name: customEventName }
+          : { tracking_type: trackingType },
+        user: {
+          email: sha256(email),
+          ip_address: sha256(ipAddress),
+          user_agent: req.headers["user-agent"],
+          uuid: rdtUuid
+        },
+        event_metadata: {
+          conversion_id: conversionId,
+          currency,
+          value_decimal: typeof value === "number" ? value : undefined,
+          item_count: typeof itemCount === "number" ? itemCount : undefined,
+          products
+        }
+      };
+      if (clickId) event.click_id = clickId;
+
+      const response = await fetch(`https://ads-api.reddit.com/api/v3/pixels/${pixelId}/conversion_events`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          data: { events: [event] },
+          test_mode: process.env.REDDIT_CONVERSIONS_TEST_MODE === "true"
+        })
+      });
+
+      const body = await response.text();
+      if (!response.ok) {
+        console.error("Reddit Conversions API error:", response.status, body);
+        return res.status(502).json({ sent: false, status: response.status, body });
+      }
+
+      res.json({ sent: true, status: response.status });
+    } catch (error: any) {
+      console.error("Reddit Conversions API request failed:", error);
+      res.status(500).json({ sent: false, error: error.message });
+    }
+  });
+
   // AliExpress OAuth Login Helper
   app.get("/api/aliexpress/login", (req, res) => {
     const appKey = process.env.ALIEXPRESS_APP_KEY;
