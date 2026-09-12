@@ -1,6 +1,7 @@
 import { useMemo, useRef, useState } from 'react';
 import CartPayPalButton, { type CartCheckoutItem, type CartEdition } from './components/CartPayPalButton';
 import cleanBookCover from './assets/images/now_i_see_book_only_clean.png';
+import { trackReddit } from './analytics';
 
 const amazonUrl = 'https://amzn.to/4cYuQUX';
 const products: Record<CartEdition, { name: string; price: number }> = {
@@ -55,6 +56,12 @@ export default function App() {
   const addToCart = (edition: CartEdition) => {
     setCart((current) => ({ ...current, [edition]: current[edition] + 1 }));
     setCartPanel('mini');
+    trackReddit('AddToCart', {
+      currency: 'USD',
+      value: products[edition].price,
+      itemCount: 1,
+      products: [{ id: edition, name: products[edition].name, category: 'Book' }]
+    });
   };
 
   const setQuantity = (edition: CartEdition, quantity: number) => {
@@ -62,13 +69,27 @@ export default function App() {
   };
 
   const handleCheckoutSuccess = (payerName: string) => {
+    trackReddit('Purchase', {
+      currency: 'USD',
+      value: cartTotal,
+      itemCount: cartQuantity,
+      products: cartItems.map((item) => ({ id: item.edition, name: item.name, category: 'Book' }))
+    });
     setPurchaseSuccess(payerName);
     setCart({ paperback: 0, hardcover: 0 });
     setCartPanel('closed');
   };
 
   const openCart = () => setCartPanel('mini');
-  const openCheckout = () => setCartPanel('checkout');
+  const openCheckout = () => {
+    setCartPanel('checkout');
+    trackReddit('Custom', {
+      customEventName: 'InitiateCheckout',
+      currency: 'USD',
+      value: cartTotal,
+      itemCount: cartQuantity
+    });
+  };
 
   return (
     <div className="site-shell">
