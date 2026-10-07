@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import CartPayPalButton, { type CartCheckoutItem, type CartEdition } from './components/CartPayPalButton';
 import cleanBookCover from './assets/images/now_i_see_book_only_clean.webp';
 import heroVisual from './assets/images/now_i_see_hero_visual.webp';
-import { identifyReddit, newConversionId, sendRedditConversion, trackReddit } from './analytics';
+import { identifyReddit, newConversionId, sendRedditConversion, trackMeta, trackReddit } from './analytics';
 
 const amazonUrl = 'https://amzn.to/4cYuQUX';
 const products: Record<CartEdition, { name: string; price: number }> = {
@@ -93,6 +93,7 @@ export default function App() {
       itemCount: 1,
       products: cartProducts
     });
+    trackMeta('AddToCart', { value: products[edition].price, contentIds: [edition], numItems: 1 }, conversionId);
     sendRedditConversion({
       trackingType: 'AddToCart',
       conversionId,
@@ -120,6 +121,7 @@ export default function App() {
       itemCount: cartQuantity,
       products: purchasedProducts
     });
+    trackMeta('Purchase', { value: cartTotal, contentIds: cartItems.map((item) => item.edition), numItems: cartQuantity }, conversionId);
     sendRedditConversion({
       trackingType: 'Purchase',
       conversionId,
@@ -144,6 +146,7 @@ export default function App() {
       value: cartTotal,
       itemCount: cartQuantity
     });
+    trackMeta('InitiateCheckout', { value: cartTotal, contentIds: cartItems.map((item) => item.edition), numItems: cartQuantity }, conversionId);
     sendRedditConversion({
       trackingType: 'CUSTOM',
       customEventName: 'InitiateCheckout',

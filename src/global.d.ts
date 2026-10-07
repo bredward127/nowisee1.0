@@ -23,4 +23,5 @@ interface ImportMeta {
 
 interface Window {
   rdt?: (...args: any[]) => void;
+  fbq?: (...args: any[]) => void;
 }

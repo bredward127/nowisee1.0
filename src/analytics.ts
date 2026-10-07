@@ -95,3 +95,35 @@ export function sendRedditConversion(event: ServerConversion) {
     keepalive: true,
   }).catch((err) => console.warn('Reddit conversion event failed:', err));
 }
+
+type MetaEventName = 'ViewContent' | 'AddToCart' | 'InitiateCheckout' | 'Purchase' | 'Lead';
+
+type MetaEventParams = {
+  value?: number;
+  currency?: string;
+  contentIds?: string[];
+  numItems?: number;
+};
+
+/**
+ * Meta Pixel standard events, so ads can optimize for purchases. The pixel
+ * loads from index.html; fbq() queues calls until it is ready. The eventID is
+ * the same conversion id Reddit gets, which lets Meta de-duplicate against a
+ * Conversions API event if one is added later.
+ */
+export function trackMeta(event: MetaEventName, params: MetaEventParams = {}, eventId?: string) {
+  if (typeof window === 'undefined' || typeof window.fbq !== 'function') return;
+  const data: Record<string, unknown> = { currency: params.currency || 'USD' };
+  if (params.value !== undefined) data.value = Number(params.value.toFixed(2));
+  if (params.contentIds?.length) {
+    data.content_ids = params.contentIds;
+    data.content_type = 'product';
+  }
+  if (params.numItems !== undefined) data.num_items = params.numItems;
+  try {
+    if (eventId) window.fbq('track', event, data, { eventID: eventId });
+    else window.fbq('track', event, data);
+  } catch (err) {
+    console.warn('Meta pixel event failed:', err);
+  }
+}
