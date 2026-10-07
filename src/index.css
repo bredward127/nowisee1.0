@@ -200,6 +200,23 @@ a:hover .arrow, button:hover .arrow { transform: translateX(.2rem); }
 .sticky-bar strong { font-family: var(--display); font-size: 1rem; }
 .sticky-bar span { overflow: hidden; color: rgba(255,253,249,.65); font-size: .75rem; text-overflow: ellipsis; white-space: nowrap; }
 
+/* Order confirmation */
+.confirmation-hero { padding: clamp(3rem, 9vw, 5.5rem) var(--gutter) clamp(2.5rem, 7vw, 4rem); color: var(--white); background: radial-gradient(ellipse at 50% 0%, rgba(201,162,77,.22), transparent 60%), var(--navy); text-align: center; }
+.confirmation-mark { display: grid; width: 4rem; height: 4rem; margin: 0 auto 1.25rem; place-items: center; background: var(--gold); border-radius: 50%; }
+.confirmation-mark .check-icon { width: 2rem; height: 2rem; color: var(--navy); }
+.confirmation-hero h1 { max-width: 40rem; margin: 0 auto; color: var(--white); font-size: clamp(2.1rem, 6vw, 3.4rem); line-height: 1.08; }
+.confirmation-hero h1 em { display: block; color: var(--gold); }
+.confirmation-lede { max-width: 34rem; margin: 1.1rem auto 0 !important; color: rgba(255,253,249,.8); font-size: 1.05rem; }
+.confirmation-lede strong { color: var(--white); overflow-wrap: anywhere; }
+.confirmation-card { max-width: 44rem; margin: 0 auto 3rem; padding: .5rem 1.25rem; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); }
+.confirmation-row { display: flex; justify-content: space-between; gap: 1rem; padding: .9rem 0; border-bottom: 1px solid var(--line); font-size: .92rem; }
+.confirmation-row:last-child { border-bottom: 0; }
+.confirmation-row span { color: var(--muted); }
+.confirmation-row strong { text-align: right; overflow-wrap: anywhere; }
+.confirmation-total { font-family: var(--display); font-size: 1.2rem; }
+.confirmation-total span { color: var(--ink); }
+.confirmation-next-title { font-size: clamp(1.6rem, 4.5vw, 2.2rem); }
+
 /* Mini cart */
 .mini-cart { position: fixed; z-index: 80; top: 5.25rem; right: clamp(.75rem, 3vw, 3rem); width: min(calc(100vw - 1.5rem), 24rem); padding: 1.15rem; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 1rem 3rem rgba(0,0,0,.25); animation: mini-cart-in .22s ease-out; }
 @keyframes mini-cart-in { from { opacity: 0; transform: translateY(-.6rem); } to { opacity: 1; transform: translateY(0); } }

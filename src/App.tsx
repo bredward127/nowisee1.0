@@ -16,6 +16,58 @@ const readerReviews: { name: string; detail: string; text: string }[] = [];
 
 type CartPanel = 'closed' | 'mini' | 'checkout';
 
+type ConfirmedOrder = {
+  name: string;
+  email?: string;
+  orderId?: string;
+  items: { name: string; quantity: number; price: number }[];
+  total: number;
+};
+
+const CONFIRMATION_PATH = '/order-confirmed';
+const ORDER_STORAGE_KEY = 'now-i-see-confirmed-order';
+
+// Keeps the confirmation on screen if the buyer refreshes /order-confirmed.
+function readStoredOrder(): ConfirmedOrder | null {
+  if (typeof window === 'undefined' || window.location.pathname !== CONFIRMATION_PATH) return null;
+  try {
+    const raw = window.sessionStorage.getItem(ORDER_STORAGE_KEY);
+    return raw ? JSON.parse(raw) as ConfirmedOrder : null;
+  } catch {
+    return null;
+  }
+}
+
+function OrderConfirmation({ order, onDone }: { order: ConfirmedOrder; onDone: () => void }) {
+  return (
+    <main id="top" className="confirmation" aria-labelledby="confirmation-title">
+      <section className="confirmation-hero">
+        <div className="confirmation-mark" aria-hidden="true"><Check /></div>
+        <p className="eyebrow eyebrow-gold">Order confirmed</p>
+        <h1 id="confirmation-title">Thank you, {order.name}. <em>Your copy is reserved.</em></h1>
+        <p className="confirmation-lede">Your payment went through and your preorder is in.{order.email ? <> PayPal has emailed your receipt to <strong>{order.email}</strong>.</> : ' PayPal has emailed your receipt.'}</p>
+      </section>
+      <section className="section section-cream">
+        <div className="confirmation-card">
+          <div className="confirmation-row"><span>Order number</span><strong>{order.orderId || 'See your PayPal receipt'}</strong></div>
+          {order.items.map((item) => <div className="confirmation-row" key={item.name}><span>Now I See — {item.name} × {item.quantity}</span><strong>${(item.price * item.quantity).toFixed(2)}</strong></div>)}
+          <div className="confirmation-row"><span>Standard U.S. shipping</span><strong>Included</strong></div>
+          <div className="confirmation-row confirmation-total"><span>Total paid</span><strong>${order.total.toFixed(2)}</strong></div>
+        </div>
+        <div className="narrow">
+          <h2 className="confirmation-next-title">What happens next</h2>
+          <ol className="steps">
+            <li><span className="step-number">01</span><div><h3>Your copy joins the next case</h3><p>Direct copies come from the publisher in cases of 12. Yours is set aside in the next one.</p></div></li>
+            <li><span className="step-number">02</span><div><h3>We prepare and ship it</h3><p>Once the case arrives, your book is packed and sent to the shipping address on your PayPal order.</p></div></li>
+            <li><span className="step-number">03</span><div><h3>At your door in about four weeks</h3><p>Keep your PayPal receipt; it has your order number if you need to reach us.</p></div></li>
+          </ol>
+          <button type="button" className="button button-gold button-wide" onClick={onDone}>Back to Now I See <Arrow /></button>
+        </div>
+      </section>
+    </main>
+  );
+}
+
 function Arrow() {
   return <span aria-hidden="true" className="arrow">→</span>;
 }
@@ -33,7 +85,7 @@ const tickerItems = ['Faith-centered memoir', 'Free U.S. shipping', 'Paperback &
 export default function App() {
   const [cartPanel, setCartPanel] = useState<CartPanel>('closed');
   const [cart, setCart] = useState<Record<CartEdition, number>>({ paperback: 0, hardcover: 0 });
-  const [purchaseSuccess, setPurchaseSuccess] = useState<string | null>(null);
+  const [confirmedOrder, setConfirmedOrder] = useState<ConfirmedOrder | null>(readStoredOrder);
   const [selectedEdition, setSelectedEdition] = useState<CartEdition>('hardcover');
   const [showStickyBar, setShowStickyBar] = useState(false);
   const [trailerMuted, setTrailerMuted] = useState(true);
@@ -55,7 +107,21 @@ export default function App() {
     if (heroRef.current) observer.observe(heroRef.current);
     if (offerRef.current) observer.observe(offerRef.current);
     return () => observer.disconnect();
+  }, [confirmedOrder]);
+
+  // The browser back button leaves the confirmation view.
+  useEffect(() => {
+    const onPopState = () => { if (window.location.pathname !== CONFIRMATION_PATH) setConfirmedOrder(null); };
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
   }, []);
+
+  const leaveConfirmation = () => {
+    try { window.sessionStorage.removeItem(ORDER_STORAGE_KEY); } catch { /* storage unavailable */ }
+    window.history.pushState({}, '', '/');
+    setConfirmedOrder(null);
+    window.scrollTo(0, 0);
+  };
 
   const enableTrailerSound = () => {
     const trailer = trailerRef.current;
@@ -130,9 +196,19 @@ export default function App() {
       email: payerEmail,
       products: purchasedProducts
     });
-    setPurchaseSuccess(payerName);
+    const order: ConfirmedOrder = {
+      name: payerName,
+      email: payerEmail,
+      orderId,
+      items: cartItems.map((item) => ({ name: item.name, quantity: item.quantity, price: item.price })),
+      total: cartTotal
+    };
+    try { window.sessionStorage.setItem(ORDER_STORAGE_KEY, JSON.stringify(order)); } catch { /* storage unavailable */ }
+    window.history.pushState({}, '', CONFIRMATION_PATH);
+    setConfirmedOrder(order);
     setCart({ paperback: 0, hardcover: 0 });
     setCartPanel('closed');
+    window.scrollTo(0, 0);
   };
 
   const openCart = () => setCartPanel('mini');
@@ -175,8 +251,7 @@ export default function App() {
         </div>
       </header>
 
-      <main id="top">
-        {purchaseSuccess && <section className="success-banner" aria-live="polite"><p><strong>Thank you, {purchaseSuccess}.</strong> Your preorder is reserved. We will send your copy after the next publisher case order arrives—approximately four weeks.</p><button type="button" onClick={() => setPurchaseSuccess(null)} aria-label="Dismiss confirmation">×</button></section>}
+      {confirmedOrder ? <OrderConfirmation order={confirmedOrder} onDone={leaveConfirmation} /> : <main id="top">
 
         <section ref={heroRef} className="hero" aria-labelledby="hero-title">
           <div className="hero-inner">
@@ -349,7 +424,7 @@ export default function App() {
             </div>
           </div>
         </section>
-      </main>
+      </main>}
 
       <footer className="site-footer">
         <a className="footer-wordmark" href="#top">NOW I SEE</a>
@@ -357,7 +432,7 @@ export default function App() {
         <p className="footer-fine">© {new Date().getFullYear()} Toni ME Taylor. All rights reserved. As an Amazon Associate, this site may earn from qualifying purchases.</p>
       </footer>
 
-      <div className={`sticky-bar ${showStickyBar && cartPanel === 'closed' ? 'is-visible' : ''}`} aria-hidden={!showStickyBar}>
+      <div className={`sticky-bar ${showStickyBar && cartPanel === 'closed' && !confirmedOrder ? 'is-visible' : ''}`} aria-hidden={!showStickyBar}>
         <img src={cleanBookCover} alt="" />
         <div><strong>Now I See</strong><span>From $22.99 · free U.S. shipping</span></div>
         <a className="button button-gold button-small" href="#preorder" tabIndex={showStickyBar ? 0 : -1}>Preorder</a>
