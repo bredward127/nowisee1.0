@@ -127,3 +127,17 @@ export function trackMeta(event: MetaEventName, params: MetaEventParams = {}, ev
     console.warn('Meta pixel event failed:', err);
   }
 }
+
+/**
+ * Asks the server to add the buyer to the MailerLite "Buyers" group. Only the
+ * PayPal order id is sent; the server looks up the buyer's email with PayPal.
+ */
+export function registerOrderForEmails(orderId?: string) {
+  if (typeof window === 'undefined' || !orderId) return;
+  fetch('/api/orders/confirmed', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ orderId }),
+    keepalive: true,
+  }).catch((err) => console.warn('Order email sign-up failed:', err));
+}

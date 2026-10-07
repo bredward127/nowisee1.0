@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import CartPayPalButton, { type CartCheckoutItem, type CartEdition } from './components/CartPayPalButton';
 import cleanBookCover from './assets/images/now_i_see_book_only_clean.webp';
 import heroVisual from './assets/images/now_i_see_hero_visual.webp';
-import { identifyReddit, newConversionId, sendRedditConversion, trackMeta, trackReddit } from './analytics';
+import { identifyReddit, newConversionId, registerOrderForEmails, sendRedditConversion, trackMeta, trackReddit } from './analytics';
 
 const amazonUrl = 'https://amzn.to/4cYuQUX';
 const products: Record<CartEdition, { name: string; price: number }> = {
@@ -196,6 +196,7 @@ export default function App() {
       email: payerEmail,
       products: purchasedProducts
     });
+    registerOrderForEmails(orderId);
     const order: ConfirmedOrder = {
       name: payerName,
       email: payerEmail,

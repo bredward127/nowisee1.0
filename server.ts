@@ -119,6 +119,109 @@ async function startServer() {
     }
   });
 
+  // Completed orders → MailerLite "Buyers" group
+  //
+  // The browser sends only the PayPal order id. The order is looked up with
+  // PayPal and the buyer is added only if it is COMPLETED, using the name and
+  // email PayPal has on the order — so nobody can put arbitrary addresses on
+  // the list. MailerLite's automation on the group sends the follow-up emails.
+  app.post("/api/orders/confirmed", async (req, res) => {
+    const mailerLiteKey = process.env.MAILERLITE_API_KEY;
+    const paypalClientId = process.env.PAYPAL_CLIENT_ID || process.env.VITE_PAYPAL_CLIENT_ID;
+    const paypalSecret = process.env.PAYPAL_CLIENT_SECRET;
+    const paypalApi = process.env.PAYPAL_API_BASE || "https://api-m.paypal.com";
+    const groupName = process.env.MAILERLITE_BUYERS_GROUP || "Buyers";
+    const mailerLiteApi = process.env.MAILERLITE_API_BASE || "https://connect.mailerlite.com/api";
+
+    const missing = [
+      !mailerLiteKey && "MAILERLITE_API_KEY",
+      !paypalClientId && "PAYPAL_CLIENT_ID",
+      !paypalSecret && "PAYPAL_CLIENT_SECRET"
+    ].filter(Boolean);
+    if (missing.length) {
+      // Not configured yet: report it without failing, so the buyer never sees an error.
+      console.warn("Order email sign-up skipped; missing:", missing.join(", "));
+      return res.json({ added: false, reason: `not configured: ${missing.join(", ")}` });
+    }
+
+    const orderId = String(req.body?.orderId || "");
+    if (!/^[A-Z0-9-]{5,40}$/i.test(orderId)) {
+      return res.status(400).json({ added: false, reason: "invalid order id" });
+    }
+
+    try {
+      const tokenResponse = await fetch(`${paypalApi}/v1/oauth2/token`, {
+        method: "POST",
+        headers: {
+          Authorization: `Basic ${Buffer.from(`${paypalClientId}:${paypalSecret}`).toString("base64")}`,
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "grant_type=client_credentials"
+      });
+      if (!tokenResponse.ok) {
+        console.error("PayPal auth failed:", tokenResponse.status, await tokenResponse.text());
+        return res.status(502).json({ added: false, reason: "paypal auth failed" });
+      }
+      const { access_token: paypalToken } = await tokenResponse.json() as { access_token: string };
+
+      const orderResponse = await fetch(`${paypalApi}/v2/checkout/orders/${encodeURIComponent(orderId)}`, {
+        headers: { Authorization: `Bearer ${paypalToken}` }
+      });
+      if (!orderResponse.ok) {
+        return res.status(404).json({ added: false, reason: "order not found" });
+      }
+      const order = await orderResponse.json() as any;
+      if (order.status !== "COMPLETED" || !order.payer?.email_address) {
+        return res.status(409).json({ added: false, reason: `order status ${order.status}` });
+      }
+
+      const mailerLite = (route: string, init: RequestInit = {}) => fetch(`${mailerLiteApi}${route}`, {
+        ...init,
+        headers: {
+          Authorization: `Bearer ${mailerLiteKey}`,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          ...(init.headers || {})
+        }
+      });
+
+      // Find the Buyers group, creating it on first use.
+      const groupsResponse = await mailerLite(`/groups?filter[name]=${encodeURIComponent(groupName)}`);
+      const groups = groupsResponse.ok ? (await groupsResponse.json() as any).data || [] : [];
+      let groupId = groups.find((group: any) => group.name === groupName)?.id;
+      if (!groupId) {
+        const created = await mailerLite("/groups", { method: "POST", body: JSON.stringify({ name: groupName }) });
+        if (!created.ok) {
+          console.error("MailerLite group create failed:", created.status, await created.text());
+          return res.status(502).json({ added: false, reason: "mailerlite group failed" });
+        }
+        groupId = (await created.json() as any).data?.id;
+      }
+
+      // Upserts: a repeat buyer is added to the group again without duplicating them.
+      const subscriber = await mailerLite("/subscribers", {
+        method: "POST",
+        body: JSON.stringify({
+          email: order.payer.email_address,
+          fields: {
+            name: order.payer.name?.given_name || "",
+            last_name: order.payer.name?.surname || ""
+          },
+          groups: [groupId]
+        })
+      });
+      if (!subscriber.ok) {
+        console.error("MailerLite subscriber failed:", subscriber.status, await subscriber.text());
+        return res.status(502).json({ added: false, reason: "mailerlite subscriber failed" });
+      }
+
+      res.json({ added: true });
+    } catch (error: any) {
+      console.error("Order email sign-up failed:", error);
+      res.status(500).json({ added: false, error: error.message });
+    }
+  });
+
   // AliExpress OAuth Login Helper
   app.get("/api/aliexpress/login", (req, res) => {
     const appKey = process.env.ALIEXPRESS_APP_KEY;
